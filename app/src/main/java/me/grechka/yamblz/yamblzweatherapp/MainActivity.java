@@ -6,6 +6,9 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 
+/* Планируется, что архитектура приложения будет переработана
+  после лекции об архитектуре. На данный момент реализован простейший
+  вариант взаимодействия фрагментов. */
 public class MainActivity extends AppCompatActivity {
 
     @Override
