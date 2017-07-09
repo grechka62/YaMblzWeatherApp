@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">YaMblzWeatherApp</string>
+
+    <string name="navigation_drawer_open">Открытие Navigation Drawer</string>
+    <string name="navigation_drawer_close">Закрытие Navigation Drawer</string>
+
+    <string name="action_settings">Настройки</string>
+    <string name="action_about">О приложении</string>
+
+    <string name="hello_blank_fragment">Привет!</string>
+</resources>

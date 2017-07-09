@@ -35,10 +35,8 @@ public class WeatherFragment extends Fragment implements NavigationView.OnNaviga
         return view;
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
         int id = item.getItemId();
         if (id == R.id.nav_settings) {
             getActivity().getSupportFragmentManager()
