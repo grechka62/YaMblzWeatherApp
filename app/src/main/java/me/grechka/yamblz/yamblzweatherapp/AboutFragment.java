@@ -23,6 +23,7 @@ public class AboutFragment extends Fragment {
         toolbar.setTitle(R.string.action_about);
         AppCompatActivity activity = (AppCompatActivity) getActivity();
         activity.setSupportActionBar(toolbar);
+        activity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         return view;
     }
 
