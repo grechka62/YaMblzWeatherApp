@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">YaMblzWeatherApp</string>
+
+    <string name="navigation_drawer_open">Открытие Navigation Drawer</string>
+    <string name="navigation_drawer_close">Закрытие Navigation Drawer</string>
+
+    <string name="action_settings">Настройки</string>
+    <string name="action_about">О приложении</string>
+
+    <string name="future_functions">Здесь будет будущая функциональность</string>
+
+    <string name="version">Версия 0.0.1</string>
+    <string name="date">от 09.07.2017 г.</string>
+    <string name="author">Автор: Кравцова Ирина</string>
+    <string name="changes">Изменения:</string>
+    <string name="change1">1. Создана основа приложения: пустой основной экран с navigation drawer-ом, в котором будут настройки и "о приложении". Изменена иконка приложения, добавлена локализация для русского языка (для других языков используется английский).</string>
+    <string name="logo_description">Логотип Яндекс.Мобилизации</string>
+
+</resources>
