@@ -8,7 +8,6 @@ import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 
 import me.grechka.yamblz.yamblzweatherapp.AboutFragment;
-import me.grechka.yamblz.yamblzweatherapp.MainView;
 import me.grechka.yamblz.yamblzweatherapp.R;
 import me.grechka.yamblz.yamblzweatherapp.settings.SettingsFragment;
 import me.grechka.yamblz.yamblzweatherapp.weather.WeatherFragment;

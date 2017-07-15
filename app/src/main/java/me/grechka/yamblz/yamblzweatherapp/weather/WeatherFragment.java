@@ -16,7 +16,7 @@ import android.view.ViewGroup;
 
 import com.arellomobile.mvp.presenter.InjectPresenter;
 
-import me.grechka.yamblz.yamblzweatherapp.MainView;
+import me.grechka.yamblz.yamblzweatherapp.activity.MainView;
 import me.grechka.yamblz.yamblzweatherapp.R;
 
 public class WeatherFragment extends Fragment implements WeatherView, NavigationView.OnNavigationItemSelectedListener{

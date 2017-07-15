@@ -1,4 +1,4 @@
-package me.grechka.yamblz.yamblzweatherapp;
+package me.grechka.yamblz.yamblzweatherapp.activity;
 
 import com.arellomobile.mvp.MvpView;
 
