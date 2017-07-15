@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="me.grechka.yamblz.yamblzweatherapp.SettingsFragment">
+    tools:context="me.grechka.yamblz.yamblzweatherapp.activity.MainActivity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
@@ -16,8 +16,63 @@
     </android.support.v7.widget.Toolbar>
 
     <TextView
+        android:id="@+id/update_frequency_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/updating"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"/>
+
+    <RadioButton
+        android:id="@+id/frequency_manual"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="RadioButton"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layoutDirection="rtl"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"/>
+
+    <RadioButton
+        android:id="@+id/frequency_15"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="RadioButton"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layoutDirection="rtl"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"/>
+
+    <RadioButton
+        android:id="@+id/frequency_30"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="RadioButton"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layoutDirection="rtl"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"/>
+
+    <RadioButton
+        android:id="@+id/frequency_60"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="RadioButton"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layoutDirection="rtl"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"/>
+
+    <RadioButton
+        android:id="@+id/frequency_180"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="RadioButton"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layoutDirection="rtl"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"/>
+
+    <!--<FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/action_settings" />
+        android:id="@+id/settings_container"/>-->
 
 </LinearLayout>
