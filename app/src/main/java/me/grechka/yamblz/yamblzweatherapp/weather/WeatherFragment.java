@@ -1,6 +1,7 @@
-package me.grechka.yamblz.yamblzweatherapp;
+package me.grechka.yamblz.yamblzweatherapp.weather;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
@@ -13,8 +14,16 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class WeatherFragment extends Fragment implements NavigationView.OnNavigationItemSelectedListener{
+import com.arellomobile.mvp.presenter.InjectPresenter;
+
+import me.grechka.yamblz.yamblzweatherapp.MainView;
+import me.grechka.yamblz.yamblzweatherapp.R;
+
+public class WeatherFragment extends Fragment implements WeatherView, NavigationView.OnNavigationItemSelectedListener{
     private View view;
+
+    @InjectPresenter
+    WeatherPresenter presenter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -32,26 +41,22 @@ public class WeatherFragment extends Fragment implements NavigationView.OnNaviga
 
         NavigationView navigationView = (NavigationView) view.findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
         return view;
     }
 
     @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.nav_settings) {
-            getActivity().getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.fragment_container, new SettingsFragment())
-                    .addToBackStack(null).commitAllowingStateLoss();
-        } else if (id == R.id.nav_about) {
-            getActivity().getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.fragment_container, new AboutFragment())
-                    .addToBackStack(null).commitAllowingStateLoss();
-        }
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        MainView mainView = (MainView) getActivity();
+        mainView.navigate(item.getItemId());
 
         DrawerLayout drawer = (DrawerLayout) view.findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public void showCurrentWeather() {
+
     }
 }
