@@ -5,10 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:layout_marginStart="@dimen/activity_horizontal_margin"
-    android:layout_marginEnd="@dimen/activity_horizontal_margin"
-    android:layout_marginBottom="@dimen/activity_vertical_margin"
-    android:layout_marginTop="@dimen/activity_vertical_margin"
     tools:context="me.grechka.yamblz.yamblzweatherapp.AboutFragment">
 
     <android.support.v7.widget.Toolbar
@@ -55,29 +51,18 @@
         android:textSize="12sp"
         android:gravity="center_horizontal"/>
 
-    <ScrollView
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:textColor="?attr/editTextColor"
+        android:text="@string/changes"
+        android:textSize="16sp"
+        android:layout_marginTop="@dimen/activity_vertical_margin"/>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="?attr/editTextColor"
-                android:text="@string/changes"
-                android:textSize="16sp" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="?attr/editTextColor"
-                android:textSize="14sp"
-                android:text="@string/change1"/>
-        </LinearLayout>
-    </ScrollView>
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/list_changes">
+    </ListView>
 
 </LinearLayout>

@@ -8,6 +8,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 
 /**
@@ -24,6 +26,11 @@ public class AboutFragment extends Fragment {
         AppCompatActivity activity = (AppCompatActivity) getActivity();
         activity.setSupportActionBar(toolbar);
         activity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>
+                (activity, android.R.layout.simple_list_item_1,
+                        getResources().getStringArray(R.array.change_array));
+        ListView listView = (ListView) view.findViewById(R.id.list_changes);
+        listView.setAdapter(adapter);
         return view;
     }
 
