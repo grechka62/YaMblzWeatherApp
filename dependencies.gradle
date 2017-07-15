@@ -1,0 +1,46 @@
+ext.versions = [
+        code                         : 1,
+        name                         : '0.0.1',
+
+        minSdk                       : 15,
+        targetSdk                    : 25,
+        compileSdk                   : 25,
+        buildTools                   : '25.0.3',
+
+        androidGradlePlugin          : '2.3.3',
+
+        supportLibs                  : '25.3.1',
+		constraint			 		 : '1.0.2',
+		
+		androidJob					 : '1.1.11',
+		retrofit					 : '2.3.0',
+		moxy						 : '1.5.3',
+		
+        espresso                     : '2.2.2',
+
+        junit                        : '4.12',
+]
+
+ext.gradlePlugins = [
+        android          : "com.android.tools.build:gradle:$versions.androidGradlePlugin",
+]
+
+ext.libraries = [
+        supportAppCompat        : "com.android.support:appcompat-v7:$versions.supportLibs",
+        supportDesign           : "com.android.support:design:$versions.supportLibs",
+		supportSupport			: "com.android.support:support-v4:$versions.supportLibs",
+		supportPreference		: "com.android.support:preference-v14:$versions.supportLibs",
+		constraint    		    : "com.android.support.constraint:constraint-layout:$versions.constraint",
+		
+		androidJob				: "com.evernote:android-job:$versions.androidJob",
+		retrofit				: "com.squareup.retrofit2:retrofit:$versions.retrofit",
+		converterGson			: "com.squareup.retrofit2:converter-gson:$versions.retrofit",
+		moxy					: "com.arello-mobile:moxy:$versions.moxy",
+		moxyAppCompat			: "com.arello-mobile:moxy-app-compat:$versions.moxy",
+		moxyCompiler			: "com.arello-mobile:moxy-compiler:$versions.moxy",
+
+        // Test dependencies
+        junit                   : "junit:junit:$versions.junit",
+        espressoCore            : "com.android.support.test.espresso:espresso-core:$versions.espresso",
+        espressoContrib         : "com.android.support.test.espresso:espresso-contrib:$versions.espresso",
+]
