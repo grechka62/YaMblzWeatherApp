@@ -20,6 +20,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!--<service
+            android:name=".WeatherService"
+            android:description="@string/service_description"
+            android:enabled="true"
+            android:exported="false"
+            android:process="remote"/>-->
     </application>
 
 </manifest>
