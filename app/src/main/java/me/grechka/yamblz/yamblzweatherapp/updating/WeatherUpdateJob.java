@@ -27,12 +27,13 @@ public class WeatherUpdateJob extends Job {
 
     public static final String TAG = "job_weather_tag";
     private Repository repository = new RepositoryImp();
+    {repository.setContext(getContext());}
 
     @Override
     @NonNull
     protected Result onRunJob(Params params) {
         Log.d("Job", "onRunJob: Job started");
-        repository.saveCurrentWeather();
+        repository.getCurrentWeather();
         return Result.SUCCESS;
     }
 }

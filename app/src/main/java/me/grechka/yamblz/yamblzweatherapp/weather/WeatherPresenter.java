@@ -1,5 +1,7 @@
 package me.grechka.yamblz.yamblzweatherapp.weather;
 
+import android.content.Context;
+
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 
@@ -16,14 +18,18 @@ import me.grechka.yamblz.yamblzweatherapp.model.repository.RepositoryImp;
 @InjectViewState
 public class WeatherPresenter extends MvpPresenter<WeatherView> implements Serializable {
     private Repository repository = new RepositoryImp();
+    {repository.setPresenter(this);}
 
     public void updateCurrentWeather() {
-        repository.setPresenter(this);
         repository.getCurrentWeather();
     }
 
     public void showCurrentWeather(CurrentWeather currentWeather) {
         String temperature = Double.toString(currentWeather.temperature);
         getViewState().showCurrentWeather(temperature, currentWeather.description);
+    }
+
+    public Repository getRepository() {
+        return repository;
     }
 }

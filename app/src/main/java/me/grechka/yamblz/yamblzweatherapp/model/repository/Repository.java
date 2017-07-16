@@ -1,5 +1,7 @@
 package me.grechka.yamblz.yamblzweatherapp.model.repository;
 
+import android.content.Context;
+
 import me.grechka.yamblz.yamblzweatherapp.model.CurrentWeather;
 import me.grechka.yamblz.yamblzweatherapp.weather.WeatherPresenter;
 
@@ -10,6 +12,8 @@ import me.grechka.yamblz.yamblzweatherapp.weather.WeatherPresenter;
 public interface Repository {
 
     void setPresenter(WeatherPresenter presenter);
+
+    void setContext(Context context);
 
     void getCurrentWeather();
 

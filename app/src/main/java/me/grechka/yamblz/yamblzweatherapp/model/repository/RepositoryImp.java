@@ -1,7 +1,10 @@
 package me.grechka.yamblz.yamblzweatherapp.model.repository;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.util.Log;
+
+import java.lang.ref.WeakReference;
 
 import me.grechka.yamblz.yamblzweatherapp.WeatherApp;
 import me.grechka.yamblz.yamblzweatherapp.model.CurrentWeather;
@@ -20,10 +23,16 @@ import static me.grechka.yamblz.yamblzweatherapp.WeatherApp.getWeatherApi;
 public class RepositoryImp implements Repository {
     private CurrentWeather currentWeather;
     private WeatherPresenter presenter;
+    private WeakReference<Context> context;
 
     @Override
     public void setPresenter(WeatherPresenter presenter) {
         this.presenter = presenter;
+    }
+
+    @Override
+    public void setContext(Context context) {
+        this.context = new WeakReference<>(context);
     }
 
     @Override
@@ -40,7 +49,7 @@ public class RepositoryImp implements Repository {
                     double temperature = currentWeatherResponse.getMain().getTemp();
                     String description = currentWeatherResponse.getWeather().get(0).getDescription();
                     currentWeather = new CurrentWeather(temperature, description);
-                    updateCurrentWeather();
+                    saveCurrentWeather();
                 } else {
                     Log.d("retrofit", "Но ответа не получили");
                     /*try {
@@ -61,8 +70,11 @@ public class RepositoryImp implements Repository {
 
     @Override
     public void saveCurrentWeather() {
-        getCurrentWeather();
-
+        context.get()
+                .getSharedPreferences("prefs", Context.MODE_PRIVATE).edit().
+                        putString("description", currentWeather.description).apply();
+        if (presenter != null)
+            updateCurrentWeather();
     }
 
     @Override

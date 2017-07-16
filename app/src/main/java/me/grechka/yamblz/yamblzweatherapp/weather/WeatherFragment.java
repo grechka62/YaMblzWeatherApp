@@ -1,5 +1,6 @@
 package me.grechka.yamblz.yamblzweatherapp.weather;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -50,6 +51,11 @@ public class WeatherFragment extends MvpAppCompatFragment implements WeatherView
         swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swiperefresh);
         swipeRefreshLayout.setOnRefreshListener(this);
 
+        TextView descView = (TextView) view.findViewById(R.id.description);
+        String description = getContext().getSharedPreferences("prefs", Context.MODE_PRIVATE).getString("description", "Description");
+        descView.setText(description);
+
+        presenter.getRepository().setContext(getActivity());
         return view;
     }
 
