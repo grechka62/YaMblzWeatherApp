@@ -1,7 +1,7 @@
 package me.grechka.yamblz.yamblzweatherapp.activity;
 
+import android.content.Context;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 
@@ -9,8 +9,6 @@ import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.evernote.android.job.JobManager;
 import com.evernote.android.job.JobRequest;
-
-import java.util.concurrent.TimeUnit;
 
 import me.grechka.yamblz.yamblzweatherapp.AboutFragment;
 import me.grechka.yamblz.yamblzweatherapp.R;
@@ -27,13 +25,14 @@ public class MainActivity extends MvpAppCompatActivity implements MainView {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        JobManager jobManager = JobManager.instance();
+        JobManager mJobManager = JobManager.instance();
         if (savedInstanceState == null)
             showWeather();
-        if (jobManager.getAllJobRequestsForTag(WeatherUpdateJob.TAG).isEmpty())
-            jobManager.schedule(new JobRequest.Builder(WeatherUpdateJob.TAG)
+        if (mJobManager.getAllJobRequestsForTag(WeatherUpdateJob.TAG).isEmpty())
+            mJobManager.schedule(new JobRequest.Builder(WeatherUpdateJob.TAG)
                     .setRequiredNetworkType(JobRequest.NetworkType.CONNECTED)
-                    .setPeriodic(3600000)
+                    .setPeriodic(Integer.parseInt(getSharedPreferences("prefs", Context.MODE_PRIVATE).getString("freq", "60"))*60000)
+                    .setPersisted(true)
                     .build());
     }
 

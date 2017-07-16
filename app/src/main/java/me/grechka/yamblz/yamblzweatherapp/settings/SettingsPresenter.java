@@ -1,11 +1,15 @@
 package me.grechka.yamblz.yamblzweatherapp.settings;
 
+import android.content.Context;
+
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 import com.evernote.android.job.JobManager;
 import com.evernote.android.job.JobRequest;
 
 import me.grechka.yamblz.yamblzweatherapp.WeatherApp;
+import me.grechka.yamblz.yamblzweatherapp.model.repository.Repository;
+import me.grechka.yamblz.yamblzweatherapp.model.repository.RepositoryImp;
 import me.grechka.yamblz.yamblzweatherapp.updating.WeatherUpdateJob;
 
 /**

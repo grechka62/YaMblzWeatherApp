@@ -5,6 +5,8 @@ import android.app.Application;
 import com.arellomobile.mvp.MvpFacade;
 import com.evernote.android.job.JobManager;
 
+import me.grechka.yamblz.yamblzweatherapp.model.repository.Repository;
+import me.grechka.yamblz.yamblzweatherapp.model.repository.RepositoryImp;
 import me.grechka.yamblz.yamblzweatherapp.updating.OpenWeatherApi;
 import me.grechka.yamblz.yamblzweatherapp.updating.WeatherJobCreator;
 import retrofit2.Retrofit;

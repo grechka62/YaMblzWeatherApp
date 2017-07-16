@@ -26,13 +26,13 @@ public class RepositoryImp implements Repository {
     private WeakReference<Context> context;
 
     @Override
-    public void setPresenter(WeatherPresenter presenter) {
-        this.presenter = presenter;
+    public void setContext(Context context) {
+        this.context = new WeakReference<>(context);
     }
 
     @Override
-    public void setContext(Context context) {
-        this.context = new WeakReference<>(context);
+    public void setPresenter(WeatherPresenter presenter) {
+        this.presenter = presenter;
     }
 
     @Override
@@ -42,28 +42,20 @@ public class RepositoryImp implements Repository {
 
             @Override
             public void onResponse(@NonNull Call<CurrentWeatherResponse> call, @NonNull Response<CurrentWeatherResponse> response) {
-                Log.d("retrofit", "Сходили в базу");
+                Log.d("retrofit", "Go to Network");
                 if (response.body() != null) {
-                    Log.d("retrofit", "Даже получили ответ");
+                    Log.d("retrofit", "Got positive answer");
                     CurrentWeatherResponse currentWeatherResponse = response.body();
                     double temperature = currentWeatherResponse.getMain().getTemp();
                     String description = currentWeatherResponse.getWeather().get(0).getDescription();
                     currentWeather = new CurrentWeather(temperature, description);
                     saveCurrentWeather();
                 } else {
-                    Log.d("retrofit", "Но ответа не получили");
-                    /*try {
-                        code = new JSONObject(response.errorBody().string()).getInt("code");
-                    } catch (Exception e) {
-                        code = CODE_WRONG_KEY;
-                    }
-                    setModel(model);*/
+                    Log.d("retrofit", "Got negative answer");
                 }
             }
             @Override
             public void onFailure(@NonNull Call<CurrentWeatherResponse> call, @NonNull Throwable t) {
-                /*code = CODE_CONNECTION_ERROR;
-                setModel(model);*/
             }
         });
     }
@@ -71,8 +63,9 @@ public class RepositoryImp implements Repository {
     @Override
     public void saveCurrentWeather() {
         context.get()
-                .getSharedPreferences("prefs", Context.MODE_PRIVATE).edit().
-                        putString("description", currentWeather.description).apply();
+                .getSharedPreferences("prefs", Context.MODE_PRIVATE).edit()
+                .putString("description", currentWeather.description)
+                .putString("temperature", Double.toString(currentWeather.temperature)).apply();
         if (presenter != null)
             updateCurrentWeather();
     }
