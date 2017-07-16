@@ -13,7 +13,16 @@
     <string name="date">от 09.07.2017 г.</string>
     <string name="author">Автор: Кравцова Ирина</string>
     <string name="changes">Изменения:</string>
-    <string name="change1">1. Создана основа приложения: пустой основной экран с navigation drawer-ом, в котором будут настройки и "о приложении". Изменена иконка приложения, добавлена локализация для русского языка (для других языков используется английский).</string>
+    <string-array name="change_array">
+        <item>1. Создана основа приложения: пустой основной экран с navigation drawer-ом, в котором будут настройки и "о приложении". Изменена иконка приложения, добавлена локализация для русского языка (для других языков используется английский).</item>
+    </string-array>
     <string name="logo_description">Логотип Яндекс.Мобилизации</string>
+    <string name="service_description">Обновление прогноза погоды</string>
+    <string name="updating">Обновление данных</string>
+    <string name="manually">Вручную</string>
+    <string name="min_15">Раз в 15 минут</string>
+    <string name="min_30">30 минут</string>
+    <string name="min_60">1 час</string>
+    <string name="min_180">3 часа</string>
 
 </resources>

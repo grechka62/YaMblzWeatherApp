@@ -10,6 +10,8 @@ import java.util.concurrent.TimeUnit;
 
 import me.grechka.yamblz.yamblzweatherapp.WeatherApp;
 import me.grechka.yamblz.yamblzweatherapp.model.CurrentWeather;
+import me.grechka.yamblz.yamblzweatherapp.model.repository.Repository;
+import me.grechka.yamblz.yamblzweatherapp.model.repository.RepositoryImp;
 import me.grechka.yamblz.yamblzweatherapp.model.response.CurrentWeatherResponse;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -24,32 +26,13 @@ import static me.grechka.yamblz.yamblzweatherapp.WeatherApp.getWeatherApi;
 public class WeatherUpdateJob extends Job {
 
     public static final String TAG = "job_weather_tag";
+    private Repository repository = new RepositoryImp();
 
     @Override
     @NonNull
     protected Result onRunJob(Params params) {
-        Log.d("Job", "onRunJob: Job was runned");
-        Call call = getWeatherApi().getCurrentWeather("524901", "ru", "metric", WeatherApp.APIKEY);
-        call.enqueue(new Callback<CurrentWeatherResponse>() {
-
-            @Override
-            public void onResponse(@NonNull Call<CurrentWeatherResponse> call, @NonNull Response<CurrentWeatherResponse> response) {
-                Log.d("retrofit", "onRunJob: Have gone to Network");
-                if (response.body() != null) {
-                    Log.d("retrofit", "onRunJob: Have got positive answer");
-                    CurrentWeatherResponse currentWeatherResponse = response.body();
-                    double temperature = currentWeatherResponse.getMain().getTemp();
-                    String description = currentWeatherResponse.getWeather().get(0).getDescription();
-                    CurrentWeather currentWeather = new CurrentWeather(temperature, description);
-                } else {
-                    Log.d("retrofit", "onRunJob: Have got negative answer");
-                }
-            }
-            @Override
-            public void onFailure(@NonNull Call<CurrentWeatherResponse> call, @NonNull Throwable t) {
-
-            }
-        });
+        Log.d("Job", "onRunJob: Job started");
+        repository.saveCurrentWeather();
         return Result.SUCCESS;
     }
 }

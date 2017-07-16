@@ -23,27 +23,18 @@ public class MainActivity extends MvpAppCompatActivity implements MainView {
     @InjectPresenter
     MainPresenter presenter;
 
-    private int jobId;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        JobManager mJobManager = JobManager.instance();
+        JobManager jobManager = JobManager.instance();
         if (savedInstanceState == null)
             showWeather();
-        if (mJobManager.getAllJobRequestsForTag(WeatherUpdateJob.TAG).isEmpty())
-            mJobManager.schedule(new JobRequest.Builder(WeatherUpdateJob.TAG)
+        if (jobManager.getAllJobRequestsForTag(WeatherUpdateJob.TAG).isEmpty())
+            jobManager.schedule(new JobRequest.Builder(WeatherUpdateJob.TAG)
                     .setRequiredNetworkType(JobRequest.NetworkType.CONNECTED)
-                    .setPeriodic(900000)
-                    .setPersisted(true)
+                    .setPeriodic(3600000)
                     .build());
-    }
-
-    @Override
-    public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
-        super.onSaveInstanceState(outState, outPersistentState);
-        outState.putInt("Job", jobId);
     }
 
     @Override

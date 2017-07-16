@@ -13,7 +13,16 @@
     <string name="date">09.07.2017</string>
     <string name="author">Author: Irina Kravtsova</string>
     <string name="changes">Changes:</string>
-    <string name="change1">1. Base of application is created: an empty main screen with navigation drawer, in which there are settings and "About". The application icon has been changed, the localization for the Russian language has been added (for other languages English is used)</string>
+    <string-array name="change_array">
+        <item>1. Base of application is created: an empty main screen with navigation drawer, in which there are settings and "About". The application icon has been changed, the localization for the Russian language has been added (for other languages English is used).</item>
+    </string-array>
     <string name="logo_description">Logo of Yandex.Mobilization</string>
+    <string name="service_description">Updating weather forecast</string>
+    <string name="updating">Updating data</string>
+    <string name="manually">Manually</string>
+    <string name="min_15">Every 15 minutes</string>
+    <string name="min_30">30 minutes</string>
+    <string name="min_60">1 hour</string>
+    <string name="min_180">3 hours</string>
 
 </resources>
