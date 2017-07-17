@@ -46,11 +46,18 @@ dependencies {
     compile libraries.supportSupport
     compile libraries.supportPreference
     compile libraries.constraint
+
+    compile libraries.dagger
+    annotationProcessor libraries.daggerCompiler
+
     compile libraries.androidJob
+
     compile libraries.retrofit
     compile libraries.converterGson
+
     compile libraries.moxy
     compile libraries.moxyAppCompat
     annotationProcessor libraries.moxyCompiler
+
     testCompile libraries.junit
 }
