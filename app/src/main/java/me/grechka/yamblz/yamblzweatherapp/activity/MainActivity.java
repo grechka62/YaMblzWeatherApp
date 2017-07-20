@@ -1,19 +1,17 @@
 package me.grechka.yamblz.yamblzweatherapp.activity;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 
 import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.arellomobile.mvp.presenter.InjectPresenter;
-import com.evernote.android.job.JobManager;
-import com.evernote.android.job.JobRequest;
+import com.arellomobile.mvp.presenter.ProvidePresenter;
 
 import me.grechka.yamblz.yamblzweatherapp.AboutFragment;
 import me.grechka.yamblz.yamblzweatherapp.R;
+import me.grechka.yamblz.yamblzweatherapp.WeatherApp;
 import me.grechka.yamblz.yamblzweatherapp.settings.SettingsFragment;
-import me.grechka.yamblz.yamblzweatherapp.updating.WeatherUpdateJob;
 import me.grechka.yamblz.yamblzweatherapp.weather.WeatherFragment;
 
 public class MainActivity extends MvpAppCompatActivity implements MainView {
@@ -21,34 +19,28 @@ public class MainActivity extends MvpAppCompatActivity implements MainView {
     @InjectPresenter
     MainPresenter presenter;
 
+    @ProvidePresenter
+    public MainPresenter providePresenter() {
+        return WeatherApp.getComponent().getMainPresenter();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        JobManager mJobManager = JobManager.instance();
         if (savedInstanceState == null)
-            showWeather();
-        if (mJobManager.getAllJobRequestsForTag(WeatherUpdateJob.TAG).isEmpty())
-            mJobManager.schedule(new JobRequest.Builder(WeatherUpdateJob.TAG)
-                    .setRequiredNetworkType(JobRequest.NetworkType.CONNECTED)
-                    .setPeriodic(Integer.parseInt(getSharedPreferences("prefs", Context.MODE_PRIVATE).getString("freq", "60"))*60000)
-                    .setPersisted(true)
-                    .build());
+            presenter.showWeather();
     }
 
     @Override
     public boolean onSupportNavigateUp() {
-        getSupportFragmentManager().popBackStack();
+        presenter.goBack();
         return true;
     }
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if ((drawer != null) && (drawer.isDrawerOpen(GravityCompat.START)))
-            drawer.closeDrawer(GravityCompat.START);
-        else
-            super.onBackPressed();
+        presenter.goBack();
     }
 
     @Override
@@ -75,11 +67,22 @@ public class MainActivity extends MvpAppCompatActivity implements MainView {
     }
 
     @Override
-    public void navigate(int id) {
-        if (id == R.id.nav_settings)
-            presenter.showSettings();
-        else if (id == R.id.nav_about)
-            presenter.showAbout();
+    public void navigate(int screenId) {
+        switch (screenId) {
+            case R.id.nav_settings:
+                presenter.showSettings(); break;
+            case R.id.nav_about:
+                presenter.showAbout();
+        }
+    }
+
+    @Override
+    public void goBack() {
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if ((drawer != null) && (drawer.isDrawerOpen(GravityCompat.START)))
+            drawer.closeDrawer(GravityCompat.START);
+        else
+            super.onBackPressed();
     }
 
 }

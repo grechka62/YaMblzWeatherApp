@@ -3,40 +3,58 @@ package me.grechka.yamblz.yamblzweatherapp;
 import android.app.Application;
 
 import com.arellomobile.mvp.MvpFacade;
-import com.evernote.android.job.JobManager;
 
-import me.grechka.yamblz.yamblzweatherapp.model.repository.Repository;
-import me.grechka.yamblz.yamblzweatherapp.model.repository.RepositoryImp;
-import me.grechka.yamblz.yamblzweatherapp.updating.OpenWeatherApi;
-import me.grechka.yamblz.yamblzweatherapp.updating.WeatherJobCreator;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
+import javax.inject.Inject;
+
+import me.grechka.yamblz.yamblzweatherapp.di.AppComponent;
+import me.grechka.yamblz.yamblzweatherapp.di.ContextModule;
+import me.grechka.yamblz.yamblzweatherapp.di.DaggerAppComponent;
+import me.grechka.yamblz.yamblzweatherapp.di.DataModule;
+import me.grechka.yamblz.yamblzweatherapp.di.JobModule;
+import me.grechka.yamblz.yamblzweatherapp.di.ModelModule;
+import me.grechka.yamblz.yamblzweatherapp.di.NavigationModule;
+import me.grechka.yamblz.yamblzweatherapp.di.NetworkModule;
+import me.grechka.yamblz.yamblzweatherapp.repository.PreferencesManager;
+import me.grechka.yamblz.yamblzweatherapp.updating.WeatherJobUtils;
 
 /**
  * Created by Grechka on 14.07.2017.
  */
 
 public class WeatherApp extends Application {
-    private static OpenWeatherApi openWeatherApi;
-    public static final String APIKEY = "847aa9acae58b3e1ccd9da7ef3fc4d01";
+    private static AppComponent component;
+
+    @Inject
+    PreferencesManager preferencesManager;
+    @Inject
+    WeatherJobUtils weatherJobUtils;
+
+    public static AppComponent getComponent() {
+        return component;
+    }
 
     @Override
     public void onCreate() {
         super.onCreate();
+        component = buildComponent();
+        component.inject(this);
         MvpFacade.init();
-        initRetrofit();
-        JobManager.create(this).addJobCreator(new WeatherJobCreator());
+        setUpdateSchedule();
     }
 
-    private void initRetrofit() {
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://api.openweathermap.org/")
-                .addConverterFactory(GsonConverterFactory.create())
+    protected AppComponent buildComponent() {
+        return DaggerAppComponent.builder()
+                .contextModule(new ContextModule(this))
+                .jobModule(new JobModule())
+                //.modelModule(new ModelModule())
+                .navigationModule(new NavigationModule())
+                .networkModule(new NetworkModule())
+                .dataModule(new DataModule())
                 .build();
-        openWeatherApi = retrofit.create(OpenWeatherApi.class);
     }
 
-    public static OpenWeatherApi getWeatherApi() {
-        return openWeatherApi;
+    void setUpdateSchedule() {
+        int minutes = Integer.parseInt(preferencesManager.getUpdateFrequency());
+        weatherJobUtils.scheduleWeatherJob(minutes);
     }
 }

@@ -1,0 +1,19 @@
+Unstaged changes after reset:
+M	app/src/main/java/me/grechka/yamblz/yamblzweatherapp/AboutFragment.java
+M	app/src/main/java/me/grechka/yamblz/yamblzweatherapp/WeatherApp.java
+M	app/src/main/java/me/grechka/yamblz/yamblzweatherapp/activity/MainActivity.java
+M	app/src/main/java/me/grechka/yamblz/yamblzweatherapp/activity/MainPresenter.java
+M	app/src/main/java/me/grechka/yamblz/yamblzweatherapp/activity/MainView.java
+M	app/src/main/java/me/grechka/yamblz/yamblzweatherapp/model/CurrentWeather.java
+D	app/src/main/java/me/grechka/yamblz/yamblzweatherapp/model/repository/Repository.java
+D	app/src/main/java/me/grechka/yamblz/yamblzweatherapp/model/repository/RepositoryImp.java
+M	app/src/main/java/me/grechka/yamblz/yamblzweatherapp/repository/RepositoryImp.java
+M	app/src/main/java/me/grechka/yamblz/yamblzweatherapp/settings/SettingsFragment.java
+M	app/src/main/java/me/grechka/yamblz/yamblzweatherapp/settings/SettingsPresenter.java
+M	app/src/main/java/me/grechka/yamblz/yamblzweatherapp/updating/CurrentWeatherUpdateJob.java
+M	app/src/main/java/me/grechka/yamblz/yamblzweatherapp/updating/WeatherApi.java
+M	app/src/main/java/me/grechka/yamblz/yamblzweatherapp/updating/WeatherJobCreator.java
+M	app/src/main/java/me/grechka/yamblz/yamblzweatherapp/weather/WeatherFragment.java
+M	app/src/main/java/me/grechka/yamblz/yamblzweatherapp/weather/WeatherPresenter.java
+M	app/src/main/java/me/grechka/yamblz/yamblzweatherapp/weather/WeatherView.java
+M	gradle.properties

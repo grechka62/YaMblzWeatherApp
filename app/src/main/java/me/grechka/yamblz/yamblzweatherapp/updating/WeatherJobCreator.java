@@ -12,8 +12,8 @@ public class WeatherJobCreator implements JobCreator {
     @Override
     public Job create(String tag) {
         switch (tag) {
-            case WeatherUpdateJob.TAG:
-                return new WeatherUpdateJob();
+            case CurrentWeatherUpdateJob.TAG:
+                return new CurrentWeatherUpdateJob();
             default:
                 return null;
         }

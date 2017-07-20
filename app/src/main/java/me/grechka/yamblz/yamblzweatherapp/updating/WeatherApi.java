@@ -9,7 +9,7 @@ import retrofit2.http.Query;
  * Created by Grechka on 14.07.2017.
  */
 
-public interface OpenWeatherApi {
+public interface WeatherApi {
     @GET("data/2.5/weather")
     Call<CurrentWeatherResponse> getCurrentWeather(@Query("id") String city,
                                            @Query("lang") String lang,

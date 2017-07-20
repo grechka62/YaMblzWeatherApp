@@ -5,10 +5,10 @@ package me.grechka.yamblz.yamblzweatherapp.model;
  */
 
 public class CurrentWeather {
-    public final double temperature;
+    public final String temperature;
     public final String description;
 
-    public CurrentWeather(double temperature, String description) {
+    public CurrentWeather(String temperature, String description) {
         this.temperature = temperature;
         this.description = description;
     }

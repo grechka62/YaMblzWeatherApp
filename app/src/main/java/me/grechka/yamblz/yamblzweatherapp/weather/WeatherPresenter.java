@@ -1,35 +1,60 @@
 package me.grechka.yamblz.yamblzweatherapp.weather;
 
-import android.content.Context;
-
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 
 import java.io.Serializable;
 
+import javax.inject.Inject;
+
+import me.grechka.yamblz.yamblzweatherapp.WeatherApp;
 import me.grechka.yamblz.yamblzweatherapp.model.CurrentWeather;
-import me.grechka.yamblz.yamblzweatherapp.model.repository.Repository;
-import me.grechka.yamblz.yamblzweatherapp.model.repository.RepositoryImp;
+import me.grechka.yamblz.yamblzweatherapp.repository.Repository;
+import me.grechka.yamblz.yamblzweatherapp.repository.RepositoryImp;
 
 /**
  * Created by Grechka on 15.07.2017.
  */
 
 @InjectViewState
-public class WeatherPresenter extends MvpPresenter<WeatherView> implements Serializable {
-    private Repository repository = new RepositoryImp();
-    {repository.setPresenter(this);}
+public class WeatherPresenter extends MvpPresenter<WeatherView> implements Repository.OnGotResponseListener {
 
-    public void updateCurrentWeather() {
-        repository.getCurrentWeather();
+    @Inject
+    Repository repository;
+
+    public WeatherPresenter() {
+        super();
+        WeatherApp.getComponent().inject(this);
+        repository.registerCallBack(this);
     }
 
-    public void showCurrentWeather(CurrentWeather currentWeather) {
-        String temperature = Double.toString(currentWeather.temperature);
-        getViewState().showCurrentWeather(temperature, currentWeather.description);
+    void updateCurrentWeather() {
+        repository.updateCurrentWeather();
     }
 
-    public Repository getRepository() {
-        return repository;
+    private void showCurrentWeather(CurrentWeather currentWeather) {
+        getViewState().showCurrentWeather(currentWeather.temperature, currentWeather.description);
+    }
+
+    void showSavedCurrentWeather() {
+        CurrentWeather currentWeather = repository.getSavedCurrentWeather();
+        showCurrentWeather(currentWeather);
+    }
+
+    void closeDrawer() {
+        getViewState().closeDrawer();
+    }
+
+    @Override
+    public void onGotResponse() {
+        CurrentWeather currentWeather = repository.getCurrentWeather();
+        repository.putCurrentWeather(currentWeather);
+        if (getViewState() != null)
+            showCurrentWeather(currentWeather);
+    }
+
+    @Override
+    public void onFailure() {
+        getViewState().showMessage();
     }
 }
