@@ -21,4 +21,12 @@ public class MainPresenter extends MvpPresenter<MainView> {
     void showAbout() {
         getViewState().showAbout();
     }
+
+    void goBack() {
+        getViewState().goBack();
+    }
+
+    public void navigate(int screenId) {
+        getViewState().navigate(screenId);
+    }
 }

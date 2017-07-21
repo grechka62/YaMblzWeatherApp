@@ -21,16 +21,19 @@ public class AboutFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_about, container, false);
+
         Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
         toolbar.setTitle(R.string.action_about);
         AppCompatActivity activity = (AppCompatActivity) getActivity();
         activity.setSupportActionBar(toolbar);
         activity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         ArrayAdapter<String> adapter = new ArrayAdapter<>
                 (activity, android.R.layout.simple_list_item_1,
                         getResources().getStringArray(R.array.change_array));
         ListView listView = (ListView) view.findViewById(R.id.list_changes);
         listView.setAdapter(adapter);
+
         return view;
     }
 

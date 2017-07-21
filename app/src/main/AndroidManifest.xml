@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="me.grechka.yamblz.yamblzweatherapp">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:name=".WeatherApp"
         android:allowBackup="true"
@@ -21,12 +24,6 @@
             </intent-filter>
         </activity>
 
-        <!--<service
-            android:name=".WeatherService"
-            android:description="@string/service_description"
-            android:enabled="true"
-            android:exported="false"
-            android:process="remote"/>-->
     </application>
 
 </manifest>

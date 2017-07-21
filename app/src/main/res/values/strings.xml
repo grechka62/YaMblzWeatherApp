@@ -9,11 +9,50 @@
 
     <string name="future_functions">Here will be future functions</string>
 
-    <string name="version">Version 0.0.1</string>
-    <string name="date">09.07.2017</string>
+    <string name="version">Version 0.0.2</string>
+    <string name="date">16.07.2017</string>
     <string name="author">Author: Irina Kravtsova</string>
     <string name="changes">Changes:</string>
-    <string name="change1">1. Base of application is created: an empty main screen with navigation drawer, in which there are settings and "About". The application icon has been changed, the localization for the Russian language has been added (for other languages English is used)</string>
+    <string-array name="change_array">
+        <item>1. Base of application is created: an empty main screen with navigation drawer, in which there are settings and "About". The application icon has been changed, the localization for the Russian language has been added (for other languages English is used).</item>
+        <item>2. Updating of current weather was implemented. There is an opportunity to update manually and on schedule. The opportunity to change the updating interval in the application settings.</item>
+    </string-array>
+
     <string name="logo_description">Logo of Yandex.Mobilization</string>
+    <string name="service_description">Updating weather forecast</string>
+
+    <string name="updating">Updating data</string>
+    <string name="manually">Manually</string>
+    <string name="min_15">Every 15 minutes</string>
+    <string name="min_30">30 minutes</string>
+    <string name="min_60">1 hour</string>
+    <string name="min_180">3 hours</string>
+
+    <string name="north">N</string>
+    <string name="north_north_east">NNE</string>
+    <string name="north_east">NE</string>
+    <string name="east_north_east">ENE</string>
+    <string name="east">E</string>
+    <string name="east_south_east">ESE</string>
+    <string name="south_east">SE</string>
+    <string name="south_south_east">SSE</string>
+    <string name="south">S</string>
+    <string name="south_south_west">SSW</string>
+    <string name="south_west">SW</string>
+    <string name="west_south_west">WSW</string>
+    <string name="west">W</string>
+    <string name="west_north_west">WNW</string>
+    <string name="north_west">NW</string>
+    <string name="north_north_west">NNW</string>
+    <string name="calm">calm</string>
+
+    <string name="default_city">Moscow</string>
+    <string name="celsius" translatable="false">"C</string>
+    <string name="wind_title">Wind: </string>
+    <string name="humidity_title">Humidity: </string>
+    <string name="wind_units">mps</string>
+
+    <string name="error">Failed to update data</string>
+    <string name="no_network">Check your Internet connection</string>
 
 </resources>

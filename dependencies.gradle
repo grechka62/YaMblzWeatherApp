@@ -1,6 +1,6 @@
 ext.versions = [
-        code                         : 1,
-        name                         : '0.0.1',
+        code                         : 2,
+        name                         : '0.0.2',
 
         minSdk                       : 15,
         targetSdk                    : 25,
@@ -11,7 +11,8 @@ ext.versions = [
 
         supportLibs                  : '25.3.1',
 		constraint			 		 : '1.0.2',
-		
+
+		dagger						 : '2.11',
 		androidJob					 : '1.1.11',
 		retrofit					 : '2.3.0',
 		moxy						 : '1.5.3',
@@ -31,7 +32,10 @@ ext.libraries = [
 		supportSupport			: "com.android.support:support-v4:$versions.supportLibs",
 		supportPreference		: "com.android.support:preference-v14:$versions.supportLibs",
 		constraint    		    : "com.android.support.constraint:constraint-layout:$versions.constraint",
-		
+
+		dagger					: "com.google.dagger:dagger:$versions.dagger",
+		daggerCompiler			: "com.google.dagger:dagger-compiler:$versions.dagger",
+
 		androidJob				: "com.evernote:android-job:$versions.androidJob",
 		retrofit				: "com.squareup.retrofit2:retrofit:$versions.retrofit",
 		converterGson			: "com.squareup.retrofit2:converter-gson:$versions.retrofit",

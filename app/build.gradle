@@ -25,6 +25,9 @@ android {
     }
 
     buildTypes {
+        debug {
+            minifyEnabled false
+        }
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
@@ -34,7 +37,6 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
     androidTestCompile(libraries.espressoCore, {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
@@ -43,11 +45,18 @@ dependencies {
     compile libraries.supportSupport
     compile libraries.supportPreference
     compile libraries.constraint
+
+    compile libraries.dagger
+    annotationProcessor libraries.daggerCompiler
+
     compile libraries.androidJob
+
     compile libraries.retrofit
     compile libraries.converterGson
+
     compile libraries.moxy
     compile libraries.moxyAppCompat
-    provided libraries.moxyCompiler
+    annotationProcessor libraries.moxyCompiler
+
     testCompile libraries.junit
 }

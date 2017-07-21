@@ -6,9 +6,11 @@ import android.support.v4.widget.DrawerLayout;
 
 import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.arellomobile.mvp.presenter.InjectPresenter;
+import com.arellomobile.mvp.presenter.ProvidePresenter;
 
 import me.grechka.yamblz.yamblzweatherapp.AboutFragment;
 import me.grechka.yamblz.yamblzweatherapp.R;
+import me.grechka.yamblz.yamblzweatherapp.WeatherApp;
 import me.grechka.yamblz.yamblzweatherapp.settings.SettingsFragment;
 import me.grechka.yamblz.yamblzweatherapp.weather.WeatherFragment;
 
@@ -16,6 +18,11 @@ public class MainActivity extends MvpAppCompatActivity implements MainView {
 
     @InjectPresenter
     MainPresenter presenter;
+
+    @ProvidePresenter
+    public MainPresenter providePresenter() {
+        return WeatherApp.getComponent().getMainPresenter();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,24 +34,20 @@ public class MainActivity extends MvpAppCompatActivity implements MainView {
 
     @Override
     public boolean onSupportNavigateUp() {
-        getSupportFragmentManager().popBackStack();
+        presenter.goBack();
         return true;
     }
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if ((drawer != null) && (drawer.isDrawerOpen(GravityCompat.START)))
-            drawer.closeDrawer(GravityCompat.START);
-        else
-            super.onBackPressed();
+        presenter.goBack();
     }
 
     @Override
     public void showWeather() {
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragment_container, new WeatherFragment())
-                .commit();
+                .commitAllowingStateLoss();
     }
 
     @Override
@@ -52,7 +55,7 @@ public class MainActivity extends MvpAppCompatActivity implements MainView {
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragment_container, new SettingsFragment())
                 .addToBackStack(null)
-                .commit();
+                .commitAllowingStateLoss();
     }
 
     @Override
@@ -60,14 +63,26 @@ public class MainActivity extends MvpAppCompatActivity implements MainView {
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragment_container, new AboutFragment())
                 .addToBackStack(null)
-                .commit();
+                .commitAllowingStateLoss();
     }
 
     @Override
-    public void navigate(int id) {
-        if (id == R.id.nav_settings)
-            presenter.showSettings();
-        else if (id == R.id.nav_about)
-            presenter.showAbout();
+    public void navigate(int screenId) {
+        switch (screenId) {
+            case R.id.nav_settings:
+                presenter.showSettings(); break;
+            case R.id.nav_about:
+                presenter.showAbout();
+        }
     }
+
+    @Override
+    public void goBack() {
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if ((drawer != null) && (drawer.isDrawerOpen(GravityCompat.START)))
+            drawer.closeDrawer(GravityCompat.START);
+        else
+            super.onBackPressed();
+    }
+
 }
