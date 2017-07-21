@@ -85,18 +85,33 @@ public class WeatherFragment extends MvpAppCompatFragment implements WeatherView
     }
 
     @Override
-    public void showCurrentWeather(String temperature, String description) {
+    public void showCurrentWeather(String temperature,
+                                   String description,
+                                   String humidity,
+                                   String tempMin,
+                                   String tempMax,
+                                   String wind) {
         TextView tempView = (TextView) view.findViewById(R.id.cur_temp);
         tempView.setText(temperature);
+        TextView maxTempView = (TextView) view.findViewById(R.id.temp_max);
+        maxTempView.setText(tempMax);
+        TextView minTempView = (TextView) view.findViewById(R.id.temp_min);
+        minTempView.setText(tempMin);
         TextView descView = (TextView) view.findViewById(R.id.description);
         descView.setText(description);
+        TextView windView = (TextView) view.findViewById(R.id.wind_value);
+        windView.setText(wind);
+        TextView humidityView = (TextView) view.findViewById(R.id.humidity_value);
+        humidityView.setText(humidity);
         swipeRefreshLayout.setRefreshing(false);
     }
 
     @Override
-    public void showMessage() {
+    public void showMessage(String message) {
+        if (message.compareTo("Error") == 0) message = getResources().getString(R.string.error);
+        else if (message.compareTo("No network") == 0) message = getResources().getString(R.string.no_network);
         swipeRefreshLayout.setRefreshing(false);
-        Toast toast = Toast.makeText(context, "Проверьте Ваше подключение к Интернету", Toast.LENGTH_SHORT);
+        Toast toast = Toast.makeText(context, message, Toast.LENGTH_SHORT);
         TextView v = (TextView) toast.getView().findViewById(android.R.id.message);
         if( v != null)
             v.setGravity(Gravity.CENTER);

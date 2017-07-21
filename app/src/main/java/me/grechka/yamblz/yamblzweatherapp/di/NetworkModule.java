@@ -6,7 +6,7 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
-import me.grechka.yamblz.yamblzweatherapp.updating.WeatherApi;
+import me.grechka.yamblz.yamblzweatherapp.repository.WeatherApi;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 

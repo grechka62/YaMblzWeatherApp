@@ -1,4 +1,4 @@
-package me.grechka.yamblz.yamblzweatherapp.updating;
+package me.grechka.yamblz.yamblzweatherapp.repository;
 
 import me.grechka.yamblz.yamblzweatherapp.model.response.CurrentWeatherResponse;
 import retrofit2.Call;

@@ -3,8 +3,6 @@ package me.grechka.yamblz.yamblzweatherapp.repository;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import javax.inject.Inject;
-
 import me.grechka.yamblz.yamblzweatherapp.model.CurrentWeather;
 
 /**
@@ -17,6 +15,10 @@ public class PreferencesManager {
     private final String FREQUENCY_DEFAULT = "60";
     private final String TEMPERATURE_TAG = "temperature";
     private final String DESCRIPTION_TAG = "descdription";
+    private final String HUMIDITY_TAG = "humidity";
+    private final String MIN_TEMP_TAG = "min_temp";
+    private final String MAX_TEMP_TAG = "max_temp";
+    private final String WIND_TAG = "wind";
     private final String NO_INFORMATION = "-";
 
     private SharedPreferences preferences;
@@ -36,12 +38,20 @@ public class PreferencesManager {
     public CurrentWeather getCurrentWeather() {
         return new CurrentWeather(
                 preferences.getString(TEMPERATURE_TAG, NO_INFORMATION),
-                preferences.getString(DESCRIPTION_TAG, NO_INFORMATION)
+                preferences.getString(DESCRIPTION_TAG, NO_INFORMATION),
+                preferences.getString(HUMIDITY_TAG, NO_INFORMATION),
+                preferences.getString(MIN_TEMP_TAG, NO_INFORMATION),
+                preferences.getString(MAX_TEMP_TAG, NO_INFORMATION),
+                preferences.getString(WIND_TAG, NO_INFORMATION)
         );
     }
 
     public void putCurrentWeather(CurrentWeather currentWeather) {
         preferences.edit().putString(TEMPERATURE_TAG, currentWeather.temperature).apply();
         preferences.edit().putString(DESCRIPTION_TAG, currentWeather.description).apply();
+        preferences.edit().putString(HUMIDITY_TAG, currentWeather.humidity).apply();
+        preferences.edit().putString(MIN_TEMP_TAG, currentWeather.tempMin).apply();
+        preferences.edit().putString(MAX_TEMP_TAG, currentWeather.tempMax).apply();
+        preferences.edit().putString(WIND_TAG, currentWeather.wind).apply();
     }
 }

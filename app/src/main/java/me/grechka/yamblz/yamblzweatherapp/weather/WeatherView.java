@@ -13,12 +13,17 @@ import com.arellomobile.mvp.viewstate.strategy.StateStrategyType;
 public interface WeatherView extends MvpView {
 
     @StateStrategyType(SingleStateStrategy.class)
-    void showCurrentWeather(String temperature, String description);
+    void showCurrentWeather(String temperature,
+                            String description,
+                            String humidity,
+                            String tempMin,
+                            String tempMax,
+                            String wind);
 
     @StateStrategyType(AddToEndSingleStrategy.class)
     void closeDrawer();
 
     @StateStrategyType(SkipStrategy.class)
-    void showMessage();
+    void showMessage(String message);
 
 }

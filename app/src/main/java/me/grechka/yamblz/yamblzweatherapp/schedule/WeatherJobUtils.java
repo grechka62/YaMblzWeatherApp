@@ -1,4 +1,4 @@
-package me.grechka.yamblz.yamblzweatherapp.updating;
+package me.grechka.yamblz.yamblzweatherapp.schedule;
 
 import com.evernote.android.job.JobManager;
 import com.evernote.android.job.JobRequest;

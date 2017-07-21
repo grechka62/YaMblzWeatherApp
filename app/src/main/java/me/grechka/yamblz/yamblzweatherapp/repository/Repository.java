@@ -13,7 +13,7 @@ public interface Repository {
 
     interface OnGotResponseListener {
         void onGotResponse();
-        void onFailure();
+        void onFailure(String message);
     }
 
     void registerCallBack(OnGotResponseListener callback);
@@ -22,7 +22,7 @@ public interface Repository {
 
     CurrentWeather getCurrentWeather();
 
-    void putCurrentWeather(CurrentWeather currentWeather);
+    //void putCurrentWeather();
 
     CurrentWeather getSavedCurrentWeather();
 

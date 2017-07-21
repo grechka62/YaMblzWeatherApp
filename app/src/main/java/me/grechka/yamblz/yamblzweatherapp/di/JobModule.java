@@ -9,8 +9,8 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
-import me.grechka.yamblz.yamblzweatherapp.updating.WeatherJobCreator;
-import me.grechka.yamblz.yamblzweatherapp.updating.WeatherJobUtils;
+import me.grechka.yamblz.yamblzweatherapp.schedule.WeatherJobCreator;
+import me.grechka.yamblz.yamblzweatherapp.schedule.WeatherJobUtils;
 
 /**
  * Created by Grechka on 19.07.2017.

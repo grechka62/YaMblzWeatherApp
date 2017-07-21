@@ -9,7 +9,6 @@ import me.grechka.yamblz.yamblzweatherapp.interactor.Interactor;
 import me.grechka.yamblz.yamblzweatherapp.WeatherApp;
 import me.grechka.yamblz.yamblzweatherapp.model.CurrentWeather;
 import me.grechka.yamblz.yamblzweatherapp.model.response.CurrentWeatherResponse;
-import me.grechka.yamblz.yamblzweatherapp.updating.WeatherApi;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -53,15 +52,19 @@ public class RepositoryImp implements Repository {
                 if (response.body() != null) {
                     Log.d("retrofit", "Got positive answer");
                     currentWeather = interactor.getCurrentWeatherFromResponse(response.body());
-                    callback.onGotResponse();
+                    putCurrentWeather();
+                    if (callback != null)
+                        callback.onGotResponse();
                 } else {
                     Log.d("retrofit", "Got negative answer");
-                    //TODO распарсить негативный ответ и показать пользователю нужное сообщение
+                    if (callback != null)
+                        callback.onFailure("Error");
                 }
             }
             @Override
             public void onFailure(@NonNull Call<CurrentWeatherResponse> call, @NonNull Throwable t) {
-                callback.onFailure();
+                if (callback != null)
+                    callback.onFailure("No network");
             }
         });
     }
@@ -71,8 +74,8 @@ public class RepositoryImp implements Repository {
         return currentWeather;
     }
 
-    @Override
-    public void putCurrentWeather(CurrentWeather currentWeather) {
+    //@Override
+    private void putCurrentWeather() {
         preferencesManager.putCurrentWeather(currentWeather);
     }
 

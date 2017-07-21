@@ -18,6 +18,7 @@ import me.grechka.yamblz.yamblzweatherapp.repository.RepositoryImp;
 
 @InjectViewState
 public class WeatherPresenter extends MvpPresenter<WeatherView> implements Repository.OnGotResponseListener {
+    public final String NO_INFORMATION = "-";
 
     @Inject
     Repository repository;
@@ -33,12 +34,20 @@ public class WeatherPresenter extends MvpPresenter<WeatherView> implements Repos
     }
 
     private void showCurrentWeather(CurrentWeather currentWeather) {
-        getViewState().showCurrentWeather(currentWeather.temperature, currentWeather.description);
+        getViewState().showCurrentWeather(currentWeather.temperature,
+                currentWeather.description,
+                currentWeather.humidity,
+                currentWeather.tempMin,
+                currentWeather.tempMax,
+                currentWeather.wind);
     }
 
     void showSavedCurrentWeather() {
         CurrentWeather currentWeather = repository.getSavedCurrentWeather();
-        showCurrentWeather(currentWeather);
+        if (currentWeather.temperature.compareTo(NO_INFORMATION) == 0)
+            repository.updateCurrentWeather();
+        else
+            showCurrentWeather(currentWeather);
     }
 
     void closeDrawer() {
@@ -48,13 +57,11 @@ public class WeatherPresenter extends MvpPresenter<WeatherView> implements Repos
     @Override
     public void onGotResponse() {
         CurrentWeather currentWeather = repository.getCurrentWeather();
-        repository.putCurrentWeather(currentWeather);
-        if (getViewState() != null)
-            showCurrentWeather(currentWeather);
+        showCurrentWeather(currentWeather);
     }
 
     @Override
-    public void onFailure() {
-        getViewState().showMessage();
+    public void onFailure(String message) {
+        getViewState().showMessage(message);
     }
 }
