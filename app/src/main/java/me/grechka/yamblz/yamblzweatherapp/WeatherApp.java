@@ -7,13 +7,13 @@ import com.arellomobile.mvp.MvpFacade;
 import javax.inject.Inject;
 
 import me.grechka.yamblz.yamblzweatherapp.di.AppComponent;
-import me.grechka.yamblz.yamblzweatherapp.di.ContextModule;
+import me.grechka.yamblz.yamblzweatherapp.di.modules.AppModule;
 import me.grechka.yamblz.yamblzweatherapp.di.DaggerAppComponent;
-import me.grechka.yamblz.yamblzweatherapp.di.DataModule;
-import me.grechka.yamblz.yamblzweatherapp.di.JobModule;
-import me.grechka.yamblz.yamblzweatherapp.di.NavigationModule;
-import me.grechka.yamblz.yamblzweatherapp.di.NetworkModule;
-import me.grechka.yamblz.yamblzweatherapp.repository.PreferencesManager;
+import me.grechka.yamblz.yamblzweatherapp.di.modules.DataModule;
+import me.grechka.yamblz.yamblzweatherapp.di.modules.JobModule;
+import me.grechka.yamblz.yamblzweatherapp.di.modules.NavigationModule;
+import me.grechka.yamblz.yamblzweatherapp.di.modules.NetworkModule;
+import me.grechka.yamblz.yamblzweatherapp.repository.prefs.PreferencesManager;
 import me.grechka.yamblz.yamblzweatherapp.schedule.WeatherJobUtils;
 
 /**
@@ -43,7 +43,7 @@ public class WeatherApp extends Application {
 
     protected AppComponent buildComponent() {
         return DaggerAppComponent.builder()
-                .contextModule(new ContextModule(this))
+                .contextModule(new AppModule(this))
                 .jobModule(new JobModule())
                 .navigationModule(new NavigationModule())
                 .networkModule(new NetworkModule())

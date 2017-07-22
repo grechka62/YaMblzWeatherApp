@@ -3,38 +3,44 @@ package me.grechka.yamblz.yamblzweatherapp.repository;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
-import javax.inject.Inject;
-
+import io.reactivex.Single;
 import me.grechka.yamblz.yamblzweatherapp.interactor.Interactor;
-import me.grechka.yamblz.yamblzweatherapp.WeatherApp;
 import me.grechka.yamblz.yamblzweatherapp.model.CurrentWeather;
 import me.grechka.yamblz.yamblzweatherapp.model.response.CurrentWeatherResponse;
+import me.grechka.yamblz.yamblzweatherapp.repository.models.SuggestionResponseModel;
+import me.grechka.yamblz.yamblzweatherapp.repository.net.SuggestApi;
+import me.grechka.yamblz.yamblzweatherapp.repository.net.WeatherApi;
+import me.grechka.yamblz.yamblzweatherapp.repository.prefs.PreferencesManager;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import static me.grechka.yamblz.yamblzweatherapp.repository.net.WeatherApi.API_KEY;
 
 /**
  * Created by Grechka on 16.07.2017.
  */
 
 public class RepositoryImp implements Repository {
-    private final String APIKEY = "847aa9acae58b3e1ccd9da7ef3fc4d01";
     private final String MOSCOW_ID = "524901";
 
     private CurrentWeather currentWeather;
     private OnGotResponseListener callback;
 
-    @Inject
-    WeatherApi weatherApi;
+    private Interactor interactor;
+    private WeatherApi weatherApi;
+    private SuggestApi suggestApi;
+    private PreferencesManager preferencesManager;
 
-    @Inject
-    PreferencesManager preferencesManager;
 
-    @Inject
-    Interactor interactor;
-
-    public RepositoryImp() {
-        WeatherApp.getComponent().inject(this);
+    public RepositoryImp(@NonNull Interactor interactor,
+                         @NonNull WeatherApi weatherApi,
+                         @NonNull SuggestApi suggestApi,
+                         @NonNull PreferencesManager preferencesManager) {
+        this.interactor = interactor;
+        this.weatherApi = weatherApi;
+        this.suggestApi = suggestApi;
+        this.preferencesManager = preferencesManager;
     }
 
     public void registerCallBack(OnGotResponseListener callback){
@@ -43,7 +49,7 @@ public class RepositoryImp implements Repository {
 
     @Override
     public void updateCurrentWeather() {
-        Call call = weatherApi.getCurrentWeather(MOSCOW_ID, "ru", "metric", APIKEY);
+        Call call = weatherApi.getCurrentWeather(MOSCOW_ID, "ru", "metric", API_KEY);
         call.enqueue(new Callback<CurrentWeatherResponse>() {
 
             @Override
@@ -74,13 +80,17 @@ public class RepositoryImp implements Repository {
         return currentWeather;
     }
 
-    //@Override
-    private void putCurrentWeather() {
-        preferencesManager.putCurrentWeather(currentWeather);
-    }
-
     @Override
     public CurrentWeather getSavedCurrentWeather() {
         return preferencesManager.getCurrentWeather();
+    }
+
+    @Override
+    public Single<SuggestionResponseModel> obtainSuggestedCities(@NonNull String input) {
+        return suggestApi.obtainSuggestedCities(input, SuggestApi.API_TYPES, SuggestApi.API_KEY);
+    }
+
+    private void putCurrentWeather() {
+        preferencesManager.putCurrentWeather(currentWeather);
     }
 }

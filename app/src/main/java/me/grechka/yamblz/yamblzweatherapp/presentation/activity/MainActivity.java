@@ -11,6 +11,7 @@ import com.arellomobile.mvp.presenter.ProvidePresenter;
 import me.grechka.yamblz.yamblzweatherapp.presentation.AboutFragment;
 import me.grechka.yamblz.yamblzweatherapp.R;
 import me.grechka.yamblz.yamblzweatherapp.WeatherApp;
+import me.grechka.yamblz.yamblzweatherapp.presentation.citySearch.CitySearchFragment;
 import me.grechka.yamblz.yamblzweatherapp.presentation.settings.SettingsFragment;
 import me.grechka.yamblz.yamblzweatherapp.presentation.weather.WeatherFragment;
 
@@ -67,12 +68,22 @@ public class MainActivity extends MvpAppCompatActivity implements MainView {
     }
 
     @Override
+    public void showCitySearch() {
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragment_container, CitySearchFragment.newInstance())
+                .addToBackStack(null)
+                .commitAllowingStateLoss();
+    }
+
+    @Override
     public void navigate(int screenId) {
         switch (screenId) {
             case R.id.nav_settings:
-                presenter.showSettings(); break;
+                presenter.showSettings();
+                break;
             case R.id.nav_about:
                 presenter.showAbout();
+                break;
         }
     }
 

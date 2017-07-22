@@ -1,4 +1,4 @@
-package me.grechka.yamblz.yamblzweatherapp.repository;
+package me.grechka.yamblz.yamblzweatherapp.repository.prefs;
 
 import android.content.Context;
 import android.content.SharedPreferences;
