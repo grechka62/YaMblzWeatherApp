@@ -87,6 +87,11 @@ public class RepositoryImp implements Repository {
     }
 
     @Override
+    public Single<CurrentWeatherResponse> getWeatherByLocation(double latitude, double longitude) {
+        return weatherApi.getWeatherByLocation(latitude, longitude, API_KEY);
+    }
+
+    @Override
     public Single<CityResponseModel> obtainCityInfo(@NonNull String cityId) {
         return suggestApi.obtainCity(cityId, SuggestApi.API_KEY);
     }

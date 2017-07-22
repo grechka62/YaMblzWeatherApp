@@ -10,36 +10,47 @@ public class CurrentWeatherResponse implements Serializable {
     @SerializedName("coord")
     @Expose
     private Coord coord;
+
     @SerializedName("weather")
     @Expose
     private List<Weather> weather = null;
+
     @SerializedName("base")
     @Expose
     private String base;
+
     @SerializedName("main")
     @Expose
     private Main main;
+
     @SerializedName("visibility")
     @Expose
     private int visibility;
+
     @SerializedName("wind")
     @Expose
     private Wind wind;
+
     @SerializedName("clouds")
     @Expose
     private Clouds clouds;
+
     @SerializedName("dt")
     @Expose
     private long dt;
+
     @SerializedName("sys")
     @Expose
     private Sys sys;
+
     @SerializedName("id")
     @Expose
     private int id;
+
     @SerializedName("name")
     @Expose
     private String name;
+
     @SerializedName("cod")
     @Expose
     private int cod;
@@ -140,4 +151,22 @@ public class CurrentWeatherResponse implements Serializable {
         this.cod = cod;
     }
 
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("CurrentWeatherResponse{");
+        sb.append("coord=").append(coord);
+        sb.append(", weather=").append(weather);
+        sb.append(", base='").append(base).append('\'');
+        sb.append(", main=").append(main);
+        sb.append(", visibility=").append(visibility);
+        sb.append(", wind=").append(wind);
+        sb.append(", clouds=").append(clouds);
+        sb.append(", dt=").append(dt);
+        sb.append(", sys=").append(sys);
+        sb.append(", id=").append(id);
+        sb.append(", name='").append(name).append('\'');
+        sb.append(", cod=").append(cod);
+        sb.append('}');
+        return sb.toString();
+    }
 }

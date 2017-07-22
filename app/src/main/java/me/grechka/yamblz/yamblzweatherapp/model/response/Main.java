@@ -84,4 +84,17 @@ public class Main implements Serializable {
         this.grndLevel = grndLevel;
     }
 
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("Main{");
+        sb.append("temp=").append(temp);
+        sb.append(", pressure=").append(pressure);
+        sb.append(", humidity=").append(humidity);
+        sb.append(", tempMin=").append(tempMin);
+        sb.append(", tempMax=").append(tempMax);
+        sb.append(", seaLevel=").append(seaLevel);
+        sb.append(", grndLevel=").append(grndLevel);
+        sb.append('}');
+        return sb.toString();
+    }
 }
