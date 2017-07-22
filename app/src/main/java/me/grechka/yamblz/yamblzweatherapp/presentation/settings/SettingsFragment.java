@@ -1,4 +1,4 @@
-package me.grechka.yamblz.yamblzweatherapp.settings;
+package me.grechka.yamblz.yamblzweatherapp.presentation.settings;
 
 
 import android.os.Bundle;
@@ -14,8 +14,6 @@ import android.widget.RadioGroup;
 
 import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
-
-import javax.inject.Inject;
 
 import me.grechka.yamblz.yamblzweatherapp.R;
 import me.grechka.yamblz.yamblzweatherapp.WeatherApp;

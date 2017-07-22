@@ -1,16 +1,13 @@
-package me.grechka.yamblz.yamblzweatherapp.weather;
+package me.grechka.yamblz.yamblzweatherapp.presentation.weather;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
-
-import java.io.Serializable;
 
 import javax.inject.Inject;
 
 import me.grechka.yamblz.yamblzweatherapp.WeatherApp;
 import me.grechka.yamblz.yamblzweatherapp.model.CurrentWeather;
 import me.grechka.yamblz.yamblzweatherapp.repository.Repository;
-import me.grechka.yamblz.yamblzweatherapp.repository.RepositoryImp;
 
 /**
  * Created by Grechka on 15.07.2017.

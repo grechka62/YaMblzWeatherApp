@@ -6,10 +6,7 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
-import me.grechka.yamblz.yamblzweatherapp.AboutFragment;
-import me.grechka.yamblz.yamblzweatherapp.activity.MainPresenter;
-import me.grechka.yamblz.yamblzweatherapp.settings.SettingsFragment;
-import me.grechka.yamblz.yamblzweatherapp.weather.WeatherFragment;
+import me.grechka.yamblz.yamblzweatherapp.presentation.activity.MainPresenter;
 
 /**
  * Created by Grechka on 18.07.2017.

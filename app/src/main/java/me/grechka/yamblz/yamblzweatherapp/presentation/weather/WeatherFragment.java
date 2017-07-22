@@ -1,10 +1,8 @@
-package me.grechka.yamblz.yamblzweatherapp.weather;
+package me.grechka.yamblz.yamblzweatherapp.presentation.weather;
 
 import android.content.Context;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.RequiresApi;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -27,7 +25,7 @@ import javax.inject.Inject;
 
 import me.grechka.yamblz.yamblzweatherapp.R;
 import me.grechka.yamblz.yamblzweatherapp.WeatherApp;
-import me.grechka.yamblz.yamblzweatherapp.activity.MainPresenter;
+import me.grechka.yamblz.yamblzweatherapp.presentation.activity.MainPresenter;
 
 public class WeatherFragment extends MvpAppCompatFragment implements WeatherView,
         NavigationView.OnNavigationItemSelectedListener,

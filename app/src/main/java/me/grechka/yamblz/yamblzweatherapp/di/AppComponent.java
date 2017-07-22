@@ -4,15 +4,15 @@ import javax.inject.Singleton;
 
 import dagger.Component;
 import me.grechka.yamblz.yamblzweatherapp.WeatherApp;
-import me.grechka.yamblz.yamblzweatherapp.activity.MainPresenter;
+import me.grechka.yamblz.yamblzweatherapp.presentation.activity.MainPresenter;
 import me.grechka.yamblz.yamblzweatherapp.interactor.InteractorImp;
 import me.grechka.yamblz.yamblzweatherapp.repository.RepositoryImp;
-import me.grechka.yamblz.yamblzweatherapp.settings.SettingsFragment;
-import me.grechka.yamblz.yamblzweatherapp.settings.SettingsPresenter;
+import me.grechka.yamblz.yamblzweatherapp.presentation.settings.SettingsFragment;
+import me.grechka.yamblz.yamblzweatherapp.presentation.settings.SettingsPresenter;
 import me.grechka.yamblz.yamblzweatherapp.schedule.CurrentWeatherUpdateJob;
 import me.grechka.yamblz.yamblzweatherapp.schedule.WeatherJobUtils;
-import me.grechka.yamblz.yamblzweatherapp.weather.WeatherFragment;
-import me.grechka.yamblz.yamblzweatherapp.weather.WeatherPresenter;
+import me.grechka.yamblz.yamblzweatherapp.presentation.weather.WeatherFragment;
+import me.grechka.yamblz.yamblzweatherapp.presentation.weather.WeatherPresenter;
 
 /**
  * Created by Grechka on 19.07.2017.

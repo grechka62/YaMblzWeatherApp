@@ -1,4 +1,4 @@
-package me.grechka.yamblz.yamblzweatherapp.activity;
+package me.grechka.yamblz.yamblzweatherapp.presentation.activity;
 
 import android.os.Bundle;
 import android.support.v4.view.GravityCompat;
@@ -8,11 +8,11 @@ import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
 
-import me.grechka.yamblz.yamblzweatherapp.AboutFragment;
+import me.grechka.yamblz.yamblzweatherapp.presentation.AboutFragment;
 import me.grechka.yamblz.yamblzweatherapp.R;
 import me.grechka.yamblz.yamblzweatherapp.WeatherApp;
-import me.grechka.yamblz.yamblzweatherapp.settings.SettingsFragment;
-import me.grechka.yamblz.yamblzweatherapp.weather.WeatherFragment;
+import me.grechka.yamblz.yamblzweatherapp.presentation.settings.SettingsFragment;
+import me.grechka.yamblz.yamblzweatherapp.presentation.weather.WeatherFragment;
 
 public class MainActivity extends MvpAppCompatActivity implements MainView {
 

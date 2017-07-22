@@ -1,9 +1,6 @@
 package me.grechka.yamblz.yamblzweatherapp.repository;
 
-import android.content.Context;
-
 import me.grechka.yamblz.yamblzweatherapp.model.CurrentWeather;
-import me.grechka.yamblz.yamblzweatherapp.weather.WeatherPresenter;
 
 /**
  * Created by Grechka on 16.07.2017.

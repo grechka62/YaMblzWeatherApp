@@ -1,4 +1,4 @@
-package me.grechka.yamblz.yamblzweatherapp.activity;
+package me.grechka.yamblz.yamblzweatherapp.presentation.activity;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;

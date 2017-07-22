@@ -1,4 +1,4 @@
-package me.grechka.yamblz.yamblzweatherapp.weather;
+package me.grechka.yamblz.yamblzweatherapp.presentation.weather;
 
 import com.arellomobile.mvp.MvpView;
 import com.arellomobile.mvp.viewstate.strategy.AddToEndSingleStrategy;
