@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 import java.util.List;
 
-public final class CurrentWeatherResponse implements Serializable {
+public final class CurrentWeatherResponse {
 
     @SerializedName("id")
     @Expose
@@ -60,96 +60,48 @@ public final class CurrentWeatherResponse implements Serializable {
         return coordinates;
     }
 
-    public void setCoordinates(Coordinates coordinates) {
-        this.coordinates = coordinates;
-    }
-
     public List<Weather> getWeather() {
         return weather;
-    }
-
-    public void setWeather(List<Weather> weather) {
-        this.weather = weather;
     }
 
     public String getBase() {
         return base;
     }
 
-    public void setBase(String base) {
-        this.base = base;
-    }
-
     public WeatherInfo getWeatherInfo() {
         return weatherInfo;
-    }
-
-    public void setWeatherInfo(WeatherInfo weatherInfo) {
-        this.weatherInfo = weatherInfo;
     }
 
     public int getVisibility() {
         return visibility;
     }
 
-    public void setVisibility(int visibility) {
-        this.visibility = visibility;
-    }
-
     public Wind getWind() {
         return wind;
-    }
-
-    public void setWind(Wind wind) {
-        this.wind = wind;
     }
 
     public Clouds getClouds() {
         return clouds;
     }
 
-    public void setClouds(Clouds clouds) {
-        this.clouds = clouds;
-    }
-
     public long getDt() {
         return dt;
-    }
-
-    public void setDt(long dt) {
-        this.dt = dt;
     }
 
     public SunriseAndSunset getSunriseAndSunset() {
         return sunriseAndSunset;
     }
 
-    public void setSunriseAndSunset(SunriseAndSunset sunriseAndSunset) {
-        this.sunriseAndSunset = sunriseAndSunset;
-    }
-
     public int getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public int getCod() {
         return cod;
-    }
-
-    public void setCod(int cod) {
-        this.cod = cod;
     }
 
     @Override

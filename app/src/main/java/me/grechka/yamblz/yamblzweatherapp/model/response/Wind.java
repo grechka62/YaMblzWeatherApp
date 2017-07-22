@@ -4,7 +4,7 @@ import java.io.Serializable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public final class Wind implements Serializable {
+public final class Wind {
 
     @SerializedName("speed")
     @Expose
@@ -18,16 +18,8 @@ public final class Wind implements Serializable {
         return speed;
     }
 
-    public void setSpeed(double speed) {
-        this.speed = speed;
-    }
-
     public double getDeg() {
         return deg;
-    }
-
-    public void setDeg(int deg) {
-        this.deg = deg;
     }
 
     @Override
