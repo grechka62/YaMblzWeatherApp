@@ -7,6 +7,7 @@ import io.reactivex.Single;
 import me.grechka.yamblz.yamblzweatherapp.interactor.Interactor;
 import me.grechka.yamblz.yamblzweatherapp.model.CurrentWeather;
 import me.grechka.yamblz.yamblzweatherapp.model.response.CurrentWeatherResponse;
+import me.grechka.yamblz.yamblzweatherapp.repository.models.CityResponseModel;
 import me.grechka.yamblz.yamblzweatherapp.repository.models.SuggestionResponseModel;
 import me.grechka.yamblz.yamblzweatherapp.repository.net.SuggestApi;
 import me.grechka.yamblz.yamblzweatherapp.repository.net.WeatherApi;
@@ -83,6 +84,11 @@ public class RepositoryImp implements Repository {
     @Override
     public CurrentWeather getSavedCurrentWeather() {
         return preferencesManager.getCurrentWeather();
+    }
+
+    @Override
+    public Single<CityResponseModel> obtainCityInfo(@NonNull String cityId) {
+        return suggestApi.obtainCity(cityId, SuggestApi.API_KEY);
     }
 
     @Override

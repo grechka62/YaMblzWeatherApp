@@ -11,6 +11,7 @@ import me.grechka.yamblz.yamblzweatherapp.di.modules.NavigationModule;
 import me.grechka.yamblz.yamblzweatherapp.di.modules.NetworkModule;
 import me.grechka.yamblz.yamblzweatherapp.presentation.activity.MainPresenter;
 import me.grechka.yamblz.yamblzweatherapp.interactor.InteractorImp;
+import me.grechka.yamblz.yamblzweatherapp.presentation.citySearch.CitySearchFragment;
 import me.grechka.yamblz.yamblzweatherapp.repository.RepositoryImp;
 import me.grechka.yamblz.yamblzweatherapp.presentation.settings.SettingsFragment;
 import me.grechka.yamblz.yamblzweatherapp.presentation.settings.SettingsPresenter;
@@ -35,6 +36,8 @@ public interface AppComponent {
 
     void inject(SettingsFragment settingsFragment);
     void inject(SettingsPresenter settingsPresenter);
+
+    void inject(CitySearchFragment fragment);
 
     void inject(CurrentWeatherUpdateJob currentWeatherUpdateJob);
     void inject(WeatherJobUtils weatherJobUtils);

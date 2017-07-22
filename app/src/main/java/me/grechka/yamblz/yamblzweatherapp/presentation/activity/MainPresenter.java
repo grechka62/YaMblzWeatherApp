@@ -10,23 +10,23 @@ import com.arellomobile.mvp.MvpPresenter;
 @InjectViewState
 public class MainPresenter extends MvpPresenter<MainView> {
 
-    void showWeather() {
+    public void showWeather() {
         getViewState().showWeather();
     }
 
-    void showSettings() {
+    public void showSettings() {
         getViewState().showSettings();
     }
 
-    void showAbout() {
+    public void showAbout() {
         getViewState().showAbout();
     }
 
-    void showCitySearch() {
+    public void showCitySearch() {
         getViewState().showCitySearch();
     }
 
-    void goBack() {
+    public void goBack() {
         getViewState().goBack();
     }
 

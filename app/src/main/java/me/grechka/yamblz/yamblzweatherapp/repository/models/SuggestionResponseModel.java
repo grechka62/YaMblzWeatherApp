@@ -9,7 +9,7 @@ import java.util.List;
  * Created by alexander on 22/07/2017.
  */
 
-public class SuggestionResponseModel {
+public final class SuggestionResponseModel {
 
     @SerializedName("predictions")
     @Expose

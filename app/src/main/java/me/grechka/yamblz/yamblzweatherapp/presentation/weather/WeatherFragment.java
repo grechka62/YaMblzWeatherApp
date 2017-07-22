@@ -59,6 +59,8 @@ public class WeatherFragment extends MvpAppCompatFragment implements WeatherView
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) view.findViewById(R.id.nav_view);
+        View headerRootView = navigationView.getHeaderView(0).findViewById(R.id.fragment_weather_header_root);
+        headerRootView.setOnClickListener(v -> mainPresenter.showCitySearch());
         navigationView.setNavigationItemSelectedListener(this);
 
         swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swiperefresh);

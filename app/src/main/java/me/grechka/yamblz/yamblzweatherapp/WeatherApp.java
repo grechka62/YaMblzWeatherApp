@@ -43,7 +43,7 @@ public class WeatherApp extends Application {
 
     protected AppComponent buildComponent() {
         return DaggerAppComponent.builder()
-                .contextModule(new AppModule(this))
+                .appModule(new AppModule(this))
                 .jobModule(new JobModule())
                 .navigationModule(new NavigationModule())
                 .networkModule(new NetworkModule())

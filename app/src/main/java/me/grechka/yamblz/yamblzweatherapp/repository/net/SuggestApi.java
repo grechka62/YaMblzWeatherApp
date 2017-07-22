@@ -3,6 +3,7 @@ package me.grechka.yamblz.yamblzweatherapp.repository.net;
 import android.support.annotation.NonNull;
 
 import io.reactivex.Single;
+import me.grechka.yamblz.yamblzweatherapp.repository.models.CityResponseModel;
 import me.grechka.yamblz.yamblzweatherapp.repository.models.SuggestionResponseModel;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
@@ -21,5 +22,6 @@ public interface SuggestApi {
                                                           @Query("types") String types,
                                                           @Query("key") String apiKey);
 
-    Single<?> obtainCity(@Query("placeid") String placeId, @Query("key") String apiKey);
+    @GET("details/json")
+    Single<CityResponseModel> obtainCity(@Query("placeid") String placeId, @Query("key") String apiKey);
 }

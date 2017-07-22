@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 
 import io.reactivex.Single;
 import me.grechka.yamblz.yamblzweatherapp.model.CurrentWeather;
+import me.grechka.yamblz.yamblzweatherapp.repository.models.CityResponseModel;
 import me.grechka.yamblz.yamblzweatherapp.repository.models.SuggestionResponseModel;
 
 /**
@@ -23,5 +24,6 @@ public interface Repository {
     CurrentWeather getCurrentWeather();
     CurrentWeather getSavedCurrentWeather();
 
+    Single<CityResponseModel> obtainCityInfo(@NonNull String cityId);
     Single<SuggestionResponseModel> obtainSuggestedCities(@NonNull String input);
 }
