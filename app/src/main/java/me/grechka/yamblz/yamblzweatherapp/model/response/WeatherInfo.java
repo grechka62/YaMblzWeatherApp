@@ -1,29 +1,36 @@
 package me.grechka.yamblz.yamblzweatherapp.model.response;
 
-import java.io.Serializable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import com.google.gson.internal.bind.DateTypeAdapter;
 
-public class Main implements Serializable {
+import java.io.Serializable;
+
+public final class WeatherInfo implements Serializable {
+
     @SerializedName("temp")
     @Expose
     private double temp;
+
     @SerializedName("pressure")
     @Expose
     private double pressure;
+
     @SerializedName("humidity")
     @Expose
     private int humidity;
+
     @SerializedName("temp_min")
     @Expose
     private double tempMin;
+
     @SerializedName("temp_max")
     @Expose
     private double tempMax;
+
     @SerializedName("sea_level")
     @Expose
     private double seaLevel;
+
     @SerializedName("grnd_level")
     @Expose
     private double grndLevel;
@@ -86,7 +93,7 @@ public class Main implements Serializable {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("Main{");
+        final StringBuilder sb = new StringBuilder("WeatherInfo{");
         sb.append("temp=").append(temp);
         sb.append(", pressure=").append(pressure);
         sb.append(", humidity=").append(humidity);

@@ -50,6 +50,7 @@ dependencies {
     compile libraries.supportDesign
     compile libraries.supportSupport
     compile libraries.supportPreference
+    compile libraries.supportCard
     compile libraries.constraint
 
     compile libraries.dagger

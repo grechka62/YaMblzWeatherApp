@@ -3,13 +3,10 @@ package me.grechka.yamblz.yamblzweatherapp.interactor;
 import android.content.Context;
 import android.support.annotation.NonNull;
 
-import java.util.Locale;
-
 import javax.inject.Inject;
 
 import me.grechka.yamblz.yamblzweatherapp.R;
 import me.grechka.yamblz.yamblzweatherapp.WeatherApp;
-import me.grechka.yamblz.yamblzweatherapp.interactor.Interactor;
 import me.grechka.yamblz.yamblzweatherapp.model.CurrentWeather;
 import me.grechka.yamblz.yamblzweatherapp.model.response.CurrentWeatherResponse;
 import me.grechka.yamblz.yamblzweatherapp.model.response.Wind;
@@ -29,11 +26,11 @@ public class InteractorImp implements Interactor {
 
     @Override
     public CurrentWeather getCurrentWeatherFromResponse(CurrentWeatherResponse response) {
-        String temperature = roundDoubletoString(response.getMain().getTemp());
+        String temperature = roundDoubletoString(response.getWeatherInfo().getTemp());
         String description = response.getWeather().get(0).getDescription();
-        String humidity = Integer.toString(response.getMain().getHumidity());
-        String tempMin = roundDoubletoString(response.getMain().getTempMin());
-        String tempMax = roundDoubletoString(response.getMain().getTempMax());
+        String humidity = Integer.toString(response.getWeatherInfo().getHumidity());
+        String tempMin = roundDoubletoString(response.getWeatherInfo().getTempMin());
+        String tempMax = roundDoubletoString(response.getWeatherInfo().getTempMax());
         String wind = buildWindString(response.getWind());
         return new CurrentWeather(temperature, description, humidity, tempMin, tempMax, wind);
     }

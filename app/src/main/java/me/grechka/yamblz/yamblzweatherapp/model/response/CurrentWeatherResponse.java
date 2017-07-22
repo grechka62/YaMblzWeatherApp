@@ -6,10 +6,19 @@ import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 import java.util.List;
 
-public class CurrentWeatherResponse implements Serializable {
+public final class CurrentWeatherResponse implements Serializable {
+
+    @SerializedName("id")
+    @Expose
+    private int id;
+
+    @SerializedName("name")
+    @Expose
+    private String name;
+
     @SerializedName("coord")
     @Expose
-    private Coord coord;
+    private Coordinates coordinates;
 
     @SerializedName("weather")
     @Expose
@@ -21,7 +30,7 @@ public class CurrentWeatherResponse implements Serializable {
 
     @SerializedName("main")
     @Expose
-    private Main main;
+    private WeatherInfo weatherInfo;
 
     @SerializedName("visibility")
     @Expose
@@ -41,26 +50,18 @@ public class CurrentWeatherResponse implements Serializable {
 
     @SerializedName("sys")
     @Expose
-    private Sys sys;
-
-    @SerializedName("id")
-    @Expose
-    private int id;
-
-    @SerializedName("name")
-    @Expose
-    private String name;
+    private SunriseAndSunset sunriseAndSunset;
 
     @SerializedName("cod")
     @Expose
     private int cod;
 
-    public Coord getCoord() {
-        return coord;
+    public Coordinates getCoordinates() {
+        return coordinates;
     }
 
-    public void setCoord(Coord coord) {
-        this.coord = coord;
+    public void setCoordinates(Coordinates coordinates) {
+        this.coordinates = coordinates;
     }
 
     public List<Weather> getWeather() {
@@ -79,12 +80,12 @@ public class CurrentWeatherResponse implements Serializable {
         this.base = base;
     }
 
-    public Main getMain() {
-        return main;
+    public WeatherInfo getWeatherInfo() {
+        return weatherInfo;
     }
 
-    public void setMain(Main main) {
-        this.main = main;
+    public void setWeatherInfo(WeatherInfo weatherInfo) {
+        this.weatherInfo = weatherInfo;
     }
 
     public int getVisibility() {
@@ -119,12 +120,12 @@ public class CurrentWeatherResponse implements Serializable {
         this.dt = dt;
     }
 
-    public Sys getSys() {
-        return sys;
+    public SunriseAndSunset getSunriseAndSunset() {
+        return sunriseAndSunset;
     }
 
-    public void setSys(Sys sys) {
-        this.sys = sys;
+    public void setSunriseAndSunset(SunriseAndSunset sunriseAndSunset) {
+        this.sunriseAndSunset = sunriseAndSunset;
     }
 
     public int getId() {
@@ -154,15 +155,15 @@ public class CurrentWeatherResponse implements Serializable {
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("CurrentWeatherResponse{");
-        sb.append("coord=").append(coord);
+        sb.append("coordinates=").append(coordinates);
         sb.append(", weather=").append(weather);
         sb.append(", base='").append(base).append('\'');
-        sb.append(", main=").append(main);
+        sb.append(", weatherInfo=").append(weatherInfo);
         sb.append(", visibility=").append(visibility);
         sb.append(", wind=").append(wind);
         sb.append(", clouds=").append(clouds);
         sb.append(", dt=").append(dt);
-        sb.append(", sys=").append(sys);
+        sb.append(", sunriseAndSunset=").append(sunriseAndSunset);
         sb.append(", id=").append(id);
         sb.append(", name='").append(name).append('\'');
         sb.append(", cod=").append(cod);

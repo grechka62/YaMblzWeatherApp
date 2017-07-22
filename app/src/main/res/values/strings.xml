@@ -14,7 +14,7 @@
     <string name="author">Author: Irina Kravtsova</string>
     <string name="changes">Changes:</string>
     <string-array name="change_array">
-        <item>1. Base of application is created: an empty main screen with navigation drawer, in which there are settings and "About". The application icon has been changed, the localization for the Russian language has been added (for other languages English is used).</item>
+        <item>1. Base of application is created: an empty weatherInfo screen with navigation drawer, in which there are settings and "About". The application icon has been changed, the localization for the Russian language has been added (for other languages English is used).</item>
         <item>2. Updating of current weather was implemented. There is an opportunity to update manually and on schedule. The opportunity to change the updating interval in the application settings.</item>
     </string-array>
 

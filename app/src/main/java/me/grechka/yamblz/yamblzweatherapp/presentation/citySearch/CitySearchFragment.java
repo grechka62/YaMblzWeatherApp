@@ -3,6 +3,8 @@ package me.grechka.yamblz.yamblzweatherapp.presentation.citySearch;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +23,8 @@ import me.grechka.yamblz.yamblzweatherapp.WeatherApp;
  */
 
 public class CitySearchFragment extends MvpAppCompatFragment implements CitySearchView {
+
+    private View v;
 
     @Inject
     @InjectPresenter
@@ -44,11 +48,20 @@ public class CitySearchFragment extends MvpAppCompatFragment implements CitySear
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_city_search, container, false);
+        v = inflater.inflate(R.layout.fragment_city_search, container, false);
         onInit();
         return v;
     }
 
     private void onInit() {
+        setToolbar();
+    }
+
+    private void setToolbar() {
+        Toolbar toolbar = (Toolbar) v.findViewById(R.id.toolbar);
+        toolbar.setTitle(R.string.action_settings);
+        AppCompatActivity activity = (AppCompatActivity) getActivity();
+        activity.setSupportActionBar(toolbar);
+        activity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 }
