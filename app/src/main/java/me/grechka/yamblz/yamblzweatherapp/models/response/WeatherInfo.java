@@ -1,9 +1,7 @@
-package me.grechka.yamblz.yamblzweatherapp.model.response;
+package me.grechka.yamblz.yamblzweatherapp.models.response;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-
-import java.io.Serializable;
 
 public final class WeatherInfo {
 

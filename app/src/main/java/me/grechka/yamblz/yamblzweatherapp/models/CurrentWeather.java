@@ -1,4 +1,4 @@
-package me.grechka.yamblz.yamblzweatherapp.model;
+package me.grechka.yamblz.yamblzweatherapp.models;
 
 /**
  * Created by Grechka on 16.07.2017.

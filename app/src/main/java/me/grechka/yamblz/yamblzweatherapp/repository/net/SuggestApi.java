@@ -1,10 +1,8 @@
 package me.grechka.yamblz.yamblzweatherapp.repository.net;
 
-import android.support.annotation.NonNull;
-
 import io.reactivex.Single;
-import me.grechka.yamblz.yamblzweatherapp.repository.models.CityResponseModel;
-import me.grechka.yamblz.yamblzweatherapp.repository.models.SuggestionResponseModel;
+import me.grechka.yamblz.yamblzweatherapp.models.response.CityResponseModel;
+import me.grechka.yamblz.yamblzweatherapp.models.response.SuggestionResponseModel;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 

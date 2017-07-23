@@ -1,4 +1,4 @@
-package me.grechka.yamblz.yamblzweatherapp.repository.models;
+package me.grechka.yamblz.yamblzweatherapp.models.response;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

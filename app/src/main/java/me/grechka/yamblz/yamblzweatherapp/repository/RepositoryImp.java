@@ -5,10 +5,10 @@ import android.util.Log;
 
 import io.reactivex.Single;
 import me.grechka.yamblz.yamblzweatherapp.interactor.Interactor;
-import me.grechka.yamblz.yamblzweatherapp.model.CurrentWeather;
-import me.grechka.yamblz.yamblzweatherapp.model.response.CurrentWeatherResponse;
-import me.grechka.yamblz.yamblzweatherapp.repository.models.CityResponseModel;
-import me.grechka.yamblz.yamblzweatherapp.repository.models.SuggestionResponseModel;
+import me.grechka.yamblz.yamblzweatherapp.models.CurrentWeather;
+import me.grechka.yamblz.yamblzweatherapp.models.response.CurrentWeatherResponse;
+import me.grechka.yamblz.yamblzweatherapp.models.response.CityResponseModel;
+import me.grechka.yamblz.yamblzweatherapp.models.response.SuggestionResponseModel;
 import me.grechka.yamblz.yamblzweatherapp.repository.net.SuggestApi;
 import me.grechka.yamblz.yamblzweatherapp.repository.net.WeatherApi;
 import me.grechka.yamblz.yamblzweatherapp.repository.prefs.PreferencesManager;

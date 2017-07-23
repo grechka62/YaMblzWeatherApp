@@ -9,9 +9,7 @@ import com.arellomobile.mvp.MvpPresenter;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
-import io.reactivex.Single;
 import me.grechka.yamblz.yamblzweatherapp.repository.Repository;
-import me.grechka.yamblz.yamblzweatherapp.repository.models.Place;
 import me.grechka.yamblz.yamblzweatherapp.utils.RxSchedulers;
 
 /**

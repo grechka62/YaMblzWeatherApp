@@ -7,9 +7,9 @@ import javax.inject.Inject;
 
 import me.grechka.yamblz.yamblzweatherapp.R;
 import me.grechka.yamblz.yamblzweatherapp.WeatherApp;
-import me.grechka.yamblz.yamblzweatherapp.model.CurrentWeather;
-import me.grechka.yamblz.yamblzweatherapp.model.response.CurrentWeatherResponse;
-import me.grechka.yamblz.yamblzweatherapp.model.response.Wind;
+import me.grechka.yamblz.yamblzweatherapp.models.CurrentWeather;
+import me.grechka.yamblz.yamblzweatherapp.models.response.CurrentWeatherResponse;
+import me.grechka.yamblz.yamblzweatherapp.models.response.Wind;
 
 /**
  * Created by Grechka on 19.07.2017.

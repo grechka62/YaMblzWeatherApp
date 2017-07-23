@@ -6,7 +6,7 @@ import com.arellomobile.mvp.MvpPresenter;
 import javax.inject.Inject;
 
 import me.grechka.yamblz.yamblzweatherapp.WeatherApp;
-import me.grechka.yamblz.yamblzweatherapp.model.CurrentWeather;
+import me.grechka.yamblz.yamblzweatherapp.models.CurrentWeather;
 import me.grechka.yamblz.yamblzweatherapp.repository.Repository;
 
 /**

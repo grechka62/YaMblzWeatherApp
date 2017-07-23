@@ -3,7 +3,7 @@ package me.grechka.yamblz.yamblzweatherapp.repository.prefs;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import me.grechka.yamblz.yamblzweatherapp.model.CurrentWeather;
+import me.grechka.yamblz.yamblzweatherapp.models.CurrentWeather;
 
 /**
  * Created by Grechka on 18.07.2017.
