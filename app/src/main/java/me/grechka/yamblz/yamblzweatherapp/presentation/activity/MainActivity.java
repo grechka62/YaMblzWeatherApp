@@ -18,8 +18,7 @@ import me.grechka.yamblz.yamblzweatherapp.presentation.weather.WeatherFragment;
 
 public class MainActivity extends MvpAppCompatActivity implements MainView {
 
-    @InjectPresenter
-    MainPresenter presenter;
+    @InjectPresenter MainPresenter presenter;
 
     @ProvidePresenter
     public MainPresenter providePresenter() {
@@ -70,7 +69,8 @@ public class MainActivity extends MvpAppCompatActivity implements MainView {
 
     @Override
     public void showCitySearch() {
-        CitySearchFragment.newInstance().show(getSupportFragmentManager(), "cities_fragment");
+        CitySearchFragment.newInstance()
+                .show(getSupportFragmentManager(), null);
     }
 
     @Override
