@@ -45,5 +45,6 @@ public interface AppComponent {
     void inject(InteractorImp interactorImp);
 
     MainPresenter getMainPresenter();
+    WeatherPresenter getWeatherPresenter();
 
 }

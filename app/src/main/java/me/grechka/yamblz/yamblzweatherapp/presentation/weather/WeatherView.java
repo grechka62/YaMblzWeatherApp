@@ -1,5 +1,7 @@
 package me.grechka.yamblz.yamblzweatherapp.presentation.weather;
 
+import android.support.annotation.NonNull;
+
 import com.arellomobile.mvp.MvpView;
 import com.arellomobile.mvp.viewstate.strategy.AddToEndSingleStrategy;
 import com.arellomobile.mvp.viewstate.strategy.SingleStateStrategy;
@@ -26,4 +28,5 @@ public interface WeatherView extends MvpView {
     @StateStrategyType(SkipStrategy.class)
     void showMessage(String message);
 
+    void showCityTitle(@NonNull String title);
 }

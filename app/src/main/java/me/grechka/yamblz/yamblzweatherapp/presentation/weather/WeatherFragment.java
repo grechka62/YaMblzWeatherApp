@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
+import com.arellomobile.mvp.presenter.ProvidePresenter;
 
 import javax.inject.Inject;
 
@@ -30,11 +31,20 @@ import me.grechka.yamblz.yamblzweatherapp.presentation.activity.MainPresenter;
 public class WeatherFragment extends MvpAppCompatFragment implements WeatherView,
         NavigationView.OnNavigationItemSelectedListener,
         SwipeRefreshLayout.OnRefreshListener{
+
     private View view;
+    private TextView cityTitleTextView;
     SwipeRefreshLayout swipeRefreshLayout;
 
     @InjectPresenter
     WeatherPresenter presenter;
+
+    @ProvidePresenter
+    public WeatherPresenter providePresenter() {
+        return WeatherApp
+                .getComponent()
+                .getWeatherPresenter();
+    }
 
     @Inject
     MainPresenter mainPresenter;
@@ -47,6 +57,8 @@ public class WeatherFragment extends MvpAppCompatFragment implements WeatherView
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_weather, container, false);
         WeatherApp.getComponent().inject(this);
+
+        cityTitleTextView = (TextView) view.findViewById(R.id.city);
 
         Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
         AppCompatActivity activity = (AppCompatActivity) getActivity();
@@ -103,7 +115,13 @@ public class WeatherFragment extends MvpAppCompatFragment implements WeatherView
         windView.setText(wind);
         TextView humidityView = (TextView) view.findViewById(R.id.humidity_value);
         humidityView.setText(humidity);
+
         swipeRefreshLayout.setRefreshing(false);
+    }
+
+    @Override
+    public void showCityTitle(@NonNull String title) {
+        cityTitleTextView.setText(title);
     }
 
     @Override

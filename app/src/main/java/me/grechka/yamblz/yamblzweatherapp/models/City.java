@@ -55,6 +55,16 @@ public class City {
         private String extendedTitle;
         private CityLocation location;
 
+        public Builder() {
+        }
+
+        public Builder(@NonNull City city) {
+            placeId = city.getPlaceId();
+            title = city.getTitle();
+            extendedTitle = city.getExtendedTitle();
+            location = city.getLocation();
+        }
+
         public Builder title(String title) {
             this.title = title;
             return this;

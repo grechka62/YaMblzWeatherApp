@@ -3,6 +3,7 @@ package me.grechka.yamblz.yamblzweatherapp.presentation.citySearch;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,6 +58,7 @@ public class CitySearchAdapter extends RecyclerView.Adapter<CitySearchAdapter.Ci
         private TextView cityTitle;
         private CircleView cityAlias;
         private TextView cityDescription;
+        private View clickableArea;
 
         public CitySearchViewHolder(View itemView) {
             super(itemView);
@@ -64,8 +66,9 @@ public class CitySearchAdapter extends RecyclerView.Adapter<CitySearchAdapter.Ci
             cityTitle = (TextView) itemView.findViewById(R.id.row_city_title);
             cityDescription = (TextView) itemView.findViewById(R.id.row_city_description);
             cityAlias = (CircleView) itemView.findViewById(R.id.row_city_alias);
+            clickableArea = itemView.findViewById(R.id.row_city_clickable_area);
 
-            itemView.setOnClickListener(this);
+            clickableArea.setOnClickListener(this);
         }
 
         public void setCity(@NonNull City city) {
@@ -76,7 +79,7 @@ public class CitySearchAdapter extends RecyclerView.Adapter<CitySearchAdapter.Ci
 
         @Override
         public void onClick(View v) {
-            if (listener != null) return;
+            if (listener == null) return;
             int position = getAdapterPosition();
             listener.onClick(list.get(position), position);
         }

@@ -34,6 +34,7 @@ import javax.inject.Inject;
 
 import me.grechka.yamblz.yamblzweatherapp.R;
 import me.grechka.yamblz.yamblzweatherapp.WeatherApp;
+import me.grechka.yamblz.yamblzweatherapp.events.OnItemClickListener;
 import me.grechka.yamblz.yamblzweatherapp.events.StopTypingDetector;
 import me.grechka.yamblz.yamblzweatherapp.models.City;
 
@@ -43,6 +44,7 @@ import me.grechka.yamblz.yamblzweatherapp.models.City;
 
 public class CitySearchFragment extends MvpAppCompatDialogFragment
         implements CitySearchView,
+        OnItemClickListener<City>,
         StopTypingDetector.TypingListener {
 
     private View rootView;
@@ -84,8 +86,6 @@ public class CitySearchFragment extends MvpAppCompatDialogFragment
         getDialog().getWindow()
                 .setLayout(WindowManager.LayoutParams.MATCH_PARENT,
                         WindowManager.LayoutParams.MATCH_PARENT);
-
-        getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
     }
 
     @Nullable
@@ -104,6 +104,7 @@ public class CitySearchFragment extends MvpAppCompatDialogFragment
         suggestRecyclerView.setLayoutManager(layoutManager);
         suggestRecyclerView.setAdapter(adapter);
 
+        adapter.setListener(this);
         searchEditText.addTextChangedListener(new StopTypingDetector(handler, this));
     }
 
@@ -115,6 +116,16 @@ public class CitySearchFragment extends MvpAppCompatDialogFragment
     @Override
     public void clearSuggestions() {
         adapter.clear();
+    }
+
+    @Override
+    public void closeSelf() {
+        dismiss();
+    }
+
+    @Override
+    public void onClick(City item, int position) {
+        presenter.loadCity(item);
     }
 
     @Override

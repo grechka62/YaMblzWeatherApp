@@ -16,16 +16,12 @@ import me.grechka.yamblz.yamblzweatherapp.models.response.SuggestionResponseMode
 
 public interface Repository {
 
-    interface OnGotResponseListener {
-        void onGotResponse();
-        void onFailure(String message);
-    }
+    City getCity();
+    void saveCity(@NonNull City city);
 
-    void registerCallBack(OnGotResponseListener callback);
-    void updateCurrentWeather();
-
-    CurrentWeather getCurrentWeather();
-    CurrentWeather getSavedCurrentWeather();
+    Single<CurrentWeather> getCurrentWeather();
+    Single<CurrentWeather> updateCurrentWeather();
+    Single<CurrentWeather> getSavedCurrentWeather();
 
     Single<CurrentWeatherResponse> getWeatherByLocation(double latitude, double longitude);
     Single<CityResponseModel> obtainCityInfo(@NonNull String cityId);

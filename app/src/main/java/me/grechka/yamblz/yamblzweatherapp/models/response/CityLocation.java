@@ -17,6 +17,14 @@ public class CityLocation {
     @Expose
     private double longitude;
 
+    public CityLocation() {
+    }
+
+    public CityLocation(double latitude, double longitude) {
+        this.latitude = latitude;
+        this.longitude = longitude;
+    }
+
     public double getLatitude() {
         return latitude;
     }

@@ -25,4 +25,17 @@ public class CurrentWeather {
         this.tempMax = tempMax;
         this.wind = wind;
     }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("CurrentWeather{");
+        sb.append("temperature='").append(temperature).append('\'');
+        sb.append(", description='").append(description).append('\'');
+        sb.append(", humidity='").append(humidity).append('\'');
+        sb.append(", tempMin='").append(tempMin).append('\'');
+        sb.append(", tempMax='").append(tempMax).append('\'');
+        sb.append(", wind='").append(wind).append('\'');
+        sb.append('}');
+        return sb.toString();
+    }
 }

@@ -11,6 +11,7 @@ import io.reactivex.SingleSource;
 import me.grechka.yamblz.yamblzweatherapp.interactor.Interactor;
 import me.grechka.yamblz.yamblzweatherapp.models.City;
 import me.grechka.yamblz.yamblzweatherapp.models.CurrentWeather;
+import me.grechka.yamblz.yamblzweatherapp.models.response.CityLocation;
 import me.grechka.yamblz.yamblzweatherapp.models.response.CurrentWeatherResponse;
 import me.grechka.yamblz.yamblzweatherapp.models.response.CityResponseModel;
 import me.grechka.yamblz.yamblzweatherapp.models.response.Place;
@@ -29,10 +30,9 @@ import static me.grechka.yamblz.yamblzweatherapp.repository.net.WeatherApi.API_K
  */
 
 public class RepositoryImp implements Repository {
-    private final String MOSCOW_ID = "524901";
 
+    private City city;
     private CurrentWeather currentWeather;
-    private OnGotResponseListener callback;
 
     private Interactor interactor;
     private WeatherApi weatherApi;
@@ -48,48 +48,42 @@ public class RepositoryImp implements Repository {
         this.weatherApi = weatherApi;
         this.suggestApi = suggestApi;
         this.preferencesManager = preferencesManager;
-    }
-
-    public void registerCallBack(OnGotResponseListener callback){
-        this.callback = callback;
+        this.city = getCity();
     }
 
     @Override
-    public void updateCurrentWeather() {
-        Call call = weatherApi.getCurrentWeather(MOSCOW_ID, "ru", "metric", API_KEY);
-        call.enqueue(new Callback<CurrentWeatherResponse>() {
+    public Single<CurrentWeather> updateCurrentWeather() {
+        CityLocation location = city.getLocation();
 
-            @Override
-            public void onResponse(@NonNull Call<CurrentWeatherResponse> call, @NonNull Response<CurrentWeatherResponse> response) {
-                Log.d("retrofit", "Go to Network");
-                if (response.body() != null) {
-                    Log.d("retrofit", "Got positive answer");
-                    currentWeather = interactor.getCurrentWeatherFromResponse(response.body());
-                    putCurrentWeather();
-                    if (callback != null)
-                        callback.onGotResponse();
-                } else {
-                    Log.d("retrofit", "Got negative answer");
-                    if (callback != null)
-                        callback.onFailure("Error");
-                }
-            }
-            @Override
-            public void onFailure(@NonNull Call<CurrentWeatherResponse> call, @NonNull Throwable t) {
-                if (callback != null)
-                    callback.onFailure("No network");
-            }
-        });
+        return weatherApi
+                .getWeatherByLocation(location.getLatitude(), location.getLongitude(), API_KEY)
+                .map(weather -> {
+                    currentWeather = interactor.getCurrentWeatherFromResponse(weather);
+                    preferencesManager.putCurrentWeather(currentWeather);
+                    return currentWeather;
+                });
     }
 
     @Override
-    public CurrentWeather getCurrentWeather() {
-        return currentWeather;
+    public void saveCity(@NonNull City city) {
+        this.city = city;
+        preferencesManager.saveCity(city);
     }
 
     @Override
-    public CurrentWeather getSavedCurrentWeather() {
-        return preferencesManager.getCurrentWeather();
+    public City getCity() {
+        if (city != null) return city;
+        return preferencesManager.getCurrentCity();
+    }
+
+    @Override
+    public Single<CurrentWeather> getCurrentWeather() {
+        return Single.just(currentWeather);
+    }
+
+    @Override
+    public Single<CurrentWeather> getSavedCurrentWeather() {
+        return Single.just(preferencesManager.getCurrentWeather());
     }
 
     @Override
@@ -113,9 +107,5 @@ public class RepositoryImp implements Repository {
                         .title(place.getPlaceInfo().getMainText())
                         .extendedTitle(place.getDescription())
                         .build());
-    }
-
-    private void putCurrentWeather() {
-        preferencesManager.putCurrentWeather(currentWeather);
     }
 }

@@ -1,5 +1,7 @@
 package me.grechka.yamblz.yamblzweatherapp.presentation.activity;
 
+import android.util.Log;
+
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 

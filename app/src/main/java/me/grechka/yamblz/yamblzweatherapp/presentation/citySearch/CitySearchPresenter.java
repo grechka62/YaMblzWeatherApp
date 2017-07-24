@@ -9,6 +9,7 @@ import com.arellomobile.mvp.MvpPresenter;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
+import me.grechka.yamblz.yamblzweatherapp.models.City;
 import me.grechka.yamblz.yamblzweatherapp.repository.Repository;
 import me.grechka.yamblz.yamblzweatherapp.utils.RxSchedulers;
 
@@ -38,10 +39,21 @@ public class CitySearchPresenter extends MvpPresenter<CitySearchView> {
                 .subscribe(getViewState()::addSuggestion);
     }
 
+    public void loadCity(@NonNull City item) {
+        appRepository.obtainCityInfo(item.getPlaceId())
+                .compose(schedulers.getComputationToMainTransformerSingle())
+                .map(city -> new City.Builder(item)
+                                .location(city.getInfo().getGeometry().getLocation())
+                                .build())
+                .subscribe(city -> {
+                    getViewState().closeSelf();
+                    appRepository.saveCity(city);
+                });
+    }
+
     @Override
-    public void detachView(CitySearchView view) {
-        super.detachView(view);
-        Log.d("DETACH", "adasd");
-        view.clearSuggestions();
+    public void attachView(CitySearchView view) {
+        super.attachView(view);
+        getViewState().clearSuggestions();
     }
 }

@@ -3,6 +3,7 @@ package me.grechka.yamblz.yamblzweatherapp.presentation.activity;
 import android.os.Bundle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.util.Log;
 
 import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.arellomobile.mvp.presenter.InjectPresenter;
@@ -69,7 +70,7 @@ public class MainActivity extends MvpAppCompatActivity implements MainView {
 
     @Override
     public void showCitySearch() {
-        CitySearchFragment.newInstance().show(getSupportFragmentManager(), null);
+        CitySearchFragment.newInstance().show(getSupportFragmentManager(), "cities_fragment");
     }
 
     @Override
