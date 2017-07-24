@@ -14,6 +14,7 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
         archivesBaseName = "app-${versions.name}-${versions.code}"
+        vectorDrawables.useSupportLibrary = true
     }
 
     compileOptions {

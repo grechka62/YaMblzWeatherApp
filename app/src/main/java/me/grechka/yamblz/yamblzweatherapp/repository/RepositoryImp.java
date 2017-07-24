@@ -1,29 +1,22 @@
 package me.grechka.yamblz.yamblzweatherapp.repository;
 
 import android.support.annotation.NonNull;
-import android.util.Log;
-
-import java.util.List;
 
 import io.reactivex.Observable;
 import io.reactivex.Single;
-import io.reactivex.SingleSource;
 import me.grechka.yamblz.yamblzweatherapp.interactor.Interactor;
 import me.grechka.yamblz.yamblzweatherapp.models.City;
 import me.grechka.yamblz.yamblzweatherapp.models.CurrentWeather;
 import me.grechka.yamblz.yamblzweatherapp.models.response.CityLocation;
 import me.grechka.yamblz.yamblzweatherapp.models.response.CurrentWeatherResponse;
 import me.grechka.yamblz.yamblzweatherapp.models.response.CityResponseModel;
-import me.grechka.yamblz.yamblzweatherapp.models.response.Place;
 import me.grechka.yamblz.yamblzweatherapp.models.response.SuggestionResponseModel;
 import me.grechka.yamblz.yamblzweatherapp.repository.net.SuggestApi;
 import me.grechka.yamblz.yamblzweatherapp.repository.net.WeatherApi;
 import me.grechka.yamblz.yamblzweatherapp.repository.prefs.PreferencesManager;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 import static me.grechka.yamblz.yamblzweatherapp.repository.net.WeatherApi.API_KEY;
+import static me.grechka.yamblz.yamblzweatherapp.repository.net.WeatherApi.UNITS_DEFAULT;
 
 /**
  * Created by Grechka on 16.07.2017.
@@ -56,7 +49,7 @@ public class RepositoryImp implements Repository {
         CityLocation location = city.getLocation();
 
         return weatherApi
-                .getWeatherByLocation(location.getLatitude(), location.getLongitude(), API_KEY)
+                .getWeatherByLocation(location.getLatitude(), location.getLongitude(), UNITS_DEFAULT, API_KEY)
                 .map(weather -> {
                     currentWeather = interactor.getCurrentWeatherFromResponse(weather);
                     preferencesManager.putCurrentWeather(currentWeather);
@@ -88,7 +81,7 @@ public class RepositoryImp implements Repository {
 
     @Override
     public Single<CurrentWeatherResponse> getWeatherByLocation(double latitude, double longitude) {
-        return weatherApi.getWeatherByLocation(latitude, longitude, API_KEY);
+        return weatherApi.getWeatherByLocation(latitude, longitude, UNITS_DEFAULT, API_KEY);
     }
 
     @Override

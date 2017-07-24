@@ -28,7 +28,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:background="?attr/colorPrimary"
-                app:logo="@drawable/ic_launcher_round"
                 android:title="@string/app_name"
                 app:contentInsetStartWithNavigation="0dp"
                 app:titleMarginStart="@dimen/activity_horizontal_margin"

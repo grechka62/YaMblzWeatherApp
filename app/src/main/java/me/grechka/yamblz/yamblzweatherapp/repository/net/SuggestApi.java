@@ -11,6 +11,7 @@ import retrofit2.http.Query;
  */
 
 public interface SuggestApi {
+
     String API_TYPES = "geocode";
     String API_KEY = "AIzaSyB93d9Y2I-UWEFEQGLdWUfHCjF7cFmlUm8";
 

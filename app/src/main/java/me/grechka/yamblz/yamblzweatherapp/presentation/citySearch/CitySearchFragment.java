@@ -100,7 +100,6 @@ public class CitySearchFragment extends MvpAppCompatDialogFragment
         searchEditText = (EditText) v.findViewById(R.id.fragment_city_search_edittext);
         suggestRecyclerView = (RecyclerView) v.findViewById(R.id.fragment_city_search_recycler_view);
 
-        suggestRecyclerView.setHasFixedSize(true);
         suggestRecyclerView.setLayoutManager(layoutManager);
         suggestRecyclerView.setAdapter(adapter);
 
