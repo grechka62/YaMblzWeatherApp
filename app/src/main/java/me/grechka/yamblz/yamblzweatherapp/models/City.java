@@ -9,18 +9,25 @@ import me.grechka.yamblz.yamblzweatherapp.models.response.CityLocation;
  */
 
 public class City {
+
     private String title;
+    private String placeId;
     private String extendedTitle;
     private CityLocation location;
 
     private City(@NonNull Builder builder) {
         this.title = builder.title;
-        this.extendedTitle = builder.extendedTitle;
+        this.placeId = builder.placeId;
         this.location = builder.location;
+        this.extendedTitle = builder.extendedTitle;
     }
 
     public String getTitle() {
         return title;
+    }
+
+    public String getPlaceId() {
+        return placeId;
     }
 
     public String getExtendedTitle() {
@@ -35,6 +42,7 @@ public class City {
     public String toString() {
         final StringBuilder sb = new StringBuilder("City{");
         sb.append("title='").append(title).append('\'');
+        sb.append(", placeId='").append(placeId).append('\'');
         sb.append(", extendedTitle='").append(extendedTitle).append('\'');
         sb.append(", location=").append(location);
         sb.append('}');
@@ -43,11 +51,17 @@ public class City {
 
     public static class Builder {
         private String title;
+        private String placeId;
         private String extendedTitle;
         private CityLocation location;
 
         public Builder title(String title) {
             this.title = title;
+            return this;
+        }
+
+        public Builder placeId(String placeId) {
+            this.placeId = placeId;
             return this;
         }
 

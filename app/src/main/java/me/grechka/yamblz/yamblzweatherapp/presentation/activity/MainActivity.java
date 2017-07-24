@@ -69,10 +69,7 @@ public class MainActivity extends MvpAppCompatActivity implements MainView {
 
     @Override
     public void showCitySearch() {
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.fragment_container, CitySearchFragment.newInstance())
-                .addToBackStack(null)
-                .commitAllowingStateLoss();
+        CitySearchFragment.newInstance().show(getSupportFragmentManager(), null);
     }
 
     @Override

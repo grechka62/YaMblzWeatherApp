@@ -1,30 +1,57 @@
 package me.grechka.yamblz.yamblzweatherapp.presentation.citySearch;
 
+import android.app.Dialog;
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.support.v4.app.DialogFragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.widget.EditText;
 
+import com.arellomobile.mvp.MvpAppCompatDialogFragment;
 import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
+
+import java.util.Collection;
 
 import javax.inject.Inject;
 
 import me.grechka.yamblz.yamblzweatherapp.R;
 import me.grechka.yamblz.yamblzweatherapp.WeatherApp;
+import me.grechka.yamblz.yamblzweatherapp.events.StopTypingDetector;
+import me.grechka.yamblz.yamblzweatherapp.models.City;
 
 /**
  * Created by alexander on 22/07/2017.
  */
 
-public class CitySearchFragment extends MvpAppCompatFragment implements CitySearchView {
+public class CitySearchFragment extends MvpAppCompatDialogFragment
+        implements CitySearchView,
+        StopTypingDetector.TypingListener {
 
-    private View v;
+    private View rootView;
+    private EditText searchEditText;
+    private RecyclerView suggestRecyclerView;
+
+    private Handler handler = new Handler();
+    private CitySearchAdapter adapter = new CitySearchAdapter();
+    private LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
 
     @Inject
     @InjectPresenter
@@ -45,23 +72,54 @@ public class CitySearchFragment extends MvpAppCompatFragment implements CitySear
         WeatherApp.getComponent().inject(this);
     }
 
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setStyle(DialogFragment.STYLE_NORMAL, R.style.SearchCityDialog);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        getDialog().getWindow()
+                .setLayout(WindowManager.LayoutParams.MATCH_PARENT,
+                        WindowManager.LayoutParams.MATCH_PARENT);
+
+        getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        v = inflater.inflate(R.layout.fragment_city_search, container, false);
-        onInit();
-        return v;
+        rootView = inflater.inflate(R.layout.fragment_city_search, container, false);
+        onInit(rootView);
+        return rootView;
     }
 
-    private void onInit() {
-        setToolbar();
+    private void onInit(View v) {
+        searchEditText = (EditText) v.findViewById(R.id.fragment_city_search_edittext);
+        suggestRecyclerView = (RecyclerView) v.findViewById(R.id.fragment_city_search_recycler_view);
+
+        suggestRecyclerView.setHasFixedSize(true);
+        suggestRecyclerView.setLayoutManager(layoutManager);
+        suggestRecyclerView.setAdapter(adapter);
+
+        searchEditText.addTextChangedListener(new StopTypingDetector(handler, this));
     }
 
-    private void setToolbar() {
-        Toolbar toolbar = (Toolbar) v.findViewById(R.id.toolbar);
-        toolbar.setTitle(R.string.action_settings);
-        AppCompatActivity activity = (AppCompatActivity) getActivity();
-        activity.setSupportActionBar(toolbar);
-        activity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    @Override
+    public void addSuggestion(City suggestion) {
+        adapter.add(suggestion);
+    }
+
+    @Override
+    public void clearSuggestions() {
+        adapter.clear();
+    }
+
+    @Override
+    public void onStopTyping() {
+        clearSuggestions();
+        presenter.loadSuggestions(searchEditText.getText().toString());
     }
 }

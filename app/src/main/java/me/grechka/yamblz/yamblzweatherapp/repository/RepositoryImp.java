@@ -3,11 +3,17 @@ package me.grechka.yamblz.yamblzweatherapp.repository;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
+import java.util.List;
+
+import io.reactivex.Observable;
 import io.reactivex.Single;
+import io.reactivex.SingleSource;
 import me.grechka.yamblz.yamblzweatherapp.interactor.Interactor;
+import me.grechka.yamblz.yamblzweatherapp.models.City;
 import me.grechka.yamblz.yamblzweatherapp.models.CurrentWeather;
 import me.grechka.yamblz.yamblzweatherapp.models.response.CurrentWeatherResponse;
 import me.grechka.yamblz.yamblzweatherapp.models.response.CityResponseModel;
+import me.grechka.yamblz.yamblzweatherapp.models.response.Place;
 import me.grechka.yamblz.yamblzweatherapp.models.response.SuggestionResponseModel;
 import me.grechka.yamblz.yamblzweatherapp.repository.net.SuggestApi;
 import me.grechka.yamblz.yamblzweatherapp.repository.net.WeatherApi;
@@ -97,8 +103,16 @@ public class RepositoryImp implements Repository {
     }
 
     @Override
-    public Single<SuggestionResponseModel> obtainSuggestedCities(@NonNull String input) {
-        return suggestApi.obtainSuggestedCities(input, SuggestApi.API_TYPES, SuggestApi.API_KEY);
+    public Observable<City> obtainSuggestedCities(@NonNull String input) {
+        return suggestApi
+                .obtainSuggestedCities(input, SuggestApi.API_TYPES, SuggestApi.API_KEY)
+                .map(SuggestionResponseModel::getPredictions)
+                .flatMapObservable(Observable::fromIterable)
+                .map(place -> new City.Builder()
+                        .placeId(place.getPlaceId())
+                        .title(place.getPlaceInfo().getMainText())
+                        .extendedTitle(place.getDescription())
+                        .build());
     }
 
     private void putCurrentWeather() {
