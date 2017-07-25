@@ -34,9 +34,14 @@ public class CitySearchPresenter extends MvpPresenter<CitySearchView> {
     }
 
     public void loadSuggestions(@NonNull String input) {
+        getViewState().showLoading();
+
         this.appRepository.obtainSuggestedCities(input)
                 .compose(schedulers.getIoToMainTransformer())
-                .subscribe(getViewState()::addSuggestion);
+                .subscribe(city -> {
+                    getViewState().hideLoading();
+                    getViewState().addSuggestion(city);
+                });
     }
 
     public void loadCity(@NonNull City item) {
@@ -54,6 +59,7 @@ public class CitySearchPresenter extends MvpPresenter<CitySearchView> {
     @Override
     public void attachView(CitySearchView view) {
         super.attachView(view);
+        getViewState().hideLoading();
         getViewState().clearSuggestions();
     }
 }

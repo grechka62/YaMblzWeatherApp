@@ -16,7 +16,7 @@ public class StopTypingDetector implements TextWatcher {
         void onStopTyping();
     }
 
-    private long delay = 1500;
+    private long delay = 750;
     private long lastTextEdit = 0;
 
     private Handler handler;

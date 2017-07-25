@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 
 import com.arellomobile.mvp.MvpAppCompatDialogFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
@@ -42,6 +43,7 @@ public class CitySearchFragment extends MvpAppCompatDialogFragment
     private View rootView;
     private EditText searchEditText;
     private RecyclerView suggestRecyclerView;
+    private ProgressBar loadingProgressBar;
 
     private OnDismissListener listener;
 
@@ -95,6 +97,7 @@ public class CitySearchFragment extends MvpAppCompatDialogFragment
     private void onInit(View v) {
         searchEditText = (EditText) v.findViewById(R.id.fragment_city_search_edittext);
         suggestRecyclerView = (RecyclerView) v.findViewById(R.id.fragment_city_search_recycler_view);
+        loadingProgressBar = (ProgressBar) v.findViewById(R.id.fragment_city_search_progress_bar);
 
         suggestRecyclerView.setLayoutManager(layoutManager);
         suggestRecyclerView.setAdapter(adapter);
@@ -111,6 +114,16 @@ public class CitySearchFragment extends MvpAppCompatDialogFragment
     @Override
     public void clearSuggestions() {
         adapter.clear();
+    }
+
+    @Override
+    public void showLoading() {
+        loadingProgressBar.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideLoading() {
+        loadingProgressBar.setVisibility(View.GONE);
     }
 
     @Override
