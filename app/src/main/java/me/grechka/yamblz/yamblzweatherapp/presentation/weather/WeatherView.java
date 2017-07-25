@@ -8,6 +8,8 @@ import com.arellomobile.mvp.viewstate.strategy.SingleStateStrategy;
 import com.arellomobile.mvp.viewstate.strategy.SkipStrategy;
 import com.arellomobile.mvp.viewstate.strategy.StateStrategyType;
 
+import me.grechka.yamblz.yamblzweatherapp.models.City;
+
 /**
  * Created by Grechka on 14.07.2017.
  */
@@ -28,5 +30,6 @@ public interface WeatherView extends MvpView {
     @StateStrategyType(SkipStrategy.class)
     void showMessage(String message);
 
-    void showCityTitle(@NonNull String title);
+    void showCity(@NonNull City city);
+    void showCitySearch();
 }

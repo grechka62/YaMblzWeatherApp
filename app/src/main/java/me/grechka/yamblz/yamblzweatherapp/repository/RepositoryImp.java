@@ -1,6 +1,7 @@
 package me.grechka.yamblz.yamblzweatherapp.repository;
 
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import io.reactivex.Observable;
 import io.reactivex.Single;
@@ -47,10 +48,12 @@ public class RepositoryImp implements Repository {
     @Override
     public Single<CurrentWeather> updateCurrentWeather() {
         CityLocation location = city.getLocation();
+        Log.e("Current", city.toString());
 
         return weatherApi
                 .getWeatherByLocation(location.getLatitude(), location.getLongitude(), UNITS_DEFAULT, API_KEY)
                 .map(weather -> {
+                    Log.e("Weather", weather.toString());
                     currentWeather = interactor.getCurrentWeatherFromResponse(weather);
                     preferencesManager.putCurrentWeather(currentWeather);
                     return currentWeather;

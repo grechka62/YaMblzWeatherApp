@@ -24,10 +24,6 @@ public class MainPresenter extends MvpPresenter<MainView> {
         getViewState().showAbout();
     }
 
-    public void showCitySearch() {
-        getViewState().showCitySearch();
-    }
-
     public void goBack() {
         getViewState().goBack();
     }

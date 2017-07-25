@@ -3,7 +3,7 @@ package me.grechka.yamblz.yamblzweatherapp.presentation.activity;
 import android.os.Bundle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.util.Log;
+import android.widget.TextView;
 
 import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.arellomobile.mvp.presenter.InjectPresenter;
@@ -29,14 +29,7 @@ public class MainActivity extends MvpAppCompatActivity implements MainView {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        if (savedInstanceState == null)
-            presenter.showWeather();
-    }
-
-    @Override
-    public boolean onSupportNavigateUp() {
-        presenter.goBack();
-        return true;
+        if (savedInstanceState == null) presenter.showWeather();
     }
 
     @Override
@@ -68,12 +61,6 @@ public class MainActivity extends MvpAppCompatActivity implements MainView {
     }
 
     @Override
-    public void showCitySearch() {
-        CitySearchFragment.newInstance()
-                .show(getSupportFragmentManager(), null);
-    }
-
-    @Override
     public void navigate(int screenId) {
         switch (screenId) {
             case R.id.nav_settings:
@@ -94,4 +81,9 @@ public class MainActivity extends MvpAppCompatActivity implements MainView {
             super.onBackPressed();
     }
 
+    @Override
+    public boolean onSupportNavigateUp() {
+        presenter.goBack();
+        return true;
+    }
 }
