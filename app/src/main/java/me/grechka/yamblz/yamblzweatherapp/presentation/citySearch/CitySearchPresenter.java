@@ -1,7 +1,6 @@
 package me.grechka.yamblz.yamblzweatherapp.presentation.citySearch;
 
 import android.support.annotation.NonNull;
-import android.util.Log;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
@@ -22,8 +21,6 @@ import me.grechka.yamblz.yamblzweatherapp.utils.RxSchedulers;
 @InjectViewState
 public class CitySearchPresenter extends MvpPresenter<CitySearchView> {
 
-    private static final String TAG = CitySearchPresenter.class.getCanonicalName();
-
     private RxSchedulers schedulers;
     private Repository appRepository;
 
@@ -34,7 +31,17 @@ public class CitySearchPresenter extends MvpPresenter<CitySearchView> {
         this.appRepository = appRepository;
     }
 
-    public void loadSuggestions(@NonNull CharSequence input) {
+    @Override
+    public void attachView(CitySearchView view) {
+        super.attachView(view);
+        view.hideLoading();
+    }
+
+    public void setObservable(@NonNull Observable<CharSequence> observable) {
+        observable.subscribe(this::fetchSuggestions);
+    }
+
+    public void fetchSuggestions(@NonNull CharSequence input) {
         getViewState().clearSuggestions();
         getViewState().showLoading();
 
@@ -46,25 +53,15 @@ public class CitySearchPresenter extends MvpPresenter<CitySearchView> {
                 });
     }
 
-    public void loadCity(@NonNull City item) {
+    public void fetchCity(@NonNull City item) {
         appRepository.obtainCityInfo(item.getPlaceId())
                 .compose(schedulers.getComputationToMainTransformerSingle())
                 .map(city -> new City.Builder(item)
                                 .location(city.getInfo().getGeometry().getLocation())
                                 .build())
                 .subscribe(city -> {
-                    getViewState().closeSelf();
+                    getViewState().closeDialog();
                     appRepository.saveCity(city);
                 });
-    }
-
-    public void setObservable(@NonNull Observable<CharSequence> observable) {
-        observable.subscribe(this::loadSuggestions);
-    }
-
-    @Override
-    public void attachView(CitySearchView view) {
-        super.attachView(view);
-        view.hideLoading();
     }
 }

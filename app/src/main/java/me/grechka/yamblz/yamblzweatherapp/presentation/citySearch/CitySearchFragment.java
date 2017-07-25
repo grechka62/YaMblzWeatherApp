@@ -3,7 +3,6 @@ package me.grechka.yamblz.yamblzweatherapp.presentation.citySearch;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -24,13 +23,11 @@ import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
 
-import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.CompositeDisposable;
 import me.grechka.yamblz.yamblzweatherapp.R;
 import me.grechka.yamblz.yamblzweatherapp.WeatherApp;
+import me.grechka.yamblz.yamblzweatherapp.events.OnDismissDialogListener;
 import me.grechka.yamblz.yamblzweatherapp.events.OnItemClickListener;
-import me.grechka.yamblz.yamblzweatherapp.events.StopTypingDetector;
 import me.grechka.yamblz.yamblzweatherapp.models.City;
 
 /**
@@ -38,22 +35,14 @@ import me.grechka.yamblz.yamblzweatherapp.models.City;
  */
 
 public class CitySearchFragment extends MvpAppCompatDialogFragment
-        implements CitySearchView,
-        OnItemClickListener<City>,
-        StopTypingDetector.TypingListener {
+        implements CitySearchView, OnItemClickListener<City> {
 
-    public interface OnDismissListener {
-        void onDismissDialog();
-    }
-
-    private View rootView;
     private EditText searchEditText;
     private RecyclerView suggestRecyclerView;
     private ProgressBar loadingProgressBar;
 
-    private OnDismissListener listener;
+    private OnDismissDialogListener listener;
 
-    private Handler handler = new Handler();
     private CitySearchAdapter adapter = new CitySearchAdapter();
     private LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
 
@@ -75,7 +64,7 @@ public class CitySearchFragment extends MvpAppCompatDialogFragment
         super.onAttach(context);
 
         WeatherApp.getComponent().inject(this);
-        listener = (OnDismissListener) getParentFragment();
+        listener = (OnDismissDialogListener) getParentFragment();
     }
 
     @Override
@@ -95,26 +84,31 @@ public class CitySearchFragment extends MvpAppCompatDialogFragment
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        rootView = inflater.inflate(R.layout.fragment_city_search, container, false);
-        onInit(rootView);
-        return rootView;
+        return inflater.inflate(R.layout.fragment_city_search, container, false);
     }
 
-    private void onInit(View v) {
-        searchEditText = (EditText) v.findViewById(R.id.fragment_city_search_edittext);
-        suggestRecyclerView = (RecyclerView) v.findViewById(R.id.fragment_city_search_recycler_view);
-        loadingProgressBar = (ProgressBar) v.findViewById(R.id.fragment_city_search_progress_bar);
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
+        searchEditText = (EditText) view.findViewById(R.id.fragment_city_search_edittext);
+        suggestRecyclerView = (RecyclerView) view.findViewById(R.id.fragment_city_search_recycler_view);
+        loadingProgressBar = (ProgressBar) view.findViewById(R.id.fragment_city_search_progress_bar);
+
+        adapter.setListener(this);
         suggestRecyclerView.setLayoutManager(layoutManager);
         suggestRecyclerView.setAdapter(adapter);
 
-        adapter.setListener(this);
         presenter.setObservable(RxTextView
                 .textChanges(searchEditText)
                 .debounce(500, TimeUnit.MILLISECONDS)
                 .filter(text -> text.length() > 0)
                 .observeOn(AndroidSchedulers.mainThread()));
-        //searchEditText.addTextChangedListener(new StopTypingDetector(handler, this));
+    }
+
+    @Override
+    public void onClick(City item, int position) {
+        presenter.fetchCity(item);
     }
 
     @Override
@@ -138,24 +132,13 @@ public class CitySearchFragment extends MvpAppCompatDialogFragment
     }
 
     @Override
-    public void closeSelf() {
+    public void closeDialog() {
         dismiss();
-    }
-
-    @Override
-    public void onClick(City item, int position) {
-        presenter.loadCity(item);
-    }
-
-    @Override
-    public void onStopTyping() {
-        clearSuggestions();
-        presenter.loadSuggestions(searchEditText.getText().toString());
     }
 
     @Override
     public void onDismiss(DialogInterface dialog) {
         super.onDismiss(dialog);
-        listener.onDismissDialog();
+        listener.onDialogDismissed();
     }
 }

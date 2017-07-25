@@ -20,60 +20,46 @@ import sasd97.java_blog.xyz.circleview.CircleView;
  * Created by alexander on 23/07/2017.
  */
 
-class CitySearchAdapter extends RecyclerView.Adapter<CitySearchAdapter.CitySearchViewHolder> {
+public class CitySearchAdapter extends RecyclerView.Adapter<CitySearchAdapter.CitySearchViewHolder> {
 
-    private List<City> list;
     private OnItemClickListener<City> listener;
+    private List<City> cities = new ArrayList<>();
 
-    CitySearchAdapter() {
-        list = new ArrayList<>();
-    }
-
-    public void add(@NonNull City item) {
-        this.list.add(item);
-        notifyItemInserted(getItemCount());
-    }
-
-    void clear() {
-        int oldLength = getItemCount();
-        this.list.clear();
-        notifyItemRangeRemoved(0, oldLength);
-    }
-
-    void setListener(OnItemClickListener<City> listener) {
+    public void setListener(OnItemClickListener<City> listener) {
         this.listener = listener;
     }
 
     class CitySearchViewHolder extends RecyclerView.ViewHolder
         implements View.OnClickListener {
 
+        private View clickRegionView;
+
+        private TextView cityArea;
         private TextView cityTitle;
-        private CircleView cityAlias;
-        private TextView cityDescription;
-        private View clickableArea;
+        private CircleView cityLogoHolder;
 
         CitySearchViewHolder(View itemView) {
             super(itemView);
 
             cityTitle = (TextView) itemView.findViewById(R.id.row_city_title);
-            cityDescription = (TextView) itemView.findViewById(R.id.row_city_description);
-            cityAlias = (CircleView) itemView.findViewById(R.id.row_city_alias);
-            clickableArea = itemView.findViewById(R.id.row_city_clickable_area);
+            cityArea = (TextView) itemView.findViewById(R.id.row_city_description);
+            cityLogoHolder = (CircleView) itemView.findViewById(R.id.row_city_alias);
+            clickRegionView = itemView.findViewById(R.id.row_city_clickable_area);
 
-            clickableArea.setOnClickListener(this);
+            clickRegionView.setOnClickListener(this);
         }
 
         public void setCity(@NonNull City city) {
             cityTitle.setText(city.getTitle());
-            cityDescription.setText(city.getExtendedTitle());
-            cityAlias.setText(city.getTitle());
+            cityArea.setText(city.getExtendedTitle());
+            cityLogoHolder.setText(city.getTitle());
         }
 
         @Override
         public void onClick(View v) {
             if (listener == null) return;
             int position = getAdapterPosition();
-            listener.onClick(list.get(position), position);
+            listener.onClick(cities.get(position), position);
         }
     }
 
@@ -86,12 +72,23 @@ class CitySearchAdapter extends RecyclerView.Adapter<CitySearchAdapter.CitySearc
 
     @Override
     public void onBindViewHolder(CitySearchViewHolder holder, int position) {
-        City city = list.get(position);
+        City city = cities.get(position);
         holder.setCity(city);
+    }
+
+    public void add(@NonNull City item) {
+        this.cities.add(item);
+        notifyItemInserted(getItemCount());
+    }
+
+    public void clear() {
+        int oldLength = getItemCount();
+        this.cities.clear();
+        notifyItemRangeRemoved(0, oldLength);
     }
 
     @Override
     public int getItemCount() {
-        return list.size();
+        return cities.size();
     }
 }

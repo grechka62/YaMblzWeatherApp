@@ -54,4 +54,5 @@
     <string name="error">Не удалось обновить данные</string>
     <string name="no_network">Проверьте Ваше подключение к Интернету</string>
 
+    <string name="fragment_city_search_hint">Начните писать тут&#8230;</string>
 </resources>

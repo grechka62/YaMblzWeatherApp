@@ -26,13 +26,14 @@ import javax.inject.Inject;
 
 import me.grechka.yamblz.yamblzweatherapp.R;
 import me.grechka.yamblz.yamblzweatherapp.WeatherApp;
+import me.grechka.yamblz.yamblzweatherapp.events.OnDismissDialogListener;
 import me.grechka.yamblz.yamblzweatherapp.models.City;
 import me.grechka.yamblz.yamblzweatherapp.presentation.activity.MainPresenter;
 import me.grechka.yamblz.yamblzweatherapp.presentation.citySearch.CitySearchFragment;
 
 public class WeatherFragment extends MvpAppCompatFragment implements WeatherView,
         NavigationView.OnNavigationItemSelectedListener,
-        CitySearchFragment.OnDismissListener,
+        OnDismissDialogListener,
         SwipeRefreshLayout.OnRefreshListener{
 
     private View view;
@@ -144,7 +145,7 @@ public class WeatherFragment extends MvpAppCompatFragment implements WeatherView
     }
 
     @Override
-    public void onDismissDialog() {
+    public void onDialogDismissed() {
         presenter.updateCity();
         presenter.updateCurrentWeather();
     }

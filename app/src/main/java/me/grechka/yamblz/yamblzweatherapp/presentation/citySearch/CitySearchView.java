@@ -4,7 +4,6 @@ import com.arellomobile.mvp.MvpView;
 import com.arellomobile.mvp.viewstate.strategy.SkipStrategy;
 import com.arellomobile.mvp.viewstate.strategy.StateStrategyType;
 
-import io.reactivex.Observable;
 import me.grechka.yamblz.yamblzweatherapp.models.City;
 
 /**
@@ -13,12 +12,10 @@ import me.grechka.yamblz.yamblzweatherapp.models.City;
 
 public interface CitySearchView extends MvpView {
     void addSuggestion(City suggestion);
+    void clearSuggestions();
 
     void showLoading();
     void hideLoading();
 
-    void clearSuggestions();
-
-    @StateStrategyType(SkipStrategy.class)
-    void closeSelf();
+    @StateStrategyType(SkipStrategy.class) void closeDialog();
 }
