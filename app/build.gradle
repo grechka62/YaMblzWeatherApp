@@ -68,6 +68,7 @@ dependencies {
     compile libraries.rxjava
     compile libraries.rxandroid
     compile libraries.rxadapter
+    compile libraries.rxbinding
 
     compile libraries.moxy
     compile libraries.moxyAppCompat

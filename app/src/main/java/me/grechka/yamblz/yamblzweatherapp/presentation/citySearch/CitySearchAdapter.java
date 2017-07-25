@@ -3,14 +3,12 @@ package me.grechka.yamblz.yamblzweatherapp.presentation.citySearch;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import me.grechka.yamblz.yamblzweatherapp.R;
@@ -22,12 +20,12 @@ import sasd97.java_blog.xyz.circleview.CircleView;
  * Created by alexander on 23/07/2017.
  */
 
-public class CitySearchAdapter extends RecyclerView.Adapter<CitySearchAdapter.CitySearchViewHolder> {
+class CitySearchAdapter extends RecyclerView.Adapter<CitySearchAdapter.CitySearchViewHolder> {
 
     private List<City> list;
     private OnItemClickListener<City> listener;
 
-    public CitySearchAdapter() {
+    CitySearchAdapter() {
         list = new ArrayList<>();
     }
 
@@ -36,23 +34,17 @@ public class CitySearchAdapter extends RecyclerView.Adapter<CitySearchAdapter.Ci
         notifyItemInserted(getItemCount());
     }
 
-    public void addAll(@NonNull Collection<City> collection) {
-        int oldSize = getItemCount();
-        this.list.addAll(collection);
-        notifyItemRangeInserted(oldSize, getItemCount());
-    }
-
-    public void clear() {
+    void clear() {
         int oldLength = getItemCount();
         this.list.clear();
         notifyItemRangeRemoved(0, oldLength);
     }
 
-    public void setListener(OnItemClickListener<City> listener) {
+    void setListener(OnItemClickListener<City> listener) {
         this.listener = listener;
     }
 
-    public class CitySearchViewHolder extends RecyclerView.ViewHolder
+    class CitySearchViewHolder extends RecyclerView.ViewHolder
         implements View.OnClickListener {
 
         private TextView cityTitle;
@@ -60,7 +52,7 @@ public class CitySearchAdapter extends RecyclerView.Adapter<CitySearchAdapter.Ci
         private TextView cityDescription;
         private View clickableArea;
 
-        public CitySearchViewHolder(View itemView) {
+        CitySearchViewHolder(View itemView) {
             super(itemView);
 
             cityTitle = (TextView) itemView.findViewById(R.id.row_city_title);

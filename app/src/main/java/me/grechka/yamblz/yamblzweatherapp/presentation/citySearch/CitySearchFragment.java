@@ -18,9 +18,15 @@ import android.widget.ProgressBar;
 import com.arellomobile.mvp.MvpAppCompatDialogFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
+import com.jakewharton.rxbinding2.widget.RxTextView;
+
+import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
 
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
 import me.grechka.yamblz.yamblzweatherapp.R;
 import me.grechka.yamblz.yamblzweatherapp.WeatherApp;
 import me.grechka.yamblz.yamblzweatherapp.events.OnItemClickListener;
@@ -103,7 +109,12 @@ public class CitySearchFragment extends MvpAppCompatDialogFragment
         suggestRecyclerView.setAdapter(adapter);
 
         adapter.setListener(this);
-        searchEditText.addTextChangedListener(new StopTypingDetector(handler, this));
+        presenter.setObservable(RxTextView
+                .textChanges(searchEditText)
+                .debounce(500, TimeUnit.MILLISECONDS)
+                .filter(text -> text.length() > 0)
+                .observeOn(AndroidSchedulers.mainThread()));
+        //searchEditText.addTextChangedListener(new StopTypingDetector(handler, this));
     }
 
     @Override

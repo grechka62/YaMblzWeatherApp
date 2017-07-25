@@ -9,6 +9,7 @@ import com.arellomobile.mvp.MvpPresenter;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
+import io.reactivex.Observable;
 import me.grechka.yamblz.yamblzweatherapp.models.City;
 import me.grechka.yamblz.yamblzweatherapp.repository.Repository;
 import me.grechka.yamblz.yamblzweatherapp.utils.RxSchedulers;
@@ -33,10 +34,11 @@ public class CitySearchPresenter extends MvpPresenter<CitySearchView> {
         this.appRepository = appRepository;
     }
 
-    public void loadSuggestions(@NonNull String input) {
+    public void loadSuggestions(@NonNull CharSequence input) {
+        getViewState().clearSuggestions();
         getViewState().showLoading();
 
-        this.appRepository.obtainSuggestedCities(input)
+        this.appRepository.obtainSuggestedCities(input.toString())
                 .compose(schedulers.getIoToMainTransformer())
                 .subscribe(city -> {
                     getViewState().hideLoading();
@@ -56,10 +58,13 @@ public class CitySearchPresenter extends MvpPresenter<CitySearchView> {
                 });
     }
 
+    public void setObservable(@NonNull Observable<CharSequence> observable) {
+        observable.subscribe(this::loadSuggestions);
+    }
+
     @Override
     public void attachView(CitySearchView view) {
         super.attachView(view);
-        getViewState().hideLoading();
-        getViewState().clearSuggestions();
+        view.hideLoading();
     }
 }

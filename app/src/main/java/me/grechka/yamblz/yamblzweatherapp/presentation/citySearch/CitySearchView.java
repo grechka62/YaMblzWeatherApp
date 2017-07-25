@@ -4,6 +4,7 @@ import com.arellomobile.mvp.MvpView;
 import com.arellomobile.mvp.viewstate.strategy.SkipStrategy;
 import com.arellomobile.mvp.viewstate.strategy.StateStrategyType;
 
+import io.reactivex.Observable;
 import me.grechka.yamblz.yamblzweatherapp.models.City;
 
 /**
