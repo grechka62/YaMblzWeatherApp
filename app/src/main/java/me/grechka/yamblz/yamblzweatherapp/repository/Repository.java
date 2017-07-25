@@ -8,7 +8,6 @@ import me.grechka.yamblz.yamblzweatherapp.models.City;
 import me.grechka.yamblz.yamblzweatherapp.models.CurrentWeather;
 import me.grechka.yamblz.yamblzweatherapp.models.response.CurrentWeatherResponse;
 import me.grechka.yamblz.yamblzweatherapp.models.response.CityResponseModel;
-import me.grechka.yamblz.yamblzweatherapp.models.response.SuggestionResponseModel;
 
 /**
  * Created by Grechka on 16.07.2017.

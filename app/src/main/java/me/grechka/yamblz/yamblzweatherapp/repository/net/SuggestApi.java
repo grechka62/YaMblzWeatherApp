@@ -21,5 +21,6 @@ public interface SuggestApi {
                                                           @Query("key") String apiKey);
 
     @GET("details/json")
-    Single<CityResponseModel> obtainCity(@Query("placeid") String placeId, @Query("key") String apiKey);
+    Single<CityResponseModel> obtainCity(@Query("placeid") String placeId,
+                                         @Query("key") String apiKey);
 }
