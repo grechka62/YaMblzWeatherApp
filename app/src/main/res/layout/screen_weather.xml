@@ -4,7 +4,7 @@
     android:id="@+id/swiperefresh"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="me.grechka.yamblz.yamblzweatherapp.activity.MainActivity">
+    tools:context=".presentation.activity.MainActivity">
 
     <android.support.constraint.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -28,7 +28,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:background="?attr/colorPrimary"
-                app:logo="@drawable/ic_launcher_round"
                 android:title="@string/app_name"
                 app:contentInsetStartWithNavigation="0dp"
                 app:titleMarginStart="@dimen/activity_horizontal_margin"

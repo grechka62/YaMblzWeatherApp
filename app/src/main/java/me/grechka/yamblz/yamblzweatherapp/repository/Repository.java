@@ -1,9 +1,13 @@
 package me.grechka.yamblz.yamblzweatherapp.repository;
 
-import android.content.Context;
+import android.support.annotation.NonNull;
 
-import me.grechka.yamblz.yamblzweatherapp.model.CurrentWeather;
-import me.grechka.yamblz.yamblzweatherapp.weather.WeatherPresenter;
+import io.reactivex.Observable;
+import io.reactivex.Single;
+import me.grechka.yamblz.yamblzweatherapp.models.City;
+import me.grechka.yamblz.yamblzweatherapp.models.CurrentWeather;
+import me.grechka.yamblz.yamblzweatherapp.models.response.CurrentWeatherResponse;
+import me.grechka.yamblz.yamblzweatherapp.models.response.CityResponseModel;
 
 /**
  * Created by Grechka on 16.07.2017.
@@ -11,19 +15,14 @@ import me.grechka.yamblz.yamblzweatherapp.weather.WeatherPresenter;
 
 public interface Repository {
 
-    interface OnGotResponseListener {
-        void onGotResponse();
-        void onFailure(String message);
-    }
+    City getCity();
+    void saveCity(@NonNull City city);
 
-    void registerCallBack(OnGotResponseListener callback);
+    Single<CurrentWeather> getCurrentWeather();
+    Single<CurrentWeather> updateCurrentWeather();
+    Single<CurrentWeather> getSavedCurrentWeather();
 
-    void updateCurrentWeather();
-
-    CurrentWeather getCurrentWeather();
-
-    //void putCurrentWeather();
-
-    CurrentWeather getSavedCurrentWeather();
-
+    Single<CurrentWeatherResponse> getWeatherByLocation(double latitude, double longitude);
+    Single<CityResponseModel> obtainCityInfo(@NonNull String cityId);
+    Observable<City> obtainSuggestedCities(@NonNull String input);
 }

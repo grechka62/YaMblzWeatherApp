@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="150dp"
+    android:background="@color/colorPrimaryDark">
+
+    <android.support.v7.widget.AppCompatImageView
+        android:id="@+id/fragment_weather_header_cities_search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="16dp"
+        android:padding="4dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        app:srcCompat="@drawable/ic_search_white_24dp" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingBottom="16dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/fragment_weather_header_city_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            tools:text="Kaluga"/>
+
+        <TextView
+            android:id="@+id/fragment_weather_header_city_area"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            tools:text="Russia"/>
+    </LinearLayout>
+</RelativeLayout>
