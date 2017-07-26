@@ -35,6 +35,7 @@ public class CitySearchPresenter extends MvpPresenter<CitySearchView> {
     public void attachView(CitySearchView view) {
         super.attachView(view);
         view.hideLoading();
+        view.clearSuggestions();
     }
 
     public void setObservable(@NonNull Observable<CharSequence> observable) {
