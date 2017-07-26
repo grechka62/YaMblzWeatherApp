@@ -26,16 +26,16 @@ public class InteractorImp implements Interactor {
 
     @Override
     public CurrentWeather getCurrentWeatherFromResponse(CurrentWeatherResponse response) {
-        String temperature = roundDoubletoString(response.getWeatherInfo().getTemp());
+        String temperature = roundDoubleToString(response.getWeatherInfo().getTemp());
         String description = response.getWeather().get(0).getDescription();
         String humidity = Integer.toString(response.getWeatherInfo().getHumidity());
-        String tempMin = roundDoubletoString(response.getWeatherInfo().getTempMin());
-        String tempMax = roundDoubletoString(response.getWeatherInfo().getTempMax());
+        String tempMin = roundDoubleToString(response.getWeatherInfo().getTempMin());
+        String tempMax = roundDoubleToString(response.getWeatherInfo().getTempMax());
         String wind = buildWindString(response.getWind());
         return new CurrentWeather(temperature, description, humidity, tempMin, tempMax, wind);
     }
 
-    private String roundDoubletoString(Double param) {
+    private String roundDoubleToString(Double param) {
         return Long.toString(Math.round(param));
     }
 
@@ -43,7 +43,7 @@ public class InteractorImp implements Interactor {
     private String buildWindString(Wind windResponse) {
         StringBuilder windBuilder = new StringBuilder();
         if (windResponse.getSpeed() >= 0.5) {
-            windBuilder.append(roundDoubletoString(windResponse.getSpeed()));
+            windBuilder.append(roundDoubleToString(windResponse.getSpeed()));
             windBuilder.append(" м/с, ");
             windBuilder.append(windDegtoDirection(windResponse.getDeg()));
             return windBuilder.toString();
