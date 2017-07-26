@@ -37,16 +37,16 @@ public class WeatherFragment extends MvpAppCompatFragment implements WeatherView
         SwipeRefreshLayout.OnRefreshListener{
 
     private View view;
-    private TextView cityTitleTextView;
     private TextView tempView;
     private TextView maxTempView;
     private TextView minTempView;
     private TextView descView;
     private TextView windView;
     private TextView humidityView;
-
+    private TextView cityTitleTextView;
     private TextView cityAreaHeaderTextView;
     private TextView cityTitleHeaderTextView;
+    private DrawerLayout drawerLayout;
 
 
     SwipeRefreshLayout swipeRefreshLayout;
@@ -81,10 +81,10 @@ public class WeatherFragment extends MvpAppCompatFragment implements WeatherView
         AppCompatActivity activity = (AppCompatActivity) getActivity();
         activity.setSupportActionBar(toolbar);
 
-        DrawerLayout drawer = (DrawerLayout) view.findViewById(R.id.drawer_layout);
+        drawerLayout = (DrawerLayout) view.findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                activity, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
+                activity, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) view.findViewById(R.id.nav_view);
@@ -146,6 +146,7 @@ public class WeatherFragment extends MvpAppCompatFragment implements WeatherView
 
     @Override
     public void onDialogDismissed() {
+        closeDrawer();
         presenter.updateCity();
         presenter.updateCurrentWeather();
     }
@@ -168,7 +169,6 @@ public class WeatherFragment extends MvpAppCompatFragment implements WeatherView
 
     @Override
     public void closeDrawer() {
-        DrawerLayout drawer = (DrawerLayout) view.findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
+        drawerLayout.closeDrawer(GravityCompat.START);
     }
 }
