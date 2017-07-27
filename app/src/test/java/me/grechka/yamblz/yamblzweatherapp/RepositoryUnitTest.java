@@ -17,6 +17,7 @@ import me.grechka.yamblz.yamblzweatherapp.repository.RepositoryImp;
 import me.grechka.yamblz.yamblzweatherapp.repository.net.SuggestApi;
 import me.grechka.yamblz.yamblzweatherapp.repository.net.WeatherApi;
 import me.grechka.yamblz.yamblzweatherapp.repository.prefs.PreferencesManager;
+import me.grechka.yamblz.yamblzweatherapp.utils.JsonProvider;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Matchers.anyString;
@@ -34,10 +35,9 @@ public class RepositoryUnitTest extends BaseUnitTest {
     @Mock Interactor interactor;
     @Mock PreferencesManager prefs;
 
-    private Gson gson = new Gson();
     private Repository repository;
+    private SuggestionResponseModel suggestions;
 
-    private String suggestionServerResponse = "{\"predictions\":[{\"description\":\"Earth, TX, United States\",\"id\":\"c57834729dd1424a330efa045f5cd2b3485ecb98\",\"matched_substrings\":[{\"length\":5,\"offset\":0}],\"place_id\":\"ChIJMbOLyNA_AocRYVRX-1HM0fw\",\"reference\":\"CjQwAAAAz-BXq9wNCvJBjZ-XxUXe5Dn7UtEBSAF8jNx2NQNXJfsxZ3GcuR6I9iIXIChc7inpEhAczXi8ZJsTCQF7Kosl-0XuGhSx7oWqj9J4GoWZrT5dv1Zi-B2lRQ\",\"structured_formatting\":{\"main_text\":\"Earth\",\"main_text_matched_substrings\":[{\"length\":5,\"offset\":0}],\"secondary_text\":\"TX, United States\"},\"terms\":[{\"offset\":0,\"value\":\"Earth\"},{\"offset\":7,\"value\":\"TX\"},{\"offset\":11,\"value\":\"United States\"}],\"types\":[\"locality\",\"political\",\"geocode\"]}]}";
 
     @Before
     @Override
@@ -48,9 +48,11 @@ public class RepositoryUnitTest extends BaseUnitTest {
 
     @Override
     public void onMockInit() {
+        suggestions = JsonProvider.openFile(SuggestionResponseModel.class, "places-suggestion-single.json");
+
         when(prefs.getCurrentCity()).thenReturn(null);
         when(suggestApi.obtainSuggestedCities(anyString(), anyString(), anyString()))
-                .thenReturn(Single.just(gson.fromJson(suggestionServerResponse, SuggestionResponseModel.class)));
+                .thenReturn(Single.just(suggestions));
     }
 
     @Test

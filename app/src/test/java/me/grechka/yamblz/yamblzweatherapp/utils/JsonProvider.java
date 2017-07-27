@@ -22,8 +22,11 @@ public class JsonProvider {
 
     private static Gson gson = new Gson();
 
+    private JsonProvider() {
+    }
+
     public static <T> T openFile(@NonNull Class<T> to,
-                                        @NonNull String fileName) throws IOException {
+                                        @NonNull String fileName) {
         InputStream inputStream = to.getClassLoader().getResourceAsStream(fileName);
         InputStreamReader reader = new InputStreamReader(inputStream);
         return gson.fromJson(reader, to);

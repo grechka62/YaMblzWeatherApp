@@ -44,7 +44,7 @@ public class InteractorUnitTest extends BaseUnitTest {
     }
 
     @Test
-    public void Interactor_parsedCorrectly_whenResponseWithGoodData() throws IOException {
+    public void Interactor_parsedCorrectly_whenResponseWithGoodData() {
         CurrentWeatherResponse weatherResponse = JsonProvider
                 .openFile(CurrentWeatherResponse.class, "openweather-weather.json");
         CurrentWeather weather = interactor.getCurrentWeatherFromResponse(weatherResponse);
