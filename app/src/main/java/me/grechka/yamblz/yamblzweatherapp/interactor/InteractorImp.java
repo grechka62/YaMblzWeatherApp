@@ -4,9 +4,9 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
 import me.grechka.yamblz.yamblzweatherapp.R;
-import me.grechka.yamblz.yamblzweatherapp.WeatherApp;
 import me.grechka.yamblz.yamblzweatherapp.models.CurrentWeather;
 import me.grechka.yamblz.yamblzweatherapp.models.response.CurrentWeatherResponse;
 import me.grechka.yamblz.yamblzweatherapp.models.response.Wind;
@@ -17,11 +17,10 @@ import me.grechka.yamblz.yamblzweatherapp.models.response.Wind;
 
 public class InteractorImp implements Interactor {
 
-    @Inject
     Context context;
 
-    public InteractorImp() {
-        WeatherApp.getComponent().inject(this);
+    public InteractorImp(@NonNull Context context) {
+        this.context = context;
     }
 
     @Override

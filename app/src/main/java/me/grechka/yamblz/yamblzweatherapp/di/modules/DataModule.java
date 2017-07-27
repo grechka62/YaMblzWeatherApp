@@ -42,7 +42,7 @@ public class DataModule {
     @Provides
     @NonNull
     @Singleton
-    public Interactor provideInteractor() {
-        return new InteractorImp();
+    public Interactor provideInteractor(Context context) {
+        return new InteractorImp(context);
     }
 }
