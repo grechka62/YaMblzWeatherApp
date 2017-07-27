@@ -1,6 +1,7 @@
 package me.grechka.yamblz.yamblzweatherapp;
 
 import com.google.gson.Gson;
+import com.google.gson.stream.MalformedJsonException;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -36,7 +37,6 @@ public class RepositoryUnitTest extends BaseUnitTest {
     @Mock PreferencesManager prefs;
 
     private Repository repository;
-    private SuggestionResponseModel suggestions;
 
 
     @Before
@@ -48,21 +48,37 @@ public class RepositoryUnitTest extends BaseUnitTest {
 
     @Override
     public void onMockInit() {
-        suggestions = JsonProvider.openFile(SuggestionResponseModel.class, "places-suggestion-single.json");
-
         when(prefs.getCurrentCity()).thenReturn(null);
-        when(suggestApi.obtainSuggestedCities(anyString(), anyString(), anyString()))
-                .thenReturn(Single.just(suggestions));
     }
 
     @Test
-    public void Repository_obtainSuggestionList_expectedPlaceModel() {
+    public void Repository_obtainSuggestionList_expectedCorrectPlaceModel() {
+        SuggestionResponseModel suggestions =
+                JsonProvider.openFile(SuggestionResponseModel.class, "places-suggestion-single.json");
+        when(suggestApi.obtainSuggestedCities(anyString(), anyString(), anyString()))
+                .thenReturn(Single.just(suggestions));
+
         repository.obtainSuggestedCities("earth")
                 .subscribe(place -> {
                     System.out.println(place.toString());
 
                     assertEquals(place.getPlaceId(), "ChIJMbOLyNA_AocRYVRX-1HM0fw");
                     assertEquals(place.getTitle(), "HHH");
+                    assertEquals(place.getExtendedTitle(), "Earth, TX, United States");
+                });
+    }
+
+    @Test(expected = MalformedJsonException.class)
+    public void Repository_obtainBrokenSuggestionList_expectedThrowAnException() {
+        SuggestionResponseModel suggestions =
+                JsonProvider.openFile(SuggestionResponseModel.class, "places-suggestion-single-broken.json");
+        when(suggestApi.obtainSuggestedCities(anyString(), anyString(), anyString()))
+                .thenReturn(Single.just(suggestions));
+
+        repository.obtainSuggestedCities("earth")
+                .subscribe(place -> {
+                    System.out.println(place.toString());
+
                     assertEquals(place.getExtendedTitle(), "Earth, TX, United States");
                 });
     }
