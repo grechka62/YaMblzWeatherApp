@@ -29,12 +29,19 @@ public class InteractorUnitTest extends BaseUnitTest {
     @Mock Resources resources;
 
     private Interactor interactor;
+    private CurrentWeather weather;
 
     @Before
     @Override
     public void onInit() {
         super.onInit();
+
         interactor = new InteractorImp(context);
+
+        weather = new CurrentWeather(
+                "27", "clear sky", "51",
+                "26", "28", "5 м/с, SW"
+        );
     }
 
     @Override
@@ -48,24 +55,18 @@ public class InteractorUnitTest extends BaseUnitTest {
         CurrentWeatherResponse weatherResponse = JsonProvider
                 .openFile(CurrentWeatherResponse.class, "openweather-weather.json");
         CurrentWeather weather = interactor.getCurrentWeatherFromResponse(weatherResponse);
-
-        assertEquals(weather.temperature, "27");
-        assertEquals(weather.description, "clear sky");
-        assertEquals(weather.humidity, "51");
-        assertEquals(weather.tempMax, "28");
-        assertEquals(weather.tempMin, "26");
-        assertEquals(weather.wind, "5 м/с, SW");
+        assertEquals(this.weather, weather);
     }
 
     @Test(expected = NumberFormatException.class)
-    public void Interactor_parsedCorrectly_whenResponseWithBrokenCoordinates() throws IOException {
+    public void Interactor_thrownAnError_whenResponseWithBrokenCoordinates() throws IOException {
         CurrentWeatherResponse weatherResponse = JsonProvider
                 .openFile(CurrentWeatherResponse.class, "openweather-weather-brokencoordinates.json");
         interactor.getCurrentWeatherFromResponse(weatherResponse);
     }
 
     @Test(expected = NullPointerException.class)
-    public void Interactor_parsedCorrectly_whenResponseWithoutBaseFields() throws IOException {
+    public void Interactor_thrownAnError_whenResponseWithoutBaseFields() throws IOException {
         CurrentWeatherResponse weatherResponse = JsonProvider
                 .openFile(CurrentWeatherResponse.class, "openweather-weather-withoutbasefields.json");
         interactor.getCurrentWeatherFromResponse(weatherResponse);

@@ -17,6 +17,9 @@ import java.nio.charset.Charset;
 import java.util.Collections;
 import java.util.Map;
 
+import io.reactivex.observers.TestObserver;
+import me.grechka.yamblz.yamblzweatherapp.base.BaseApiUnitTest;
+import me.grechka.yamblz.yamblzweatherapp.models.response.CurrentWeatherResponse;
 import me.grechka.yamblz.yamblzweatherapp.models.response.Place;
 import me.grechka.yamblz.yamblzweatherapp.models.response.Weather;
 import me.grechka.yamblz.yamblzweatherapp.repository.net.SuggestApi;
@@ -41,28 +44,20 @@ import static org.mockito.Matchers.intThat;
  */
 
 @RunWith(JUnit4.class)
-public class WeatherApiUnitTest {
+public class WeatherApiUnitTest extends BaseApiUnitTest {
+
+    private static final double EPS = 0.01;
 
     private WeatherApi api;
-    private MockWebServer mockWebServer;
 
     @Before
     public void createService() throws IOException {
-        mockWebServer = new MockWebServer();
-
-        GsonBuilder builder = new GsonBuilder().excludeFieldsWithoutExposeAnnotation();
-
-        api = new Retrofit.Builder()
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .addConverterFactory(GsonConverterFactory.create(builder.create()))
-                .baseUrl(mockWebServer.url("/"))
-                .build()
-                .create(WeatherApi.class);
+        api = createService(WeatherApi.class);
     }
 
     @After
-    public void stopService() throws IOException {
-        mockWebServer.shutdown();
+    public void destroyService() throws IOException {
+       stopService();
     }
 
     @Test
@@ -75,38 +70,33 @@ public class WeatherApiUnitTest {
         String units = "metric";
         String apiKey = "123456";
 
-        api.getWeatherByLocation(latitude, longitude, units, apiKey)
-                .subscribe(weather -> {
+        double expectedTemperature = 26.76;
+        double expectedMaxTemperature = 28.0;
+        double expectedMinTemperature = 26.0;
+        double expectedSpeed = 5.0;
+        int expectedHumidity = 51;
+        String expectedDescription = "clear sky";
+
+        TestObserver<CurrentWeatherResponse> observer =
+                api.getWeatherByLocation(latitude, longitude, units, apiKey).test();
+
+        observer
+                .assertNoErrors()
+                .assertValueCount(1)
+                .assertValue(check(weather -> {
                     assertThat(weather.getWeather().size(), new GreaterThan<>(0));
                     Weather w = weather.getWeather().get(0);
 
-                    assertEquals(26.76, weather.getWeatherInfo().getTemp(), 0.01);
-                    assertEquals("clear sky", w.getDescription());
-                    assertEquals(51, weather.getWeatherInfo().getHumidity());
-                    assertEquals(28.0, weather.getWeatherInfo().getTempMax(), 0.01);
-                    assertEquals(26.0, weather.getWeatherInfo().getTempMin(), 0.01);
-                    assertEquals(5.0, weather.getWind().getSpeed(), 0.01);
-                });
+                    assertEquals(expectedTemperature, weather.getWeatherInfo().getTemp(), EPS);
+                    assertEquals(expectedDescription, w.getDescription());
+                    assertEquals(expectedHumidity, weather.getWeatherInfo().getHumidity());
+                    assertEquals(expectedMaxTemperature, weather.getWeatherInfo().getTempMax(), EPS);
+                    assertEquals(expectedMinTemperature, weather.getWeatherInfo().getTempMin(), EPS);
+                    assertEquals(expectedSpeed, weather.getWind().getSpeed(), EPS);
+                }));
 
-        RecordedRequest request = mockWebServer.takeRequest();
-        String url = String.format("/data/2.5/weather?lat=%1$.2f&lon=%2$.2f&units=metric&appid=%3$s",
-                latitude, longitude, apiKey);
-        assertEquals(request.getPath(), url);
-    }
-
-
-    private void enqueueResponse(String fileName) throws IOException {
-        enqueueResponse(fileName, Collections.emptyMap());
-    }
-
-    private void enqueueResponse(String fileName, Map<String, String> headers) throws IOException {
-        InputStream inputStream = getClass().getClassLoader().getResourceAsStream(fileName);
-        BufferedSource source = Okio.buffer(Okio.source(inputStream));
-        MockResponse mockResponse = new MockResponse();
-        for (Map.Entry<String, String> header : headers.entrySet()) {
-            mockResponse.addHeader(header.getKey(), header.getValue());
-        }
-        mockWebServer.enqueue(mockResponse
-                .setBody(source.readString(Charset.forName("UTF-8"))));
+        String url = String
+                .format("/data/2.5/weather?lat=%1$.2f&lon=%2$.2f&units=metric&appid=%3$s", latitude, longitude, apiKey);
+        assertEquals(getRequest().getPath(), url);
     }
 }
