@@ -48,6 +48,16 @@ dependencies {
     androidTestCompile(libraries.espressoCore, {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
+
+    androidTestCompile(libraries.espressoContrib, {
+        exclude group: 'com.android.support', module: 'appcompat-v7'
+        exclude group: 'com.android.support', module: 'support-v4'
+        exclude group: 'com.android.support', module: 'support-annotations'
+        exclude group: 'com.android.support', module: 'support-vector-drawable'
+        exclude group: 'com.android.support', module: 'design'
+        exclude module: 'recyclerview-v7'
+    })
+
     compile project(':circleview')
 
     compile libraries.supportAppCompat

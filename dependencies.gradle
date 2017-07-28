@@ -24,7 +24,7 @@ ext.versions = [
 
 		junit                        : '4.12',
 		mockito					     : '1.10.19',
-        espresso                     : '2.2.2',
+        espresso                     : '3.0.0',
 		mockwebserver                : '3.8.0',
 ]
 
