@@ -1,43 +1,22 @@
 package me.grechka.yamblz.yamblzweatherapp.api;
 
-import com.google.gson.GsonBuilder;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
-import org.mockito.Matchers;
 import org.mockito.internal.matchers.GreaterThan;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.URLEncoder;
-import java.nio.charset.Charset;
-import java.util.Collections;
-import java.util.Map;
 
 import io.reactivex.observers.TestObserver;
 import me.grechka.yamblz.yamblzweatherapp.base.BaseApiUnitTest;
 import me.grechka.yamblz.yamblzweatherapp.models.response.CurrentWeatherResponse;
-import me.grechka.yamblz.yamblzweatherapp.models.response.Place;
 import me.grechka.yamblz.yamblzweatherapp.models.response.Weather;
-import me.grechka.yamblz.yamblzweatherapp.repository.net.SuggestApi;
 import me.grechka.yamblz.yamblzweatherapp.repository.net.WeatherApi;
-import okhttp3.mockwebserver.MockResponse;
-import okhttp3.mockwebserver.MockWebServer;
-import okhttp3.mockwebserver.RecordedRequest;
-import okio.BufferedSource;
-import okio.Okio;
-import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
-import retrofit2.converter.gson.GsonConverterFactory;
 
-import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
-import static org.mockito.AdditionalMatchers.gt;
-import static org.mockito.Matchers.intThat;
 
 /**
  * Created by alexander on 27/07/2017.
@@ -61,7 +40,7 @@ public class WeatherApiUnitTest extends BaseApiUnitTest {
     }
 
     @Test
-    public void SuggestApi_obtainWeatherForCoordinates_parsedCorrectlyWithGsonExposeAndCorrectModule()
+    public void weatherApi_obtainWeatherForCoordinates_parsedCorrectlyWithGsonExposeAnnotationEnabled()
             throws IOException, InterruptedException {
         enqueueResponse("openweather-weather.json");
 

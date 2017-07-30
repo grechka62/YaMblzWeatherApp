@@ -40,7 +40,7 @@ public class SettingsFragmentInstrumentedTest {
     }
 
     @Test
-    public void SettingsFragment_checkRadioGroup_defaultEnabled() {
+    public void settingsFragment_checkRadioGroupState_lastSavedEnabled() {
         String frequency = preferences.getString("frequency", "60");
 
         navigateToSettings();
@@ -50,14 +50,13 @@ public class SettingsFragmentInstrumentedTest {
     }
 
     @Test
-    public void SettingsFragment_checkRadioGroup_clickAndCheckEnabledState() {
+    public void settingsFragment_chooseNewInRadioGroup_clickedItemSavedAndEnabled() {
         navigateToSettings();
 
         onView(withId(R.id.frequency_180))
                 .perform(click());
 
         pressBack();
-
         navigateToSettings();
 
         onView(withId(R.id.frequency_180))

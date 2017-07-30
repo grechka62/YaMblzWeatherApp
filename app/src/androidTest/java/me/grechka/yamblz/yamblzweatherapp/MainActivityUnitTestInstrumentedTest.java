@@ -22,7 +22,7 @@ public class MainActivityUnitTestInstrumentedTest {
     public ActivityTestRule<MainActivity> mainActivity = new ActivityTestRule<>(MainActivity.class);
 
     @Test
-    public void mainActivity_navigation_goToAbout() {
+    public void mainActivity_navigateToAbout_aboutFragmentOpenedSuccessfully() {
         onView(withContentDescription(R.string.navigation_drawer_open)).perform(click());
 
         onView(withText(R.string.action_about))
@@ -34,7 +34,7 @@ public class MainActivityUnitTestInstrumentedTest {
     }
 
     @Test
-    public void mainActivity_navigation_goToSettings() {
+    public void mainActivity_navigateToSettings_settingsFragmentOpenedSuccessfully() {
         onView(withContentDescription(R.string.navigation_drawer_open)).perform(click());
 
         onView(withText(R.string.action_settings))

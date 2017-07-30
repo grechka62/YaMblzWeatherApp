@@ -26,9 +26,9 @@ public class WeatherPresenterUnitTest extends BaseUnitTest {
 
     private WeatherPresenter presenter;
 
+    @Mock WeatherView view;
     @Mock Repository repository;
     @Mock RxSchedulers scheduler;
-    @Mock WeatherView view;
 
     @Before
     @Override
@@ -51,12 +51,12 @@ public class WeatherPresenterUnitTest extends BaseUnitTest {
     }
 
     @Test
-    public void WeatherPresenter_checkAttachView_onlyUpdateCityCalled() {
+    public void weatherPresenter_attachView_citiesWereShowed() {
         verify(view, only()).showCity(any(City.class));
     }
 
     @Test
-    public void WeatherPresenter_checkAttachView_showCurrentWeather() {
+    public void weatherPresenter_updateWeather_weaterWereUpdateAndDisplayedCorrectly() {
         presenter.updateCurrentWeather();
 
         verify(view, times(1)).showCurrentWeather(anyString(), anyString(), anyString(),
@@ -64,7 +64,7 @@ public class WeatherPresenterUnitTest extends BaseUnitTest {
     }
 
     @Test
-    public void WeatherPresenter_getCachedCurrentWeather_whenWeatherInCache() {
+    public void weatherPresenter_getCachedCurrentWeatherWhenWeatherIsInCache_success() {
         CurrentWeather item = new CurrentWeather("12", "", "", "", "", "");
 
         when(repository.getSavedCurrentWeather())
@@ -77,7 +77,7 @@ public class WeatherPresenterUnitTest extends BaseUnitTest {
     }
 
     @Test
-    public void WeatherPresenter_getCachedCurrentWeather_whenWeatherNeedToBeDownloaded() {
+    public void weatherPresenter_getCachedCurrentWeatherWhenWeatherNeedToBeDownloaded_wereCalledUpdateWeatherMethod() {
         CurrentWeather item = new CurrentWeather("-", "", "", "", "", "");
 
         when(repository.getSavedCurrentWeather())

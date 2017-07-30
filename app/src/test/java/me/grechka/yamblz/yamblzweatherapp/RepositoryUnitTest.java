@@ -62,7 +62,7 @@ public class RepositoryUnitTest extends BaseUnitTest {
     }
 
     @Test
-    public void Repository_obtainSuggestionList_expectedCorrectPlaceModel() {
+    public void repository_obtainSuggestionList_expectedCorrectPlaceModel() {
         SuggestionResponseModel suggestions =
                 JsonProvider.openFile(SuggestionResponseModel.class, "places-suggestion.json");
 
@@ -77,7 +77,7 @@ public class RepositoryUnitTest extends BaseUnitTest {
     }
 
     @Test
-    public void Repository_obtainBrokenSuggestionList_expectedThrowAnException() {
+    public void repository_obtainBrokenSuggestionList_expectedThrowAnException() {
         SuggestionResponseModel suggestions =
                 JsonProvider.openFile(SuggestionResponseModel.class, "places-suggestion-single-broken.json");
 

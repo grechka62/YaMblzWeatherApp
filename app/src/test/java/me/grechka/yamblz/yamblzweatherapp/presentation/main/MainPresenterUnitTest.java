@@ -16,8 +16,9 @@ import static org.mockito.Mockito.*;
 
 public class MainPresenterUnitTest extends BaseUnitTest {
 
-    @Mock MainView view;
     private MainPresenter presenter = new MainPresenter();
+
+    @Mock MainView view;
 
     @Before
     @Override
@@ -31,31 +32,31 @@ public class MainPresenterUnitTest extends BaseUnitTest {
     }
 
     @Test
-    public void MainPresenter_navigation_toWeather() {
+    public void mainPresenter_navigateToWeather_success() {
         presenter.showWeather();
         verify(view, only()).showWeather();
     }
 
     @Test
-    public void MainPresenter_navigation_toSettings() {
+    public void mainPresenter_navigateToSettings_success() {
         presenter.showSettings();
         verify(view, only()).showSettings();
     }
 
     @Test
-    public void MainPresenter_navigation_toAbout() {
+    public void mainPresenter_navigateToAbout_success() {
         presenter.showAbout();
         verify(view, only()).showAbout();
     }
 
     @Test
-    public void MainPresenter_navigation_goBack() {
+    public void mainPresenter_pressBack_success() {
         presenter.goBack();
         verify(view, only()).goBack();
     }
 
     @Test
-    public void MainPresenter_navigation_navigateTo() {
+    public void mainPresenter_navigateById_success() {
         presenter.navigate(anyInt());
         verify(view, only()).navigate(anyInt());
     }

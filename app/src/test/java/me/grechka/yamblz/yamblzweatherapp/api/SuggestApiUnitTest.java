@@ -43,7 +43,7 @@ public class SuggestApiUnitTest extends BaseApiUnitTest {
     }
 
     @Test
-    public void SuggestApi_obtainPlacesSuggestion_parsedCorrectlyWithGsonExposeAndCorrectModule()
+    public void suggestApi_obtainPlacesSuggestion_parsedCorrectlyWithGsonExposeAnnotationEnabled()
             throws IOException, InterruptedException {
         enqueueResponse("places-suggestion.json");
 
@@ -79,7 +79,7 @@ public class SuggestApiUnitTest extends BaseApiUnitTest {
     }
 
     @Test
-    public void SuggestApi_cityParsedCorrectly_whenWithGsonExposeAndCorrectModule()
+    public void SuggestApi_cityParsedCorrectly_whenWithGsonExposeAnnotationEnabled()
             throws IOException, InterruptedException {
         enqueueResponse("places-city.json");
 

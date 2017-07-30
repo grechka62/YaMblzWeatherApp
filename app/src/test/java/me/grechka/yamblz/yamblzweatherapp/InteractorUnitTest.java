@@ -51,7 +51,7 @@ public class InteractorUnitTest extends BaseUnitTest {
     }
 
     @Test
-    public void Interactor_parsedCorrectly_whenResponseWithGoodData() {
+    public void interactor_parsedCorrectly_whenResponseWithGoodData() {
         CurrentWeatherResponse weatherResponse = JsonProvider
                 .openFile(CurrentWeatherResponse.class, "openweather-weather.json");
         CurrentWeather weather = interactor.getCurrentWeatherFromResponse(weatherResponse);
@@ -59,14 +59,14 @@ public class InteractorUnitTest extends BaseUnitTest {
     }
 
     @Test(expected = NumberFormatException.class)
-    public void Interactor_thrownAnError_whenResponseWithBrokenCoordinates() throws IOException {
+    public void interactor_thrownAnError_whenResponseWithBrokenCoordinates() throws IOException {
         CurrentWeatherResponse weatherResponse = JsonProvider
                 .openFile(CurrentWeatherResponse.class, "openweather-weather-brokencoordinates.json");
         interactor.getCurrentWeatherFromResponse(weatherResponse);
     }
 
     @Test(expected = NullPointerException.class)
-    public void Interactor_thrownAnError_whenResponseWithoutBaseFields() throws IOException {
+    public void interactor_thrownAnError_whenResponseWithoutBaseFields() throws IOException {
         CurrentWeatherResponse weatherResponse = JsonProvider
                 .openFile(CurrentWeatherResponse.class, "openweather-weather-withoutbasefields.json");
         interactor.getCurrentWeatherFromResponse(weatherResponse);

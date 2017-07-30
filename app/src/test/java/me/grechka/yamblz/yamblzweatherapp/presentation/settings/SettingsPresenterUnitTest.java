@@ -34,11 +34,10 @@ public class SettingsPresenterUnitTest extends BaseUnitTest {
 
     @Override
     public void onMockInit() {
-
     }
 
     @Test
-    public void SettingsPresenter_changeUpdateSchedule_success() {
+    public void settingsPresenter_updateScheduleInterval_intervalSuccessfullySavedToPrefsAndJobUpdated() {
         presenter.changeUpdateSchedule(anyInt());
 
         verify(preferencesManager, times(1)).putUpdateFrequency(anyString());
@@ -46,7 +45,7 @@ public class SettingsPresenterUnitTest extends BaseUnitTest {
     }
 
     @Test
-    public void SettingsPresenter_updateFrequency_success() {
+    public void SettingsPresenter_obtainFrequency_getFrequencyFromSavedLocation() {
         presenter.getUpdateFrequency();
 
         verify(preferencesManager, times(1)).getUpdateFrequency();

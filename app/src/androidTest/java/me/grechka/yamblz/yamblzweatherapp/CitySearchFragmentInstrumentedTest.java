@@ -1,7 +1,5 @@
 package me.grechka.yamblz.yamblzweatherapp;
 
-import android.support.test.espresso.assertion.ViewAssertions;
-import android.support.test.espresso.contrib.RecyclerViewActions;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
@@ -24,7 +22,7 @@ import static android.support.test.espresso.matcher.ViewMatchers.isRoot;
 import static android.support.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
-import static me.grechka.yamblz.yamblzweatherapp.utils.WaitExtension.waitFor;
+import static me.grechka.yamblz.yamblzweatherapp.utils.WaitActions.waitFor;
 import static org.hamcrest.Matchers.allOf;
 
 /**
@@ -37,9 +35,8 @@ public class CitySearchFragmentInstrumentedTest {
     @Rule
     public ActivityTestRule<MainActivity> mainActivity = new ActivityTestRule<>(MainActivity.class);
 
-
     @Test
-    public void mainActivity_findCity_changeCityAndUpdateWeather() {
+    public void citySearchFragment_findCity_changeCityAndUpdateWeather() {
         onView(withContentDescription(R.string.navigation_drawer_open))
                 .perform(click());
 

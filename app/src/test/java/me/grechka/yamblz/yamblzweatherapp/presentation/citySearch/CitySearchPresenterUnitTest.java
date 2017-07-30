@@ -1,7 +1,5 @@
 package me.grechka.yamblz.yamblzweatherapp.presentation.citySearch;
 
-import android.support.annotation.NonNull;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -11,8 +9,6 @@ import io.reactivex.Single;
 import me.grechka.yamblz.yamblzweatherapp.base.BaseUnitTest;
 import me.grechka.yamblz.yamblzweatherapp.models.City;
 import me.grechka.yamblz.yamblzweatherapp.models.response.CityResponseModel;
-import me.grechka.yamblz.yamblzweatherapp.presentation.citySearch.CitySearchPresenter;
-import me.grechka.yamblz.yamblzweatherapp.presentation.citySearch.CitySearchView;
 import me.grechka.yamblz.yamblzweatherapp.repository.Repository;
 import me.grechka.yamblz.yamblzweatherapp.utils.JsonProvider;
 import me.grechka.yamblz.yamblzweatherapp.utils.RxSchedulers;
@@ -25,15 +21,14 @@ import static org.mockito.Mockito.*;
 
 public class CitySearchPresenterUnitTest extends BaseUnitTest {
 
+    private CitySearchPresenter presenter;
     private City sanJose  = new City.Builder()
             .placeId("ChIJ9T_5iuTKj4ARe3GfygqMnbk")
             .title("San Jose")
             .extendedTitle("San Jose, CA, United States")
             .build();
-    private CitySearchPresenter presenter;
 
-    @Mock
-    CitySearchView view;
+    @Mock CitySearchView view;
     @Mock Repository repository;
     @Mock RxSchedulers schedulers;
 
@@ -64,13 +59,13 @@ public class CitySearchPresenterUnitTest extends BaseUnitTest {
     }
 
     @Test
-    public void CitySearchView_attachView_clearList() {
+    public void citySearchPresenter_attachView_theSuggestionListWasClearedAndLoadingHidden() {
         verify(view, times(1)).hideLoading();
         verify(view, times(1)).clearSuggestions();
     }
 
     @Test
-    public void CitySearchView_fetchSuggestions_success() {
+    public void citySearchPresenter_fetchSuggestions_suggestionsWereObtainedAndDisplayed() {
         presenter.fetchSuggestions("san jose");
 
         verify(view, atLeast(1)).clearSuggestions();
@@ -80,7 +75,7 @@ public class CitySearchPresenterUnitTest extends BaseUnitTest {
     }
 
     @Test
-    public void CitySearchView_fetchCity_success() {
+    public void citySearchPresenter_fetchCity_cityLocationWasFetchedAndCached() {
         presenter.fetchCity(sanJose);
 
         verify(view, times(1)).closeDialog();
