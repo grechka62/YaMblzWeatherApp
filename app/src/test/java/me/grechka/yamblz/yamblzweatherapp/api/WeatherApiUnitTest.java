@@ -75,7 +75,7 @@ public class WeatherApiUnitTest extends BaseApiUnitTest {
                     assertEquals(expectedSpeed, weather.getWind().getSpeed(), EPS);
                 }));
 
-        String url = String.format(Locale.getDefault(),
+        String url = String.format(Locale.US,
                 "/data/2.5/weather?lat=%1$.2f&lon=%2$.2f&units=metric&appid=%3$s", latitude, longitude, apiKey);
         assertEquals(getRequest().getPath(), url);
     }
