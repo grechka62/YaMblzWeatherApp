@@ -4,9 +4,9 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
 import me.grechka.yamblz.yamblzweatherapp.R;
-import me.grechka.yamblz.yamblzweatherapp.WeatherApp;
 import me.grechka.yamblz.yamblzweatherapp.models.CurrentWeather;
 import me.grechka.yamblz.yamblzweatherapp.models.response.CurrentWeatherResponse;
 import me.grechka.yamblz.yamblzweatherapp.models.response.Wind;
@@ -17,25 +17,24 @@ import me.grechka.yamblz.yamblzweatherapp.models.response.Wind;
 
 public class InteractorImp implements Interactor {
 
-    @Inject
     Context context;
 
-    public InteractorImp() {
-        WeatherApp.getComponent().inject(this);
+    public InteractorImp(@NonNull Context context) {
+        this.context = context;
     }
 
     @Override
     public CurrentWeather getCurrentWeatherFromResponse(CurrentWeatherResponse response) {
-        String temperature = roundDoubletoString(response.getWeatherInfo().getTemp());
+        String temperature = roundDoubleToString(response.getWeatherInfo().getTemp());
         String description = response.getWeather().get(0).getDescription();
         String humidity = Integer.toString(response.getWeatherInfo().getHumidity());
-        String tempMin = roundDoubletoString(response.getWeatherInfo().getTempMin());
-        String tempMax = roundDoubletoString(response.getWeatherInfo().getTempMax());
+        String tempMin = roundDoubleToString(response.getWeatherInfo().getTempMin());
+        String tempMax = roundDoubleToString(response.getWeatherInfo().getTempMax());
         String wind = buildWindString(response.getWind());
         return new CurrentWeather(temperature, description, humidity, tempMin, tempMax, wind);
     }
 
-    private String roundDoubletoString(Double param) {
+    private String roundDoubleToString(Double param) {
         return Long.toString(Math.round(param));
     }
 
@@ -43,7 +42,7 @@ public class InteractorImp implements Interactor {
     private String buildWindString(Wind windResponse) {
         StringBuilder windBuilder = new StringBuilder();
         if (windResponse.getSpeed() >= 0.5) {
-            windBuilder.append(roundDoubletoString(windResponse.getSpeed()));
+            windBuilder.append(roundDoubleToString(windResponse.getSpeed()));
             windBuilder.append(" м/с, ");
             windBuilder.append(windDegtoDirection(windResponse.getDeg()));
             return windBuilder.toString();

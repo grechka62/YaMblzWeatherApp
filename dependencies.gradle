@@ -21,10 +21,11 @@ ext.versions = [
 		androidJob					 : '1.1.11',
 		retrofit					 : '2.3.0',
 		moxy						 : '1.5.3',
-		
-        espresso                     : '2.2.2',
 
-        junit                        : '4.12',
+		junit                        : '4.12',
+		mockito					     : '1.10.19',
+        espresso                     : '3.0.0',
+		mockwebserver                : '3.8.0',
 ]
 
 ext.gradlePlugins = [
@@ -35,7 +36,7 @@ ext.gradlePlugins = [
 ext.libraries = [
         supportAppCompat        : "com.android.support:appcompat-v7:$versions.supportLibs",
         supportDesign           : "com.android.support:design:$versions.supportLibs",
-		supportAnnotations           : "com.android.support:support-annotations:$versions.supportLibs",
+		supportAnnotations      : "com.android.support:support-annotations:$versions.supportLibs",
 		supportCard	            : "com.android.support:cardview-v7:$versions.supportLibs",
 		supportSupport			: "com.android.support:support-v4:$versions.supportLibs",
 		supportPreference		: "com.android.support:preference-v14:$versions.supportLibs",
@@ -60,6 +61,8 @@ ext.libraries = [
 
         // Test dependencies
         junit                   : "junit:junit:$versions.junit",
+		mockito					: "org.mockito:mockito-core:$versions.mockito",
         espressoCore            : "com.android.support.test.espresso:espresso-core:$versions.espresso",
         espressoContrib         : "com.android.support.test.espresso:espresso-contrib:$versions.espresso",
+		mockwebserver           : "com.squareup.okhttp3:mockwebserver:$versions.mockwebserver",
 ]

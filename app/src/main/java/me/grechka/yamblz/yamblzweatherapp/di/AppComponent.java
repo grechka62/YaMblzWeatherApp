@@ -46,5 +46,5 @@ public interface AppComponent {
 
     MainPresenter getMainPresenter();
     WeatherPresenter getWeatherPresenter();
-
+    SettingsPresenter getSettingsPresenter();
 }

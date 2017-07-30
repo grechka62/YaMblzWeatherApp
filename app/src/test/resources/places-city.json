@@ -1,0 +1,133 @@
+{
+  "html_attributions" : [],
+  "result" : {
+    "address_components" : [
+      {
+        "long_name" : "San José",
+        "short_name" : "San José",
+        "types" : [ "locality", "political" ]
+      },
+      {
+        "long_name" : "San José Province",
+        "short_name" : "San José Province",
+        "types" : [ "administrative_area_level_1", "political" ]
+      },
+      {
+        "long_name" : "Costa Rica",
+        "short_name" : "CR",
+        "types" : [ "country", "political" ]
+      }
+    ],
+    "adr_address" : "\u003cspan class=\"region\"\u003eSan José Province\u003c/span\u003e, \u003cspan class=\"locality\"\u003eSan José\u003c/span\u003e, \u003cspan class=\"country-name\"\u003eCosta Rica\u003c/span\u003e",
+    "formatted_address" : "San José Province, San José, Costa Rica",
+    "geometry" : {
+      "location" : {
+        "lat" : 9.9280694,
+        "lng" : -84.0907246
+      },
+      "viewport" : {
+        "northeast" : {
+          "lat" : 9.9712598,
+          "lng" : -84.047191
+        },
+        "southwest" : {
+          "lat" : 9.899968699999999,
+          "lng" : -84.1794991
+        }
+      }
+    },
+    "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/geocode-71.png",
+    "id" : "f7197675a1f5732501d51945460da1f5e0ea9ed8",
+    "name" : "San José",
+    "photos" : [
+      {
+        "height" : 3854,
+        "html_attributions" : [
+          "\u003ca href=\"https://maps.google.com/maps/contrib/114413351656206453188/photos\"\u003eFrederic Beaulieu\u003c/a\u003e"
+        ],
+        "photo_reference" : "CmRaAAAAcnwF2qyzJt0mU5L0xEZJoNAQaVGQDc4VoXAzIpgUIL_h_V1Q0YHnJl77P-bJSbmwKt9kCfLWAhmqoG_B9UvCd0aJAChDpX_VfcJGV9SDIQ84BS9YTykx_2Ot3xW5du3kEhAZauMii2nDV5hg7qXELeygGhTVZJxFUS8Nap5stbKi0p5JXQs3CA",
+        "width" : 10150
+      },
+      {
+        "height" : 1440,
+        "html_attributions" : [
+          "\u003ca href=\"https://maps.google.com/maps/contrib/104236743223921277649/photos\"\u003ePaul Cascante\u003c/a\u003e"
+        ],
+        "photo_reference" : "CmRaAAAArlsD0e-A4tovNVAWxsl2eL5Rt0x7Im9_kq4wnzvm5cfwtdBuZpKmRgVPbVrcTaH0rmxipSnIi-CBoSUcg_IsTZJvTK610ipRdYm5yStnXaJbHg8R849ONKRoshrmN9y0EhAJn6XxBIn6UF7krAKVvFlyGhRk-Kj56BwsLSXAJ2pfQaN97t2fWA",
+        "width" : 2560
+      },
+      {
+        "height" : 2988,
+        "html_attributions" : [
+          "\u003ca href=\"https://maps.google.com/maps/contrib/117488681938048107823/photos\"\u003eOrlando Ruiz\u003c/a\u003e"
+        ],
+        "photo_reference" : "CmRaAAAASrBk0UfIen_Bc8TypwdH1wFvs6rUbICkAFDkSGFPKdEn_IvLEnqKh_firwkBQwG7YekqImaf0PZtfHvQ7Ew9BnNMm2Ic3TF1Prechl36HgCxPPcIhhk6S6_Q4y9MxdJFEhCByQYH1CYobV1hBb1ou6cgGhS_GxgXNvkpOVJJIZr22oeMF0WFFQ",
+        "width" : 5312
+      },
+      {
+        "height" : 2988,
+        "html_attributions" : [
+          "\u003ca href=\"https://maps.google.com/maps/contrib/110464515589325307053/photos\"\u003eJames Waggoner\u003c/a\u003e"
+        ],
+        "photo_reference" : "CmRaAAAAWWRcu0jIlMvdQK8OgZndnc_JaId_96t-UcNPxkRjwTSuXQ4o8D4HTG1je5JYB2Jd_nW0zGdCnrLJ_Ob8KcokhdJQE_ewLmdE3sr4LFMoij3ot3rzhZ2Goo5HE92TGzxjEhAVJqrEQ08NSxgnKHxRx1pWGhRNUKFCI2sDf50SBQaLIEtFT9AAuw",
+        "width" : 5312
+      },
+      {
+        "height" : 1520,
+        "html_attributions" : [
+          "\u003ca href=\"https://maps.google.com/maps/contrib/102669482912948564041/photos\"\u003eLaura S. Hunt\u003c/a\u003e"
+        ],
+        "photo_reference" : "CmRaAAAAx17Ts57yVGqrGZ9sA2x3eZiH4RCNzRckUSjVX9wEMM9Gj8Y_bRiYl8EHq9gxmp1S3UNblFohwSCqWr45-veG3FcwjRWhuA4wC4WuVBDk_kLpWsfHiV_K0Pd6sj3Zo-YQEhBcgsxD_I_bGz_lBmfKHz_aGhT01ELwQmoGmmfvJ69ZQvrVMSseyQ",
+        "width" : 2688
+      },
+      {
+        "height" : 2988,
+        "html_attributions" : [
+          "\u003ca href=\"https://maps.google.com/maps/contrib/106352585194216747370/photos\"\u003eEdgardo Klachko\u003c/a\u003e"
+        ],
+        "photo_reference" : "CmRaAAAAIkaUda7IPZUP2H0mUVQ1_QdKRvlR5bSQ5GJT9yNUDd_0fg2cV2uUf7JMGiRFoETFbZS1Scf47Zw3scYqFym8S-mlXKYNLB0oDJsHXRxYP9hYtTe2nvJNyd4ZsUxGFveQEhCmHgEf1UJF_urRMQFwCOIVGhRCtI810idjcwHhmdGgaZoAuuDYkw",
+        "width" : 5312
+      },
+      {
+        "height" : 2336,
+        "html_attributions" : [
+          "\u003ca href=\"https://maps.google.com/maps/contrib/108093778784585742133/photos\"\u003eFrancisco Ruiz\u003c/a\u003e"
+        ],
+        "photo_reference" : "CmRaAAAAkJslrDd3H-Vwv8QyusDJDhYVjgS5h8o9IBXAIHwTMkH6dtnrSHbLJMgEnxJACEN0JXgVYm2AZAYT4noMM6sAFgDgfp1MV_Skd01UsZ5CdOY2XJYsPR4utzWdcQ9al5UOEhD5g4wrzrpIZp8grOg-iePWGhTTujQ3L6cRCC79vyfnzcYKfbBqxw",
+        "width" : 4160
+      },
+      {
+        "height" : 1536,
+        "html_attributions" : [
+          "\u003ca href=\"https://maps.google.com/maps/contrib/101111019136516147820/photos\"\u003eCarlos Enrique Carrillo Chataing\u003c/a\u003e"
+        ],
+        "photo_reference" : "CmRaAAAAky4v2d10xoaOTk6MeW8b4xgfhEupoZHfGgZ68o_ch9Ywvq0DhZhjTube4N9tGLDxDd4OyCkBT5sDQrvoB-UOpjBFHa1FWNWAXaD7w0n_QIUTCtQMmaOE0pEszYBJzNkdEhBg6GmKnaxoOEqCQqaEY_FJGhQzs506tDSawrR9XbJQJGqa_Op-yg",
+        "width" : 2560
+      },
+      {
+        "height" : 1428,
+        "html_attributions" : [
+          "\u003ca href=\"https://maps.google.com/maps/contrib/103430966644098895525/photos\"\u003eFrancisco Retana Quiros\u003c/a\u003e"
+        ],
+        "photo_reference" : "CmRaAAAAjNqhJwimLBDLYDU3kiwl27GQXRVATFFzUbVE7XdYTDR6aZpSInnbuzdhAah4FxlgdnIm1eXQnx3chNLj5UaAeJy_t1G-TSlnu6s0Ik6FQv3l3sdZo79CKpm6qJV1Pj87EhCDORfe9tOg6hczdsb7ks_GGhR_rjDKz8guSGFqKoWwldyyukDhyA",
+        "width" : 2632
+      },
+      {
+        "height" : 1152,
+        "html_attributions" : [
+          "\u003ca href=\"https://maps.google.com/maps/contrib/111838908293408644061/photos\"\u003ejoelle battestini\u003c/a\u003e"
+        ],
+        "photo_reference" : "CmRaAAAAsKnV_Ivbohp7a_yE7dikNNfxhuSVIy0Kg7_Hy4ZIEbRd252zRxQAZ0E67P-m-FO-v8dApQE_YT2YsGOo2dDvP_nsYmeHQLU9Z99z-5w2QyAGI1jxjJLjGoFbodcthjjIEhDi3bUNZr5FCgapW3Tl-TxAGhSGtWkClvblkBZtS-lkH5orazKCCw",
+        "width" : 2048
+      }
+    ],
+    "place_id" : "ChIJxRUNxULjoI8RgrgRn2pqdOY",
+    "reference" : "CmRbAAAA0E0oftYcaXhsPkVlpsDWdivAxJEyRREKdFeJK0Vm9FBhfjgwvhE8gjn_93yyMKTqL1DYzU0TKtHpsfMn-AraLyn_GTxOfpt3YQV7C_W5pIxTXz3unmhKDFJT5wPItkFiEhDVYIbBI-Y-3N4mWyX7y8WcGhSuMKGjEVoM-JgFN7TvD-ZiCNoOEA",
+    "scope" : "GOOGLE",
+    "types" : [ "locality", "political" ],
+    "url" : "https://maps.google.com/?q=San+Jos%C3%A9+Province,+San+Jos%C3%A9,+Costa+Rica&ftid=0x8fa0e342c50d15c5:0xe6746a6a9f11b882",
+    "utc_offset" : -360,
+    "vicinity" : "San José"
+  },
+  "status" : "OK"
+}

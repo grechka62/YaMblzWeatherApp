@@ -1,0 +1,46 @@
+{
+  "predictions": [
+    {
+      "description": "San Jose, CA, United States",
+      "id": "c00d0e6ed23a5a6b418841457b33c47430a93a4c",
+      "matched_substrings": [
+        {
+          "length": 8,
+          "offset": 0
+        }
+      ],
+      "place_id": "",
+      "reference": "CkQzAAAAKUIYJ7KwQw2_CLgmEpGmV_cx5fvR7d6I9UZopn9mM66_OAWS22BmdxuSdAefUHJFWyu0gvi8MzmvRTEcFpXwNhIQkwpJOsc7OQn2hXj4vOb6IxoUvaBQZ_z7smCJrDcwEvv-OGyueqo",
+      "structured_formatting": {
+        "main_text": "",
+        "main_text_matched_substrings": [
+          {
+            "length": 8,
+            "offset": 0
+          }
+        ],
+        "secondary_text": ""
+      },
+      "terms": [
+        {
+          "offset": 0,
+          "value": "San Jose"
+        },
+        {
+          "offset": 10,
+          "value": "CA"
+        },
+        {
+          "offset": 14,
+          "value": "United States"
+        }
+      ],
+      "types": [
+        "locality",
+        "political",
+        "geocode"
+      ]
+    }
+  ],
+  "status": "OK"
+}
