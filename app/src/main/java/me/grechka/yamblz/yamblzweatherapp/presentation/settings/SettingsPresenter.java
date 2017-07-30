@@ -1,5 +1,7 @@
 package me.grechka.yamblz.yamblzweatherapp.presentation.settings;
 
+import android.support.annotation.NonNull;
+
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 
@@ -16,15 +18,14 @@ import me.grechka.yamblz.yamblzweatherapp.schedule.WeatherJobUtils;
 @InjectViewState
 public class SettingsPresenter extends MvpPresenter<SettingsView> {
 
-    @Inject
     WeatherJobUtils weatherJobUtils;
-
-    @Inject
     PreferencesManager preferencesManager;
 
-    public SettingsPresenter() {
-        super();
-        WeatherApp.getComponent().inject(this);
+    @Inject
+    public SettingsPresenter(@NonNull WeatherJobUtils weatherJobUtils,
+                             @NonNull PreferencesManager preferencesManager) {
+        this.weatherJobUtils = weatherJobUtils;
+        this.preferencesManager = preferencesManager;
     }
 
     void changeUpdateSchedule(int minutes) {

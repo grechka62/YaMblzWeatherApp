@@ -1,0 +1,89 @@
+package me.grechka.yamblz.yamblzweatherapp.presentation.citySearch;
+
+import android.support.annotation.NonNull;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.mockito.Mock;
+
+import io.reactivex.Observable;
+import io.reactivex.Single;
+import me.grechka.yamblz.yamblzweatherapp.base.BaseUnitTest;
+import me.grechka.yamblz.yamblzweatherapp.models.City;
+import me.grechka.yamblz.yamblzweatherapp.models.response.CityResponseModel;
+import me.grechka.yamblz.yamblzweatherapp.presentation.citySearch.CitySearchPresenter;
+import me.grechka.yamblz.yamblzweatherapp.presentation.citySearch.CitySearchView;
+import me.grechka.yamblz.yamblzweatherapp.repository.Repository;
+import me.grechka.yamblz.yamblzweatherapp.utils.JsonProvider;
+import me.grechka.yamblz.yamblzweatherapp.utils.RxSchedulers;
+
+import static org.mockito.Mockito.*;
+
+/**
+ * Created by alexander on 30/07/2017.
+ */
+
+public class CitySearchPresenterUnitTest extends BaseUnitTest {
+
+    private City sanJose  = new City.Builder()
+            .placeId("ChIJ9T_5iuTKj4ARe3GfygqMnbk")
+            .title("San Jose")
+            .extendedTitle("San Jose, CA, United States")
+            .build();
+    private CitySearchPresenter presenter;
+
+    @Mock
+    CitySearchView view;
+    @Mock Repository repository;
+    @Mock RxSchedulers schedulers;
+
+    @Before
+    @Override
+    public void onInit() {
+        super.onInit();
+
+        presenter = new CitySearchPresenter(repository, schedulers);
+        presenter.attachView(view);
+    }
+
+    @Override
+    public void onMockInit() {
+        CityResponseModel cityResponse = JsonProvider.openFile(CityResponseModel.class, "places-city.json");
+
+        when(repository.obtainSuggestedCities(anyString()))
+                .thenReturn(Observable.just(sanJose));
+
+        when(repository.obtainCityInfo(anyString()))
+                .thenReturn(Single.just(cityResponse));
+
+        when(schedulers.getIoToMainTransformer())
+                .thenReturn(observer -> observer);
+
+        when(schedulers.getComputationToMainTransformerSingle())
+                .thenReturn(observer -> observer);
+    }
+
+    @Test
+    public void CitySearchView_attachView_clearList() {
+        verify(view, times(1)).hideLoading();
+        verify(view, times(1)).clearSuggestions();
+    }
+
+    @Test
+    public void CitySearchView_fetchSuggestions_success() {
+        presenter.fetchSuggestions("san jose");
+
+        verify(view, atLeast(1)).clearSuggestions();
+        verify(view, atLeast(1)).hideLoading();
+        verify(view, times(1)).showLoading();
+        verify(view, times(1)).addSuggestion(any(City.class));
+    }
+
+    @Test
+    public void CitySearchView_fetchCity_success() {
+        presenter.fetchCity(sanJose);
+
+        verify(view, times(1)).closeDialog();
+        verify(repository, times(1)).saveCity(any(City.class));
+    }
+}

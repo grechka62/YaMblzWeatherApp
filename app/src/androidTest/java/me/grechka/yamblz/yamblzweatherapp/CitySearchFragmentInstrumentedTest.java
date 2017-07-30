@@ -26,7 +26,6 @@ import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static me.grechka.yamblz.yamblzweatherapp.utils.WaitExtension.waitFor;
 import static org.hamcrest.Matchers.allOf;
-import static org.hamcrest.Matchers.is;
 
 /**
  * Created by alexander on 28/07/2017.

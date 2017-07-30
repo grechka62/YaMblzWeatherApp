@@ -12,6 +12,7 @@ import me.grechka.yamblz.yamblzweatherapp.presentation.activity.MainActivity;
 import static android.support.test.espresso.Espresso.*;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
+import static android.support.test.espresso.contrib.DrawerActions.openDrawer;
 import static android.support.test.espresso.matcher.ViewMatchers.*;
 
 @RunWith(AndroidJUnit4.class)
