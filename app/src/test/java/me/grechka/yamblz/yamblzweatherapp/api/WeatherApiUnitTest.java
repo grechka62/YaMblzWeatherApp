@@ -8,6 +8,7 @@ import org.junit.runners.JUnit4;
 import org.mockito.internal.matchers.GreaterThan;
 
 import java.io.IOException;
+import java.util.Locale;
 
 import io.reactivex.observers.TestObserver;
 import me.grechka.yamblz.yamblzweatherapp.base.BaseApiUnitTest;
@@ -74,8 +75,8 @@ public class WeatherApiUnitTest extends BaseApiUnitTest {
                     assertEquals(expectedSpeed, weather.getWind().getSpeed(), EPS);
                 }));
 
-        String url = String
-                .format("/data/2.5/weather?lat=%1$.2f&lon=%2$.2f&units=metric&appid=%3$s", latitude, longitude, apiKey);
+        String url = String.format(Locale.getDefault(),
+                "/data/2.5/weather?lat=%1$.2f&lon=%2$.2f&units=metric&appid=%3$s", latitude, longitude, apiKey);
         assertEquals(getRequest().getPath(), url);
     }
 }

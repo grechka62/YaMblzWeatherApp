@@ -59,7 +59,7 @@ public class WeatherPresenterUnitTest extends BaseUnitTest {
     public void weatherPresenter_updateWeather_weaterWereUpdateAndDisplayedCorrectly() {
         presenter.updateCurrentWeather();
 
-        verify(view, times(1)).showCurrentWeather(anyString(), anyString(), anyString(),
+        verify(view).showCurrentWeather(anyString(), anyString(), anyString(),
                 anyString(), anyString(), anyString());
     }
 
@@ -72,7 +72,7 @@ public class WeatherPresenterUnitTest extends BaseUnitTest {
 
         presenter.showSavedCurrentWeather();
 
-        verify(view, times(1)).showCurrentWeather(anyString(), anyString(), anyString(),
+        verify(view).showCurrentWeather(anyString(), anyString(), anyString(),
                 anyString(), anyString(), anyString());
     }
 
@@ -85,8 +85,8 @@ public class WeatherPresenterUnitTest extends BaseUnitTest {
 
         presenter.showSavedCurrentWeather();
 
-        verify(repository, times(1)).updateCurrentWeather();
-        verify(view, times(1)).showCurrentWeather(anyString(), anyString(), anyString(),
+        verify(repository).updateCurrentWeather();
+        verify(view).showCurrentWeather(anyString(), anyString(), anyString(),
                 anyString(), anyString(), anyString());
     }
 }

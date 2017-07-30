@@ -40,14 +40,14 @@ public class SettingsPresenterUnitTest extends BaseUnitTest {
     public void settingsPresenter_updateScheduleInterval_intervalSuccessfullySavedToPrefsAndJobUpdated() {
         presenter.changeUpdateSchedule(anyInt());
 
-        verify(preferencesManager, times(1)).putUpdateFrequency(anyString());
-        verify(utils, times(1)).rescheduleWeatherJob(anyInt());
+        verify(preferencesManager).putUpdateFrequency(anyString());
+        verify(utils).rescheduleWeatherJob(anyInt());
     }
 
     @Test
     public void SettingsPresenter_obtainFrequency_getFrequencyFromSavedLocation() {
         presenter.getUpdateFrequency();
 
-        verify(preferencesManager, times(1)).getUpdateFrequency();
+        verify(preferencesManager).getUpdateFrequency();
     }
 }

@@ -14,9 +14,11 @@ import android.widget.RadioGroup;
 
 import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
+import com.arellomobile.mvp.presenter.ProvidePresenter;
 
 import me.grechka.yamblz.yamblzweatherapp.R;
 import me.grechka.yamblz.yamblzweatherapp.WeatherApp;
+import me.grechka.yamblz.yamblzweatherapp.models.response.Weather;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -29,6 +31,13 @@ public class SettingsFragment extends MvpAppCompatFragment implements SettingsVi
 
     @InjectPresenter
     SettingsPresenter presenter;
+
+    @ProvidePresenter
+    public SettingsPresenter presenter() {
+        return WeatherApp
+                .getComponent()
+                .getSettingsPresenter();
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

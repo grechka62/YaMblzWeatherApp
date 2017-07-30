@@ -60,8 +60,8 @@ public class CitySearchPresenterUnitTest extends BaseUnitTest {
 
     @Test
     public void citySearchPresenter_attachView_theSuggestionListWasClearedAndLoadingHidden() {
-        verify(view, times(1)).hideLoading();
-        verify(view, times(1)).clearSuggestions();
+        verify(view).hideLoading();
+        verify(view).clearSuggestions();
     }
 
     @Test
@@ -70,15 +70,15 @@ public class CitySearchPresenterUnitTest extends BaseUnitTest {
 
         verify(view, atLeast(1)).clearSuggestions();
         verify(view, atLeast(1)).hideLoading();
-        verify(view, times(1)).showLoading();
-        verify(view, times(1)).addSuggestion(any(City.class));
+        verify(view).showLoading();
+        verify(view).addSuggestion(any(City.class));
     }
 
     @Test
     public void citySearchPresenter_fetchCity_cityLocationWasFetchedAndCached() {
         presenter.fetchCity(sanJose);
 
-        verify(view, times(1)).closeDialog();
-        verify(repository, times(1)).saveCity(any(City.class));
+        verify(view).closeDialog();
+        verify(repository).saveCity(any(City.class));
     }
 }
