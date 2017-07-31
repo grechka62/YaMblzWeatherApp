@@ -1,7 +1,5 @@
 language: android
 android:
-  before_install:
-   - chmod +x gradlew
   components:
     - tools
     - platform-tools
@@ -9,3 +7,5 @@ android:
     - android-25
 
     - sys-img-armeabi-v7a-android-24
+before_install:
+ - chmod +x gradlew
