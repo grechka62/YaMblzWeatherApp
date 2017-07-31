@@ -17,6 +17,7 @@ import me.grechka.yamblz.yamblzweatherapp.utils.RxSchedulers;
 
 @InjectViewState
 public class WeatherPresenter extends MvpPresenter<WeatherView> {
+
     public final String NO_INFORMATION = "-";
 
     private Repository repository;
@@ -61,9 +62,5 @@ public class WeatherPresenter extends MvpPresenter<WeatherView> {
                     if (weather.temperature.compareTo(NO_INFORMATION) == 0) updateCurrentWeather();
                     else showCurrentWeather(weather);
                 });
-    }
-
-    void closeDrawer() {
-        getViewState().closeDrawer();
     }
 }

@@ -3,74 +3,60 @@ package me.grechka.yamblz.yamblzweatherapp.presentation.weather;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.Gravity;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
 
 import javax.inject.Inject;
 
+import butterknife.BindView;
 import me.grechka.yamblz.yamblzweatherapp.R;
 import me.grechka.yamblz.yamblzweatherapp.WeatherApp;
-import me.grechka.yamblz.yamblzweatherapp.events.OnDismissDialogListener;
 import me.grechka.yamblz.yamblzweatherapp.models.City;
-import me.grechka.yamblz.yamblzweatherapp.presentation.activity.MainPresenter;
-import me.grechka.yamblz.yamblzweatherapp.presentation.citySearch.CitySearchFragment;
+import me.grechka.yamblz.yamblzweatherapp.presentation.base.BaseFragment;
 
-public class WeatherFragment extends MvpAppCompatFragment implements WeatherView,
-        OnDismissDialogListener,
+public class WeatherFragment extends BaseFragment implements WeatherView,
         SwipeRefreshLayout.OnRefreshListener{
 
-    private View view;
-    private TextView tempView;
-    private TextView maxTempView;
-    private TextView minTempView;
-    private TextView descView;
-    private TextView windView;
-    private TextView humidityView;
-    private TextView cityTitleTextView;
+    @BindView(R.id.cur_temp) TextView tempView;
+    @BindView(R.id.temp_max) TextView maxTempView;
+    @BindView(R.id.temp_min) TextView minTempView;
+    @BindView(R.id.description) TextView descView;
+    @BindView(R.id.wind_value) TextView windView;
+    @BindView(R.id.humidity_value) TextView humidityView;
+    @BindView(R.id.city) TextView cityTitleTextView;
+    @BindView(R.id.swiperefresh) SwipeRefreshLayout swipeRefreshLayout;
 
-    SwipeRefreshLayout swipeRefreshLayout;
-
-    @Inject Context context;
-    @Inject MainPresenter mainPresenter;
-
-    @InjectPresenter WeatherPresenter presenter;
+    @Inject
+    @InjectPresenter
+    WeatherPresenter presenter;
 
     @ProvidePresenter
     public WeatherPresenter providePresenter() {
-        return WeatherApp
-                .getComponent()
-                .getWeatherPresenter();
+        return presenter;
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_weather, container, false);
+    protected int obtainLayoutView() {
+        return R.layout.fragment_weather;
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
         WeatherApp.getComponent().inject(this);
+    }
 
-        cityTitleTextView = (TextView) view.findViewById(R.id.city);
-        tempView = (TextView) view.findViewById(R.id.cur_temp);
-        maxTempView = (TextView) view.findViewById(R.id.temp_max);
-        minTempView = (TextView) view.findViewById(R.id.temp_min);
-        descView = (TextView) view.findViewById(R.id.description);
-        windView = (TextView) view.findViewById(R.id.wind_value);
-        humidityView = (TextView) view.findViewById(R.id.humidity_value);
-
-        swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swiperefresh);
+    @Override
+    protected void onViewsCreated(@Nullable Bundle savedInstanceState) {
+        super.onViewsCreated(savedInstanceState);
         swipeRefreshLayout.setOnRefreshListener(this);
-
         presenter.showSavedCurrentWeather();
-
-        return view;
     }
 
     @Override
@@ -92,18 +78,9 @@ public class WeatherFragment extends MvpAppCompatFragment implements WeatherView
     @Override
     public void showCity(@NonNull City city) {
         cityTitleTextView.setText(city.getTitle());
-        //cityTitleHeaderTextView.setText(city.getTitle());
-        //cityAreaHeaderTextView.setText(city.getExtendedTitle());
     }
 
-    @Override
-    public void showCitySearch() {
-        CitySearchFragment.newInstance().show(getChildFragmentManager(), null);
-    }
-
-    @Override
     public void onDialogDismissed() {
-        closeDrawer();
         presenter.updateCity();
         presenter.updateCurrentWeather();
     }
@@ -113,7 +90,7 @@ public class WeatherFragment extends MvpAppCompatFragment implements WeatherView
         if (message.equals("Error")) message = getResources().getString(R.string.error);
         else if (message.equals("No network")) message = getResources().getString(R.string.no_network);
         swipeRefreshLayout.setRefreshing(false);
-        Toast toast = Toast.makeText(context, message, Toast.LENGTH_SHORT);
+        Toast toast = Toast.makeText(getContext(), message, Toast.LENGTH_SHORT);
         TextView v = (TextView) toast.getView().findViewById(android.R.id.message);
         if( v != null) v.setGravity(Gravity.CENTER);
         toast.show();
@@ -122,10 +99,5 @@ public class WeatherFragment extends MvpAppCompatFragment implements WeatherView
     @Override
     public void onRefresh() {
         presenter.updateCurrentWeather();
-    }
-
-    @Override
-    public void closeDrawer() {
-        //drawerLayout.closeDrawer(GravityCompat.START);
     }
 }

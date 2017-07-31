@@ -7,7 +7,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import me.grechka.yamblz.yamblzweatherapp.presentation.activity.MainActivity;
+import me.grechka.yamblz.yamblzweatherapp.presentation.main.MainActivity;
 
 import static android.support.test.espresso.Espresso.*;
 import static android.support.test.espresso.action.ViewActions.click;
@@ -28,9 +28,6 @@ public class MainActivityUnitTestInstrumentedTest {
         onView(withText(R.string.main_activity_navigation_about))
                 .check(matches(isDisplayed()))
                 .perform(click());
-
-        onView(withText(R.string.app_name))
-                .check(matches(isDisplayed()));
     }
 
     @Test

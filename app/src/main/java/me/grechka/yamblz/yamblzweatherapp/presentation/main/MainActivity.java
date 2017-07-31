@@ -1,7 +1,6 @@
-package me.grechka.yamblz.yamblzweatherapp.presentation.activity;
+package me.grechka.yamblz.yamblzweatherapp.presentation.main;
 
 import android.os.Bundle;
-import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -16,19 +15,25 @@ import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
 
 import butterknife.BindView;
+import me.grechka.yamblz.yamblzweatherapp.events.OnDismissDialogListener;
+import me.grechka.yamblz.yamblzweatherapp.models.City;
 import me.grechka.yamblz.yamblzweatherapp.presentation.AboutFragment;
 import me.grechka.yamblz.yamblzweatherapp.R;
 import me.grechka.yamblz.yamblzweatherapp.WeatherApp;
 import me.grechka.yamblz.yamblzweatherapp.presentation.base.BaseActivity;
+import me.grechka.yamblz.yamblzweatherapp.presentation.citySearch.CitySearchFragment;
 import me.grechka.yamblz.yamblzweatherapp.presentation.settings.SettingsFragment;
 import me.grechka.yamblz.yamblzweatherapp.presentation.weather.WeatherFragment;
 
 public class MainActivity extends BaseActivity
         implements MainView,
+        OnDismissDialogListener,
         NavigationView.OnNavigationItemSelectedListener{
 
     private TextView cityAreaHeaderTextView;
     private TextView cityTitleHeaderTextView;
+
+    private WeatherFragment weatherFragment;
 
     @BindView(R.id.drawer_layout) DrawerLayout drawerLayout;
 
@@ -76,12 +81,17 @@ public class MainActivity extends BaseActivity
         cityTitleHeaderTextView = (TextView) headerView.findViewById(R.id.fragment_weather_header_city_title);
         cityAreaHeaderTextView = (TextView) headerView.findViewById(R.id.fragment_weather_header_city_area);
 
-        //searchView.setOnClickListener(v -> showCitySearch());
+        searchView.setOnClickListener(v -> showCitySearch());
+    }
+
+    public void showCitySearch() {
+        CitySearchFragment.newInstance().show(getSupportFragmentManager(), null);
     }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         presenter.navigate(item.getItemId());
+        closeDrawer();
         return true;
     }
 
@@ -92,8 +102,9 @@ public class MainActivity extends BaseActivity
 
     @Override
     public void showWeather() {
+        weatherFragment = new WeatherFragment();
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.fragment_container, new WeatherFragment())
+                .replace(R.id.fragment_container, weatherFragment)
                 .commit();
     }
 
@@ -127,16 +138,30 @@ public class MainActivity extends BaseActivity
 
     @Override
     public void goBack() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if ((drawer != null) && (drawer.isDrawerOpen(GravityCompat.START)))
-            drawer.closeDrawer(GravityCompat.START);
-        else
-            super.onBackPressed();
+        if (!closeDrawer()) super.onBackPressed();
+    }
+
+    @Override
+    public void onDialogDismissed() {
+        presenter.updateCity();
+        weatherFragment.onDialogDismissed();
+    }
+
+    @Override
+    public void setCityToHeader(@NonNull City city) {
+        cityTitleHeaderTextView.setText(city.getTitle());
+        cityAreaHeaderTextView.setText(city.getExtendedTitle());
     }
 
     @Override
     public boolean onSupportNavigateUp() {
-        presenter.goBack();
+        goBack();
+        return true;
+    }
+
+    private boolean closeDrawer() {
+        if (!drawerLayout.isDrawerOpen(GravityCompat.START)) return false;
+        drawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }
 }

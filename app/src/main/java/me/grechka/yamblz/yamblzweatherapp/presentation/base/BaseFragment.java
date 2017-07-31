@@ -2,6 +2,7 @@ package me.grechka.yamblz.yamblzweatherapp.presentation.base;
 
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,13 +18,20 @@ import butterknife.ButterKnife;
 
 public abstract class BaseFragment extends MvpAppCompatFragment {
 
+    private View rootView;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v = inflater.inflate(obtainLayoutView(), container, false);
-        ButterKnife.bind(this, v);
+        this.rootView = inflater.inflate(obtainLayoutView(), container, false);
+        ButterKnife.bind(this, rootView);
         onViewsCreated(savedInstanceState);
-        return v;
+        return rootView;
+    }
+
+    @NonNull
+    public View getView() {
+        return rootView;
     }
 
     @LayoutRes

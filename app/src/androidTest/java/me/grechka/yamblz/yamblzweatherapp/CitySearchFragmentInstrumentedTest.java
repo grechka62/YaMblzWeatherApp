@@ -9,7 +9,7 @@ import org.junit.runner.RunWith;
 
 import java.util.concurrent.TimeUnit;
 
-import me.grechka.yamblz.yamblzweatherapp.presentation.activity.MainActivity;
+import me.grechka.yamblz.yamblzweatherapp.presentation.main.MainActivity;
 
 import static android.support.test.espresso.Espresso.closeSoftKeyboard;
 import static android.support.test.espresso.Espresso.onView;
