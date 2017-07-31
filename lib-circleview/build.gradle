@@ -7,8 +7,8 @@ android {
     defaultConfig {
         minSdkVersion versions.minSdk
         targetSdkVersion versions.targetSdk
-        versionCode versions.code
-        versionName versions.name
+        versionCode modules.circleViewCode
+        versionName modules.circleViewName
 
     }
 

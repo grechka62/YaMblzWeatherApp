@@ -33,7 +33,13 @@ ext.gradlePlugins = [
 		retrolambda      : "me.tatarka:gradle-retrolambda:$versions.retrolambdaGradlePlugin",
 ]
 
+ext.modules = [
+			circleViewCode: 5,
+			circleViewName: '0.1.0',
+]
+
 ext.libraries = [
+		//support library
         supportAppCompat        : "com.android.support:appcompat-v7:$versions.supportLibs",
         supportDesign           : "com.android.support:design:$versions.supportLibs",
 		supportAnnotations      : "com.android.support:support-annotations:$versions.supportLibs",
@@ -42,6 +48,7 @@ ext.libraries = [
 		supportPreference		: "com.android.support:preference-v14:$versions.supportLibs",
 		constraint    		    : "com.android.support.constraint:constraint-layout:$versions.constraint",
 
+		//common
 		dagger					: "com.google.dagger:dagger:$versions.dagger",
 		daggerCompiler			: "com.google.dagger:dagger-compiler:$versions.dagger",
 
@@ -58,6 +65,9 @@ ext.libraries = [
 		moxy					: "com.arello-mobile:moxy:$versions.moxy",
 		moxyAppCompat			: "com.arello-mobile:moxy-app-compat:$versions.moxy",
 		moxyCompiler			: "com.arello-mobile:moxy-compiler:$versions.moxy",
+
+		//modules
+		circleView				: project(':lib-circleview'),
 
         // Test dependencies
         junit                   : "junit:junit:$versions.junit",
