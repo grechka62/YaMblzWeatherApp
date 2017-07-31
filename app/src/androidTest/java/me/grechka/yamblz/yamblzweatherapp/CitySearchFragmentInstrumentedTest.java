@@ -56,6 +56,9 @@ public class CitySearchFragmentInstrumentedTest {
         onView(withId(R.id.fragment_city_search_recycler_view))
         .perform(actionOnItemAtPosition(4, click()));
 
+        onView(isRoot())
+                .perform(waitFor(TimeUnit.SECONDS.toMillis(2)));
+
         onView(allOf(withId(R.id.city),
                 withText("Orel"))).check(matches(isDisplayed()));
     }
