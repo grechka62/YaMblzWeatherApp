@@ -13,6 +13,6 @@ android:
     - android-25
     - extra
     - addon
-    - sys-img-armeabi-v7a-android-24
+    - sys-img-armeabi-v7a-android-22
 script:
     - ./gradlew connectedAndroidTest
