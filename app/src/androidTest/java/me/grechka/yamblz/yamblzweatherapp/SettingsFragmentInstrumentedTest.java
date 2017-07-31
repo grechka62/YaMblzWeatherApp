@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
-import android.support.v7.preference.PreferenceManager;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -66,7 +65,7 @@ public class SettingsFragmentInstrumentedTest {
     private void navigateToSettings() {
         onView(withContentDescription(R.string.navigation_drawer_open)).perform(click());
 
-        onView(withText(R.string.action_settings))
+        onView(withText(R.string.main_activity_navigation_settings))
                 .check(matches(isDisplayed()))
                 .perform(click());
     }
