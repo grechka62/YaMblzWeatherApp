@@ -3,16 +3,9 @@ package me.grechka.yamblz.yamblzweatherapp.presentation.weather;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.NavigationView;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -32,7 +25,6 @@ import me.grechka.yamblz.yamblzweatherapp.presentation.activity.MainPresenter;
 import me.grechka.yamblz.yamblzweatherapp.presentation.citySearch.CitySearchFragment;
 
 public class WeatherFragment extends MvpAppCompatFragment implements WeatherView,
-        NavigationView.OnNavigationItemSelectedListener,
         OnDismissDialogListener,
         SwipeRefreshLayout.OnRefreshListener{
 
@@ -44,10 +36,6 @@ public class WeatherFragment extends MvpAppCompatFragment implements WeatherView
     private TextView windView;
     private TextView humidityView;
     private TextView cityTitleTextView;
-    private TextView cityAreaHeaderTextView;
-    private TextView cityTitleHeaderTextView;
-    private DrawerLayout drawerLayout;
-
 
     SwipeRefreshLayout swipeRefreshLayout;
 
@@ -77,43 +65,12 @@ public class WeatherFragment extends MvpAppCompatFragment implements WeatherView
         windView = (TextView) view.findViewById(R.id.wind_value);
         humidityView = (TextView) view.findViewById(R.id.humidity_value);
 
-        Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
-        AppCompatActivity activity = (AppCompatActivity) getActivity();
-        activity.setSupportActionBar(toolbar);
-
-        drawerLayout = (DrawerLayout) view.findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                activity, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawerLayout.addDrawerListener(toggle);
-        toggle.syncState();
-
-        NavigationView navigationView = (NavigationView) view.findViewById(R.id.nav_view);
-        View navigationHeaderView = navigationView.getHeaderView(0);
-        navigationView.setNavigationItemSelectedListener(this);
-
-        onHeaderInit(navigationHeaderView);
-
         swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swiperefresh);
         swipeRefreshLayout.setOnRefreshListener(this);
 
         presenter.showSavedCurrentWeather();
 
         return view;
-    }
-
-    private void onHeaderInit(@NonNull View headerView) {
-        View searchView = headerView.findViewById(R.id.fragment_weather_header_cities_search);
-        cityTitleHeaderTextView = (TextView) headerView.findViewById(R.id.fragment_weather_header_city_title);
-        cityAreaHeaderTextView = (TextView) headerView.findViewById(R.id.fragment_weather_header_city_area);
-
-        searchView.setOnClickListener(v -> showCitySearch());
-    }
-
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        mainPresenter.navigate(item.getItemId());
-        presenter.closeDrawer();
-        return true;
     }
 
     @Override
@@ -135,8 +92,8 @@ public class WeatherFragment extends MvpAppCompatFragment implements WeatherView
     @Override
     public void showCity(@NonNull City city) {
         cityTitleTextView.setText(city.getTitle());
-        cityTitleHeaderTextView.setText(city.getTitle());
-        cityAreaHeaderTextView.setText(city.getExtendedTitle());
+        //cityTitleHeaderTextView.setText(city.getTitle());
+        //cityAreaHeaderTextView.setText(city.getExtendedTitle());
     }
 
     @Override
@@ -169,6 +126,6 @@ public class WeatherFragment extends MvpAppCompatFragment implements WeatherView
 
     @Override
     public void closeDrawer() {
-        drawerLayout.closeDrawer(GravityCompat.START);
+        //drawerLayout.closeDrawer(GravityCompat.START);
     }
 }

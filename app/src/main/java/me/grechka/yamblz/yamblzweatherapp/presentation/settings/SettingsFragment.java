@@ -56,11 +56,6 @@ public class SettingsFragment extends MvpAppCompatFragment implements SettingsVi
     }
 
     private void setToolbar() {
-        Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
-        toolbar.setTitle(R.string.action_settings);
-        AppCompatActivity activity = (AppCompatActivity) getActivity();
-        activity.setSupportActionBar(toolbar);
-        activity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     private void setCheckedFrequency() {
