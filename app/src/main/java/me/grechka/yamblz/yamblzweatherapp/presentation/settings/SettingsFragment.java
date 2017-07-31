@@ -1,11 +1,7 @@
 package me.grechka.yamblz.yamblzweatherapp.presentation.settings;
 
-
 import android.os.Bundle;
 import android.support.annotation.IdRes;
-import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,11 +14,7 @@ import com.arellomobile.mvp.presenter.ProvidePresenter;
 
 import me.grechka.yamblz.yamblzweatherapp.R;
 import me.grechka.yamblz.yamblzweatherapp.WeatherApp;
-import me.grechka.yamblz.yamblzweatherapp.models.response.Weather;
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class SettingsFragment extends MvpAppCompatFragment implements SettingsView,
         RadioGroup.OnCheckedChangeListener {
 
