@@ -53,6 +53,9 @@ public class CitySearchFragmentInstrumentedTest {
 
         closeSoftKeyboard();
 
+        onView(isRoot())
+                .perform(waitFor(TimeUnit.SECONDS.toMillis(2)));
+
         onView(withId(R.id.fragment_city_search_recycler_view))
         .perform(actionOnItemAtPosition(4, click()));
 

@@ -143,6 +143,7 @@ public class MainActivity extends BaseActivity
 
     @Override
     public void onDialogDismissed() {
+        closeDrawer();
         presenter.updateCity();
         weatherFragment.onDialogDismissed();
     }
