@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
@@ -15,6 +16,7 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import me.grechka.yamblz.yamblzweatherapp.R;
 import me.grechka.yamblz.yamblzweatherapp.WeatherApp;
+import me.grechka.yamblz.yamblzweatherapp.events.OnDrawerLocked;
 import me.grechka.yamblz.yamblzweatherapp.presentation.base.BaseFragment;
 
 public class SettingsFragment extends BaseFragment implements SettingsView,
@@ -64,5 +66,17 @@ public class SettingsFragment extends BaseFragment implements SettingsView,
 
     private int getFrequencyFromTag(@IdRes int checkedId) {
         return Integer.parseInt((String) getView().findViewById(checkedId).getTag());
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        ((AppCompatActivity) getActivity())
+                .getSupportActionBar()
+                .setTitle(R.string.main_activity_navigation_settings);
+
+        ((OnDrawerLocked) getActivity())
+                .setDrawerEnabled(false);
     }
 }

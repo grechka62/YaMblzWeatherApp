@@ -16,6 +16,7 @@ import com.arellomobile.mvp.presenter.ProvidePresenter;
 
 import butterknife.BindView;
 import me.grechka.yamblz.yamblzweatherapp.events.OnDismissDialogListener;
+import me.grechka.yamblz.yamblzweatherapp.events.OnDrawerLocked;
 import me.grechka.yamblz.yamblzweatherapp.models.City;
 import me.grechka.yamblz.yamblzweatherapp.presentation.AboutFragment;
 import me.grechka.yamblz.yamblzweatherapp.R;
@@ -27,15 +28,18 @@ import me.grechka.yamblz.yamblzweatherapp.presentation.weather.WeatherFragment;
 
 public class MainActivity extends BaseActivity
         implements MainView,
+        OnDrawerLocked,
         OnDismissDialogListener,
         NavigationView.OnNavigationItemSelectedListener{
 
     private TextView cityAreaHeaderTextView;
     private TextView cityTitleHeaderTextView;
 
+    private ActionBarDrawerToggle toggle;
     private WeatherFragment weatherFragment;
 
-    @BindView(R.id.drawer_layout) DrawerLayout drawerLayout;
+    @BindView(R.id.main_activity_drawer_layout) DrawerLayout drawerLayout;
+    @BindView(R.id.main_activity_navigation_view) NavigationView navigationView;
 
     @InjectPresenter MainPresenter presenter;
 
@@ -64,12 +68,11 @@ public class MainActivity extends BaseActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+        toggle = new ActionBarDrawerToggle(
                 this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         View navigationHeaderView = navigationView.getHeaderView(0);
         navigationView.setNavigationItemSelectedListener(this);
 
@@ -158,6 +161,23 @@ public class MainActivity extends BaseActivity
     public boolean onSupportNavigateUp() {
         goBack();
         return true;
+    }
+
+    @Override
+    public void setDrawerEnabled(boolean isEnabled) {
+        int lockMode = isEnabled ? DrawerLayout.LOCK_MODE_UNLOCKED :
+                DrawerLayout.LOCK_MODE_LOCKED_CLOSED;
+        drawerLayout.setDrawerLockMode(lockMode);
+        if (isEnabled) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+            toggle.setDrawerIndicatorEnabled(true);
+            toggle.setToolbarNavigationClickListener(null);
+        }
+        else {
+            toggle.setDrawerIndicatorEnabled(false);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            toggle.setToolbarNavigationClickListener(v -> goBack());
+        }
     }
 
     private boolean closeDrawer() {

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,6 +18,7 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import me.grechka.yamblz.yamblzweatherapp.R;
 import me.grechka.yamblz.yamblzweatherapp.WeatherApp;
+import me.grechka.yamblz.yamblzweatherapp.events.OnDrawerLocked;
 import me.grechka.yamblz.yamblzweatherapp.models.City;
 import me.grechka.yamblz.yamblzweatherapp.presentation.base.BaseFragment;
 
@@ -99,5 +101,17 @@ public class WeatherFragment extends BaseFragment implements WeatherView,
     @Override
     public void onRefresh() {
         presenter.updateCurrentWeather();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        ((AppCompatActivity) getActivity())
+                .getSupportActionBar()
+                .setTitle(R.string.main_activity_navigation_weather);
+
+        ((OnDrawerLocked) getActivity())
+                .setDrawerEnabled(true);
     }
 }
