@@ -27,7 +27,7 @@ android:
     components:
         - platform-tools
         - tools
-        - build-tools-25.0.0
+        - build-tools-25.0.3
         - android-25
         - android-19
 
@@ -67,5 +67,3 @@ before_install:
 
 after_success:
     - codecov
-
-after_failure: "cat $TRAVIS_BUILD_DIR/app/build/outputs/lint-results-debug.xml"
