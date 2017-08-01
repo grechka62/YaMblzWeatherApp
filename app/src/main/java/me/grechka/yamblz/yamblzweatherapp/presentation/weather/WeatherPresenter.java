@@ -8,7 +8,7 @@ import com.arellomobile.mvp.MvpPresenter;
 import javax.inject.Inject;
 
 import me.grechka.yamblz.yamblzweatherapp.models.CurrentWeather;
-import me.grechka.yamblz.yamblzweatherapp.repository.Repository;
+import me.grechka.yamblz.yamblzweatherapp.repository.AppRepository;
 import me.grechka.yamblz.yamblzweatherapp.utils.RxSchedulers;
 
 /**
@@ -20,14 +20,14 @@ public class WeatherPresenter extends MvpPresenter<WeatherView> {
 
     public final String NO_INFORMATION = "-";
 
-    private Repository repository;
+    private AppRepository appRepository;
     private RxSchedulers scheduler;
 
     @Inject
     public WeatherPresenter(@NonNull RxSchedulers scheduler,
-                            @NonNull Repository repository) {
+                            @NonNull AppRepository appRepository) {
         this.scheduler = scheduler;
-        this.repository = repository;
+        this.appRepository = appRepository;
     }
 
     @Override
@@ -37,11 +37,11 @@ public class WeatherPresenter extends MvpPresenter<WeatherView> {
     }
 
     void updateCity() {
-        getViewState().showCity(repository.getCity());
+        getViewState().showCity(appRepository.getCity());
     }
 
     void updateCurrentWeather() {
-        repository
+        appRepository
                 .updateCurrentWeather()
                 .compose(scheduler.getIoToMainTransformerSingle())
                 .subscribe(this::showCurrentWeather);
@@ -57,7 +57,7 @@ public class WeatherPresenter extends MvpPresenter<WeatherView> {
     }
 
     void showSavedCurrentWeather() {
-        repository.getSavedCurrentWeather()
+        appRepository.getSavedCurrentWeather()
                 .subscribe(weather -> {
                     if (weather.temperature.compareTo(NO_INFORMATION) == 0) updateCurrentWeather();
                     else showCurrentWeather(weather);

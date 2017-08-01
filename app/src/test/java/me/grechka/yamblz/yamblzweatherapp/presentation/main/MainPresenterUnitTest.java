@@ -8,7 +8,7 @@ import org.mockito.Mock;
 
 import me.grechka.yamblz.yamblzweatherapp.base.BaseUnitTest;
 import me.grechka.yamblz.yamblzweatherapp.models.City;
-import me.grechka.yamblz.yamblzweatherapp.repository.Repository;
+import me.grechka.yamblz.yamblzweatherapp.repository.AppRepository;
 
 import static org.mockito.Mockito.*;
 
@@ -20,7 +20,8 @@ import static org.mockito.Mockito.*;
 public class MainPresenterUnitTest extends BaseUnitTest {
 
     @Mock MainView view;
-    @Mock Repository repository;
+    @Mock
+    AppRepository appRepository;
 
     private MainPresenter presenter;
 
@@ -28,7 +29,7 @@ public class MainPresenterUnitTest extends BaseUnitTest {
     @Override
     public void onInit() {
         super.onInit();
-        presenter = new MainPresenter(repository);
+        presenter = new MainPresenter(appRepository);
         presenter.attachView(view);
     }
 
@@ -38,7 +39,7 @@ public class MainPresenterUnitTest extends BaseUnitTest {
                 .when(view)
                 .setCityToHeader(any(City.class));
 
-        when(repository.getCity()).thenReturn(
+        when(appRepository.getCity()).thenReturn(
                 new City.Builder()
                 .title("title")
                 .extendedTitle("extended")

@@ -7,7 +7,7 @@ import com.arellomobile.mvp.MvpPresenter;
 
 import javax.inject.Inject;
 
-import me.grechka.yamblz.yamblzweatherapp.repository.Repository;
+import me.grechka.yamblz.yamblzweatherapp.repository.AppRepository;
 
 /**
  * Created by Grechka on 14.07.2017.
@@ -16,11 +16,11 @@ import me.grechka.yamblz.yamblzweatherapp.repository.Repository;
 @InjectViewState
 public class MainPresenter extends MvpPresenter<MainView> {
 
-    private Repository repository;
+    private AppRepository appRepository;
 
     @Inject
-    public MainPresenter(@NonNull Repository repository) {
-        this.repository = repository;
+    public MainPresenter(@NonNull AppRepository appRepository) {
+        this.appRepository = appRepository;
     }
 
     @Override
@@ -30,7 +30,7 @@ public class MainPresenter extends MvpPresenter<MainView> {
     }
 
     void updateCity() {
-        getViewState().setCityToHeader(repository.getCity());
+        getViewState().setCityToHeader(appRepository.getCity());
     }
 
     public void showWeather() {
