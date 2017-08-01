@@ -1,4 +1,4 @@
-package me.grechka.yamblz.yamblzweatherapp.presentation.weather;
+package me.grechka.yamblz.yamblzweatherapp.presentation.main;
 
 import android.support.annotation.NonNull;
 
@@ -11,21 +11,21 @@ import com.arellomobile.mvp.viewstate.strategy.StateStrategyType;
 import me.grechka.yamblz.yamblzweatherapp.models.City;
 
 /**
- * Created by Grechka on 14.07.2017.
+ * Created by Grechka on 15.07.2017.
  */
 
-public interface WeatherView extends MvpView {
+@StateStrategyType(AddToEndSingleStrategy.class)
+public interface MainView extends MvpView {
+
+    void setCityToHeader(@NonNull City city);
 
     @StateStrategyType(SingleStateStrategy.class)
-    void showCurrentWeather(String temperature,
-                            String description,
-                            String humidity,
-                            String tempMin,
-                            String tempMax,
-                            String wind);
+    void showWeather();
+    void showSettings();
+    void showAbout();
 
     @StateStrategyType(SkipStrategy.class)
-    void showMessage(String message);
+    void navigate(int id);
+    void goBack();
 
-    void showCity(@NonNull City city);
 }

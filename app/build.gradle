@@ -1,5 +1,10 @@
 apply plugin: 'com.android.application'
 apply plugin: 'me.tatarka.retrolambda'
+apply plugin: 'jacoco-android'
+
+def keystorePropertiesFile = rootProject.file("keystore.properties")
+def keystoreProperties = new Properties()
+keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 
 android {
     compileSdkVersion versions.compileSdk
@@ -24,48 +29,38 @@ android {
 
     signingConfigs {
         release {
-            storeFile file(RELEASE_STORE_FILE)
-            storePassword RELEASE_STORE_PASSWORD
-            keyAlias RELEASE_KEY_ALIAS
-            keyPassword RELEASE_KEY_PASSWORD
+            storeFile file(keystoreProperties['releaseFile'])
+            keyAlias keystoreProperties['releaseAlias']
+            keyPassword keystoreProperties['releaseKeyPassword']
+            storePassword keystoreProperties['releaseStorePassword']
         }
     }
 
     buildTypes {
         debug {
             minifyEnabled false
+            applicationIdSuffix '.debug'
+            versionNameSuffix '-DEBUG'
         }
 
         release {
             minifyEnabled true
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
 }
 
 dependencies {
-    androidTestCompile(libraries.espressoCore, {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
-
-    androidTestCompile(libraries.espressoContrib, {
-        exclude group: 'com.android.support', module: 'appcompat-v7'
-        exclude group: 'com.android.support', module: 'support-v4'
-        exclude group: 'com.android.support', module: 'support-annotations'
-        exclude group: 'com.android.support', module: 'support-vector-drawable'
-        exclude group: 'com.android.support', module: 'design'
-        exclude module: 'recyclerview-v7'
-    })
-
-    compile project(':circleview')
-
     compile libraries.supportAppCompat
     compile libraries.supportDesign
     compile libraries.supportSupport
     compile libraries.supportPreference
     compile libraries.supportCard
     compile libraries.constraint
+
+    compile libraries.butterknife
+    annotationProcessor libraries.butterknifeCompiler
 
     compile libraries.dagger
     annotationProcessor libraries.daggerCompiler
@@ -84,7 +79,22 @@ dependencies {
     compile libraries.moxyAppCompat
     annotationProcessor libraries.moxyCompiler
 
+    compile libraries.circleView
+
     testCompile libraries.junit
     testCompile libraries.mockito
     testCompile libraries.mockwebserver
+
+    androidTestCompile(libraries.espressoCore, {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+
+    androidTestCompile(libraries.espressoContrib, {
+        exclude group: 'com.android.support', module: 'appcompat-v7'
+        exclude group: 'com.android.support', module: 'support-v4'
+        exclude group: 'com.android.support', module: 'support-annotations'
+        exclude group: 'com.android.support', module: 'support-vector-drawable'
+        exclude group: 'com.android.support', module: 'design'
+        exclude module: 'recyclerview-v7'
+    })
 }
